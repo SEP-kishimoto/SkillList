@@ -15,6 +15,12 @@ import="servlet.EditBL"
 request.setCharacterEncoding("UTF-8");
 %>
 
+<!-- DB変数 -->
+<%
+String db_number = "";
+String db_name = "";
+%>
+
 <!-- Profile変数 -->
 <%
 String kana = "";
@@ -35,6 +41,12 @@ String skill = "";
 String tool = "";
 String db = "";
 String qualification = "";
+%>
+
+<!-- DBからの値 -->
+<%
+db_number = (String) request.getAttribute("db_number");
+db_name = (String) request.getAttribute("db_name");
 %>
 
 <!-- Profile変数の設定 -->
@@ -62,7 +74,7 @@ qualification = (String) request.getAttribute("qualification");
 
 <h1>スキルシート管理システム：スキルシート編集</h1>
 <h2>■Profile</h2>
-<form method="post" action="/SkillList/EditCheckBL">
+<form method="post" action="/SkillList/EditCommitBL">
 <table>
 	<tr>
 		<td>フリガナ＊</td>
@@ -124,6 +136,10 @@ qualification = (String) request.getAttribute("qualification");
 	</tr>
 
 </table>
+
+<!-- DB input -->
+<input type="hidden" name="db_number" value="<%=db_number %>">
+<input type="hidden" name="db_name" value="<%=db_name %>">
 
 <!-- Pfrofile input -->
 <input type="hidden" name="kana" value="<%=kana %>">
