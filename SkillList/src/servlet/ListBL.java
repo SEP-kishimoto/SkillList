@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,7 +61,9 @@ public class ListBL extends HttpServlet {
 			request.setAttribute("master_flg", master_flg);
 			request.setAttribute("filename", filename);
 			System.out.println("一般です");
-			getServletContext().getRequestDispatcher("/jsp/Skill.jsp").forward(request, response);
+			ServletContext sc = getServletContext();
+			RequestDispatcher dispatcher = sc.getRequestDispatcher("/SkillBL");
+			dispatcher.forward(request, response);
 		}
 
 	}

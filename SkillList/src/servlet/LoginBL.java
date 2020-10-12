@@ -83,7 +83,7 @@ public class LoginBL extends HttpServlet {
 					}catch (SQLException e) {
 					System.out.println("SQLException");
 				} catch (ClassNotFoundException e) {
-					System.out.println("ClassNotFoundException");
+					System.out.println("ClassNotFoundException" +e);
 				} catch (Exception e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();

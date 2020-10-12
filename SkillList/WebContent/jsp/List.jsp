@@ -3,6 +3,7 @@
 <%@ page import="java.sql.ResultSet"%>
 <!DOCTYPE html>
 <html>
+<head>
 <meta charset="UTF-8">
 <title>技術者一覧画面</title>
 </head>
