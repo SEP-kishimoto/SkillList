@@ -59,16 +59,22 @@ public class SkillBL extends HttpServlet {
 
 	    String db_number = "";
 	    String db_name = "";
+	    String master_flg = "";
+	    String filename = "";
 
-	    db_number = request.getParameter("db_number");
-	    db_name = request.getParameter("db_name");
+	    db_number = (String) request.getAttribute("db_number");
+	    db_name = (String) request.getAttribute("db_name");
+	    master_flg = (String) request.getAttribute("master_flg");
+	    filename = (String) request.getAttribute("filename");
 
 	    request.setAttribute("db_number", db_number);
 	    request.setAttribute("db_name", db_name);
+	    request.setAttribute("master_flg", master_flg);
+	    request.setAttribute("filename", filename);
 
 	    try {
 	      //Excelファイルを読み込む
-	      is = new FileInputStream("C:\\temp\\SkillSheet_" + db_number + "_" + db_name +  ".xlsx");
+	      is = new FileInputStream("C:\\temp\\" + filename);
 	      wb = WorkbookFactory.create(is);
 
 

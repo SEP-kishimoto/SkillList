@@ -50,7 +50,7 @@ public class LoginBL extends HttpServlet {
 			if (id != null && pass != null) {//ID・Passがどちらも入っている
 				try {
 					Connection con = Common.getConnection();
-					String sql = "SELECT * FROM skillsheet WHERE db_number=? AND password=?";
+					String sql = "SELECT * FROM kishimoto.skillsheet WHERE db_number=? AND password=?";
 					PreparedStatement ps = con.prepareStatement(sql);
 					ps.setString(1, id);
 					ps.setString(2, pass);
@@ -81,7 +81,7 @@ public class LoginBL extends HttpServlet {
 						dispatcher.forward(request, response);
 						}
 					}catch (SQLException e) {
-					System.out.println("SQLException");
+					System.out.println("SQLException"+ e.getMessage());
 				} catch (ClassNotFoundException e) {
 					System.out.println("ClassNotFoundException");
 				} catch (Exception e) {
