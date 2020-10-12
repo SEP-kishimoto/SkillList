@@ -1,21 +1,13 @@
 package servlet;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 /**
  * Servlet implementation class EditCheckBL
@@ -47,10 +39,10 @@ public class EditCheckBL extends HttpServlet {
 	    request.setCharacterEncoding("UTF-8");
 	    response.setContentType("text/html; charset=UTF-8");
 
-	    InputStream is = null;
-	    Workbook wb = null;
-
 	    // 変数を宣言
+	    String db_number = "";
+	    String db_name = "";
+
 	    String kana = "";
 	    String name = "";
 	    String address = "";
@@ -69,6 +61,9 @@ public class EditCheckBL extends HttpServlet {
 	    String qualification = "";
 
 	    // 変数に設定
+	    db_number = request.getParameter("db_number");
+	    db_name = request.getParameter("db_name");
+
 	    kana = request.getParameter("kana");
 	    name = request.getParameter("name");
 	    address = request.getParameter("address");
@@ -87,94 +82,34 @@ public class EditCheckBL extends HttpServlet {
 	    db = request.getParameter("db");
 	    qualification = request.getParameter("qualification");
 
-	    FileOutputStream out = null;
+	    // db
+	    request.setAttribute("db_number", db_number);
+	    request.setAttribute("db_name", db_name);
 
-		try {
+	    // Profaile
+	    request.setAttribute("kana", kana);
+	    request.setAttribute("name", name);
+	    request.setAttribute("address", address);
+	    request.setAttribute("birthday", birthday);
+	    request.setAttribute("age", age);
+	    request.setAttribute("gender", gender);
+	    request.setAttribute("background", background);
+	    request.setAttribute("backgroundNumber", backgroundNumber);
+	    request.setAttribute("nearestStation", nearestStation);
+	    request.setAttribute("stationName", stationName);
 
-		      //Excelファイルを読み込む
-		      is = new FileInputStream("C:\\temp\\SkillSheetSample.xlsx");
-		      wb = WorkbookFactory.create(is);
+	    // Skill Info読み込み
+	    request.setAttribute("os", os);
+	    request.setAttribute("skill", skill);
+	    request.setAttribute("tool", tool);
+	    request.setAttribute("db", db);
+	    request.setAttribute("qualification", qualification);
 
-		      Sheet sh = wb.getSheetAt(0);
-		      Row row = sh.getRow(3);
-		      Cell cell = row.getCell(2);
-		      cell.setCellValue(kana);
-
-		      row = sh.getRow(4);
-		      cell = row.getCell(2);
-		      cell.setCellValue(name);
-
-		      row = sh.getRow(5);
-		      cell = row.getCell(2);
-		      cell.setCellValue(address);
-
-		      row = sh.getRow(3);
-		      cell = row.getCell(8);
-		      cell.setCellValue(birthday);
-
-		      row = sh.getRow(3);
-		      cell = row.getCell(12);
-		      cell.setCellValue(age);
-
-		      row = sh.getRow(4);
-		      cell = row.getCell(8);
-		      cell.setCellValue(gender);
-
-		      row = sh.getRow(4);
-		      cell = row.getCell(10);
-		      cell.setCellValue(background);
-
-		      row = sh.getRow(4);
-		      cell = row.getCell(12);
-		      cell.setCellValue(backgroundNumber);
-
-		      row = sh.getRow(5);
-		      cell = row.getCell(8);
-		      cell.setCellValue(nearestStation);
-
-		      row = sh.getRow(5);
-		      cell = row.getCell(10);
-		      cell.setCellValue(stationName);
+	    String view = "/jsp/EditCheck.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 
 
-		      row = sh.getRow(10);
-		      cell = row.getCell(2);
-		      cell.setCellValue(os);
-
-		      row = sh.getRow(11);
-		      cell = row.getCell(2);
-		      cell.setCellValue(skill);
-
-		      row = sh.getRow(11);
-		      cell = row.getCell(9);
-		      cell.setCellValue(tool);
-
-		      row = sh.getRow(13);
-		      cell = row.getCell(2);
-		      cell.setCellValue(db);
-
-		      row = sh.getRow(14);
-		      cell = row.getCell(2);
-		      cell.setCellValue(qualification);
-
-
-		      out = new FileOutputStream("C:\\temp\\sampleskill.xlsx");
-
-		      wb.write(out);
-
-
-
-
-		    } catch (Exception ex) {
-		      ex.printStackTrace();
-
-		    } finally {
-		      try {
-		        // wb.close();
-		      } catch (Exception ex2) {
-		        ex2.printStackTrace();
-		      }
-		    }
 	}
 
 }
