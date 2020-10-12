@@ -11,7 +11,7 @@
 	<h1>スキルシート管理システム：技術者一覧</h1>
 	<!-- 新規登録 -->
 	<form>
-		<input formaction="http://localhost:8080/SkillList/Add.jsp"
+		<input formaction="http://localhost:8080/SkillList/jsp/Add.jsp"
 			type="submit" name="send" value="新規登録"
 			style="width: 100px; height: 25px">
 	</form>
@@ -28,10 +28,12 @@
 				String db_name = (String) rs.getString("db_name");
 				String filename = (String) rs.getString("filename");
 		%>
-		<form>
+		<form method="POST">
 		<tr class="cell">
 			<td><%=db_number%></td>
-			<td><input class="db_name" type="submit" value="<%=db_name%>" formaction="http://localhost:8080/SkillList/jsp/Skill.jsp"></td>
+			<td><input class="db_name" type="submit" value="<%=db_name%>"></td>
+			<input type="hidden" value="<%=db_number%>">
+			<input type="hidden" value="<%=db_name%>">
 			<input type="hidden" value="<%=filename%>">
 		</tr>
 		</form>
