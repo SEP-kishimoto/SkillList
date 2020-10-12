@@ -31,7 +31,8 @@
 		<form>
 		<tr class="cell">
 			<td><%=db_number%></td>
-			<td><%=db_name%></td>
+			<td><input class="db_name" type="submit" value="<%=db_name%>" formaction="http://localhost:8080/SkillList/jsp/Skill.jsp"></td>
+			<input type="hidden" value="<%=filename%>">
 		</tr>
 		</form>
 		<%
