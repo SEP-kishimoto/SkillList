@@ -39,6 +39,13 @@ public class SkillBL extends HttpServlet {
 
 	}
 
+	public static Cell getCell(Sheet sheet, int rowPoint, int cellPoint) {
+		Row row = sheet.getRow(rowPoint);
+		Cell cell = row.getCell(cellPoint);
+
+		return cell;
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -64,83 +71,67 @@ public class SkillBL extends HttpServlet {
 	      is = new FileInputStream("C:\\temp\\SkillSheet_" + db_number + "_" + db_name +  ".xlsx");
 	      wb = WorkbookFactory.create(is);
 
-	      // Profile読み込み
+
 	      Sheet sh = wb.getSheetAt(0); //シート番号で読み込みたい場合はこちら
-	      Row row = sh.getRow(3);              //1行目を読み込む
-	      Cell cell = row.getCell(2);          //1セル目を読み込む
-	      String value = cell.getStringCellValue();  //セルの値をString値として読み込む
+
+	      // Profile読み込み
+	      String value = getCell(sh, 3, 2).getStringCellValue();
 	      request.setAttribute("kana", value);
 
-	      row = sh.getRow(4);
-	      cell = row.getCell(2);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 4, 2).getStringCellValue();
 	      request.setAttribute("name", value);
 
-	      row = sh.getRow(5);
-	      cell = row.getCell(2);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 5, 2).getStringCellValue();
 	      request.setAttribute("address", value);
 
-	      row = sh.getRow(3);
-	      cell = row.getCell(8);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 3, 8).getStringCellValue();
 	      request.setAttribute("birthday", value);
 
-	      row = sh.getRow(3);
-	      cell = row.getCell(12);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 3, 12).getStringCellValue();
 	      request.setAttribute("age", value);
 
-	      row = sh.getRow(4);
-	      cell = row.getCell(8);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 4, 8).getStringCellValue();
 	      request.setAttribute("gender", value);
 
-	      row = sh.getRow(4);
-	      cell = row.getCell(10);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 4, 10).getStringCellValue();
 	      request.setAttribute("background", value);
 
-	      row = sh.getRow(4);
-	      cell = row.getCell(12);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 4, 12).getStringCellValue();
 	      request.setAttribute("backgroundNumber", value);
 
-	      row = sh.getRow(5);
-	      cell = row.getCell(8);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 5, 8).getStringCellValue();
 	      request.setAttribute("nearestStation", value);
 
-	      row = sh.getRow(5);
-	      cell = row.getCell(10);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 5, 10).getStringCellValue();
 	      request.setAttribute("stationName", value);
 
 
 	      // Skill Info読み込み
-	      row = sh.getRow(8);
-	      cell = row.getCell(2);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 8, 2).getStringCellValue();
 	      request.setAttribute("os", value);
 
-	      row = sh.getRow(9);
-	      cell = row.getCell(2);
-	      value = cell.getStringCellValue();
+	      value = "";
+	      for (int i = 9; i <= 12; i++) {
+	    	  if (getCell(sh, i, 9).getStringCellValue() == "") {
+	    		  break;
+	    	  }
+	    	  value += getCell(sh, i, 2).getStringCellValue() + "|";
+	      }
 	      request.setAttribute("skill", value);
 
-	      row = sh.getRow(9);
-	      cell = row.getCell(9);
-	      value = cell.getStringCellValue();
+	      value = "";
+	      for (int i = 9; i <= 12; i++) {
+	    	  if (getCell(sh, i, 9).getStringCellValue() == "") {
+	    		  break;
+	    	  }
+	    	  value += getCell(sh, i, 9).getStringCellValue() + "|";
+	      }
 	      request.setAttribute("tool", value);
 
-	      row = sh.getRow(12);
-	      cell = row.getCell(2);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 12, 2).getStringCellValue();
 	      request.setAttribute("db", value);
 
-	      row = sh.getRow(14);
-	      cell = row.getCell(2);
-	      value = cell.getStringCellValue();
+	      value = getCell(sh, 14, 2).getStringCellValue();
 	      request.setAttribute("qualification", value);
 
 	    } catch (Exception ex) {
