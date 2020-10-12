@@ -26,15 +26,17 @@
 			while (rs.next()) {
 				String db_number = (String) rs.getString("db_number");
 				String db_name = (String) rs.getString("db_name");
+				String master_flg = (String) rs.getString("master_flg");
 				String filename = (String) rs.getString("filename");
 		%>
-		<form method="POST">
+		<form method="POST" action="/SkillList/SkillBL">
 		<tr class="cell">
 			<td><%=db_number%></td>
-			<td><input class="db_name" type="submit" value="<%=db_name%>"></td>
-			<input type="hidden" value="<%=db_number%>">
-			<input type="hidden" value="<%=db_name%>">
-			<input type="hidden" value="<%=filename%>">
+			<td><input class="db_name" type="submit" value="<%=db_name%>">
+			<input type="hidden" name="db_number" value="<%=db_number%>">
+			<input type="hidden" name="db_name" value="<%=db_name%>">
+			<input type="hidden" name="master_flg" value="<%=master_flg%>">
+			<input type="hidden" name="filename" value="<%=filename%>"></td>
 		</tr>
 		</form>
 		<%
