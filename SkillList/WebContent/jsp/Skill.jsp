@@ -164,7 +164,7 @@ qualification = (String) request.getAttribute("qualification");
 		<td><input type="submit" value="削除" formaction="./jsp/Delete.jsp"></td>
 		<td><input type="submit" value="ダウンロード" formaction="./DownloadBL.jsp"></td>
 		<td><input type="submit" value="ログアウト" formaction="./Logout.jsp"></td>
-		<%if(request.getParameter("mater_flg") == "1") {%>
+		<%if(request.getParameter("master_flg") == "1") {%>
 		<td><input type="submit" value="戻る" formaction="./jsp/List.jsp"></td>
 		<%} %>
 	</tr>

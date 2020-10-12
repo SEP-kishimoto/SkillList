@@ -45,7 +45,6 @@ public class EditCommitBL extends HttpServlet {
 		Row row = sheet.getRow(rowPoint);
 		Cell cell = row.getCell(cellPoint);
 
-
 		return cell;
 	}
 
@@ -111,24 +110,42 @@ public class EditCommitBL extends HttpServlet {
 		      is = new FileInputStream("C:\\temp\\SkillSheet_" + db_number + "_" + db_name + ".xlsx");
 		      wb = WorkbookFactory.create(is);
 
-		      // Sheet sh = wb.getSheetAt(0);
+		      Sheet sh = wb.getSheetAt(0);
 
-		      getCell(wb.getSheetAt(0), 3, 2).setCellValue(kana);
-		      getCell(wb.getSheetAt(0), 4, 2).setCellValue(name);
-		      getCell(wb.getSheetAt(0), 5, 2).setCellValue(address);
-		      getCell(wb.getSheetAt(0), 3, 8).setCellValue(birthday);
-		      getCell(wb.getSheetAt(0), 3, 12).setCellValue(age);
-		      getCell(wb.getSheetAt(0), 4, 8).setCellValue(gender);
-		      getCell(wb.getSheetAt(0), 4, 10).setCellValue(background);
-		      getCell(wb.getSheetAt(0), 4, 12).setCellValue(backgroundNumber);
-		      getCell(wb.getSheetAt(0), 5, 8).setCellValue(nearestStation);
-		      getCell(wb.getSheetAt(0), 5, 10).setCellValue(stationName);
+		      getCell(sh, 3, 2).setCellValue(kana);
+		      getCell(sh, 4, 2).setCellValue(name);
+		      getCell(sh, 5, 2).setCellValue(address);
+		      getCell(sh, 3, 8).setCellValue(birthday);
+		      getCell(sh, 3, 12).setCellValue(age);
+		      getCell(sh, 4, 8).setCellValue(gender);
+		      getCell(sh, 4, 10).setCellValue(background);
+		      getCell(sh, 4, 12).setCellValue(backgroundNumber);
+		      getCell(sh, 5, 8).setCellValue(nearestStation);
+		      getCell(sh, 5, 10).setCellValue(stationName);
 
-		      getCell(wb.getSheetAt(0), 10, 2).setCellValue(os);
-		      getCell(wb.getSheetAt(0), 11, 2).setCellValue(skill);
-		      getCell(wb.getSheetAt(0), 11, 9).setCellValue(tool);
-		      getCell(wb.getSheetAt(0), 13, 2).setCellValue(db);
-		      getCell(wb.getSheetAt(0), 14, 2).setCellValue(qualification);
+		      getCell(sh, 10, 2).setCellValue(os);
+
+		      int n = 0;
+		      String[] skillList = skill.split("[\\|]", -1);
+		      for (int i = 9; i <= 12; i++) {
+		    	  getCell(sh, i, 2).setCellValue(skillList[n]);
+		    	  if (skillList[n].equals("")) {
+		    		  break;
+		    	  }
+		    	  n++;
+		      }
+
+		      n = 0;
+		      String[] toolList = tool.split("[\\|]", -1);
+		      for (int i = 9; i <= 12; i++) {
+		    	  getCell(sh, i, 9).setCellValue(toolList[n]);
+		    	  if (toolList[n].equals("")) {
+		    		  break;
+		    	  }
+		    	  n++;
+		      }
+		      getCell(sh, 13, 2).setCellValue(db);
+		      getCell(sh, 14, 2).setCellValue(qualification);
 
 
 		      // Excelファイルに書き込む
