@@ -40,6 +40,12 @@ String db = "";
 String qualification = "";
 %>
 
+<!-- Background Note変数 -->
+<%
+String noteNumber = "";
+String beginning = "";
+%>
+
 <!-- DBからの値 -->
 <%
 db_number = (String) request.getAttribute("db_number");
@@ -67,6 +73,12 @@ skill = (String) request.getAttribute("skill");
 tool = (String) request.getAttribute("tool");
 db = (String) request.getAttribute("db");
 qualification = (String) request.getAttribute("qualification");
+%>
+
+<!-- Background Noteの設定 -->
+<%
+noteNumber = (String) request.getAttribute("noteNumber");
+beginning = (String) request.getAttribute("beginning");
 %>
 
 <h1>スキルシート管理システム：スキルシート編集</h1>
@@ -135,6 +147,21 @@ qualification = (String) request.getAttribute("qualification");
 
 </table>
 
+<h2>■Background Note</h2>
+<table>
+	<tr>
+		<td>No.</td>
+		<td><%=noteNumber %></td>
+	</tr>
+	<tr>
+		<td>開始</td>
+		<td><%=beginning %></td>
+	</tr>
+
+</table>
+
+
+
 <!-- DB input -->
 <input type="hidden" name="db_number" value="<%=db_number %>">
 <input type="hidden" name="db_name" value="<%=db_name %>">
@@ -170,7 +197,5 @@ qualification = (String) request.getAttribute("qualification");
 	</tr>
 </table>
 </form>
-
-<h2>■Background Note</h2>
 </body>
 </html>

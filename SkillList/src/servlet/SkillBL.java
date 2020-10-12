@@ -140,6 +140,54 @@ public class SkillBL extends HttpServlet {
 	      value = getCell(sh, 14, 2).getStringCellValue();
 	      request.setAttribute("qualification", value);
 
+
+	      // Background Note読み込み表示
+	      value = Integer.toString((int)getCell(sh, 18, 0).getNumericCellValue());
+	      request.setAttribute("noteNumber", value);
+
+
+	      value = getCell(sh, 18, 2).getStringCellValue();
+	      request.setAttribute("beginning", value);
+
+	      /*
+	      value = getCell(sh, 27, 2).getStringCellValue();
+	      request.setAttribute("end", value);
+
+	      value = getCell(sh, 18, 3).getStringCellValue();
+	      request.setAttribute("task", value);
+
+	      value = getCell(sh, 19, 9).getStringCellValue();
+	      request.setAttribute("requirement", value);
+
+	      value = getCell(sh, 20, 9).getStringCellValue();
+	      request.setAttribute("basic", value);
+
+	      value = getCell(sh, 21, 9).getStringCellValue();
+	      request.setAttribute("details", value);
+
+	      value = getCell(sh, 22, 9).getStringCellValue();
+	      request.setAttribute("pg", value);
+
+	      value = getCell(sh, 23, 9).getStringCellValue();
+	      request.setAttribute("single", value);
+
+	      value = getCell(sh, 24, 9).getStringCellValue();
+	      request.setAttribute("join", value);
+
+	      value = getCell(sh, 25, 9).getStringCellValue();
+	      request.setAttribute("customer", value);
+
+	      value = getCell(sh, 27, 9).getStringCellValue();
+	      request.setAttribute("environment", value);
+
+	      value = getCell(sh, 18, 10).getStringCellValue();
+	      request.setAttribute("peopleNumber", value);
+
+	      value = getCell(sh, 18, 11).getStringCellValue();
+	      request.setAttribute("development", value);
+	      */
+
+
 	    } catch (Exception ex) {
 	      ex.printStackTrace();
 
