@@ -75,7 +75,6 @@ public class EditCheckBL extends HttpServlet {
 	    nearestStation = request.getParameter("nearestStation");
 	    stationName = request.getParameter("stationName");
 
-
 	    os = request.getParameter("os");
 	    skill = request.getParameter("skill");
 	    tool = request.getParameter("tool");
