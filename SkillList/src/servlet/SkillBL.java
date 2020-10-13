@@ -3,6 +3,9 @@ package servlet;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,7 +45,11 @@ public class SkillBL extends HttpServlet {
 	public static Cell getCell(Sheet sheet, int rowPoint, int cellPoint) {
 		Row row = sheet.getRow(rowPoint);
 		Cell cell = row.getCell(cellPoint);
+  		if (Integer.toString((int)cell.getNumericCellValue()) != null || cell.getStringCellValue() != null) {
+  			System.out.println(cell);
+  		} else {
 
+  		}
 		return cell;
 	}
 
@@ -66,6 +73,12 @@ public class SkillBL extends HttpServlet {
 	    db_name = (String) request.getAttribute("db_name");
 	    master_flg = (String) request.getAttribute("master_flg");
 	    filename = (String) request.getAttribute("filename");
+	    if(db_number==null) {
+		    db_number = request.getParameter("db_number");
+		    db_name = request.getParameter("db_name");
+		    master_flg = request.getParameter("master_flg");
+		    filename = request.getParameter("filename");
+	    }
 
 	    request.setAttribute("db_number", db_number);
 	    request.setAttribute("db_name", db_name);
@@ -79,6 +92,8 @@ public class SkillBL extends HttpServlet {
 
 
 	      Sheet sh = wb.getSheetAt(0); //シート番号で読み込みたい場合はこちら
+
+	      int wonderland = sh.getLastRowNum() - 17;
 
 	      // Profile読み込み
 	      String value = getCell(sh, 3, 2).getStringCellValue();
@@ -142,19 +157,72 @@ public class SkillBL extends HttpServlet {
 
 
 	      // Background Note読み込み表示
-	      value = Integer.toString((int)getCell(sh, 18, 0).getNumericCellValue());
-	      request.setAttribute("noteNumber", value);
 
+	      value = "";
+	      List<String> valueList = new ArrayList<String>();
+	      int n = 18;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  valueList.add(i, Integer.toString((int)getCell(sh, n, 0).getNumericCellValue()));
+	    	  n = n + 10;
+	      }
+	      System.out.println(valueList);
+	      request.setAttribute("noteNumber", valueList);
 
-	      value = getCell(sh, 18, 2).getStringCellValue();
-	      request.setAttribute("beginning", value);
+	      value = "";
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	      valueList = new ArrayList<String>();
+	      n = 18;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  try {
+	    		  value = sdf.format(getCell(sh, n, 2).getDateCellValue());
+	    		  if (value != null) {
+	    			  System.out.println(value);
+	    		  } else {
+	    			  throw new NullPointerException();
+	    		  }
 
-	      /*
-	      value = getCell(sh, 27, 2).getStringCellValue();
-	      request.setAttribute("end", value);
+	    	  } catch(NullPointerException e) {
+	    		  e.printStackTrace();
+	    	  }
+	    	  valueList.add(i, value);
+	    	  n = n + 10;
+	      }
+	      System.out.println(valueList);
+	      request.setAttribute("beginning", valueList);
 
-	      value = getCell(sh, 18, 3).getStringCellValue();
+	      value = "";
+	      sdf = new SimpleDateFormat("yyyy/MM/dd");
+	      valueList = new ArrayList<String>();
+	      n = 27;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  try {
+	    		  value = sdf.format(getCell(sh, n, 2).getDateCellValue());
+	    		  if (value != null) {
+	    			  System.out.println(value);
+	    		  } else {
+	    			  throw new NullPointerException();
+	    		  }
+
+	    	  } catch(NullPointerException e) {
+	    		  e.printStackTrace();
+	    	  }
+	    	  valueList.add(i, value);
+	    	  n = n + 10;
+	      }
+	      System.out.println(valueList);
+	      request.setAttribute("end", valueList);
+
+	      //value = new SimpleDateFormat("yyyy/MM/dd").format(getCell(sh, 27, 2).getDateCellValue());
+
+	      value = "";
+	      for (int i = 18; i <= 27; i++) {
+	    	  if (getCell(sh, i, 3).getStringCellValue() == "") {
+	    		  break;
+	    	  }
+	    	  value += getCell(sh, i, 3).getStringCellValue() + "|";
+	      }
 	      request.setAttribute("task", value);
+
 
 	      value = getCell(sh, 19, 9).getStringCellValue();
 	      request.setAttribute("requirement", value);
@@ -180,13 +248,12 @@ public class SkillBL extends HttpServlet {
 	      value = getCell(sh, 27, 9).getStringCellValue();
 	      request.setAttribute("environment", value);
 
+
 	      value = getCell(sh, 18, 10).getStringCellValue();
 	      request.setAttribute("peopleNumber", value);
 
 	      value = getCell(sh, 18, 11).getStringCellValue();
 	      request.setAttribute("development", value);
-	      */
-
 
 	    } catch (Exception ex) {
 	      ex.printStackTrace();

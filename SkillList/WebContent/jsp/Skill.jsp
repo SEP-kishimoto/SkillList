@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.io.*,java.util.*,java.text.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +43,22 @@ String qualification = "";
 
 <!-- Background Note変数 -->
 <%
-String noteNumber = "";
-String beginning = "";
+List<String> noteNumber = new ArrayList<String>();
+List<String> beginning = new ArrayList<String>();
+List<String> end = new ArrayList<String>();
+String task = "";
+
+String requirement = "";
+String basic = "";
+String details = "";
+String pg = "";
+String single = "";
+String join = "";
+String customer = "";
+String environment = "";
+String peopleNumber = "";
+String development = "";
+
 %>
 
 <!-- DBからの値 -->
@@ -77,8 +92,21 @@ qualification = (String) request.getAttribute("qualification");
 
 <!-- Background Noteの設定 -->
 <%
-noteNumber = (String) request.getAttribute("noteNumber");
-beginning = (String) request.getAttribute("beginning");
+noteNumber = (ArrayList<String>) request.getAttribute("noteNumber");
+beginning = (ArrayList<String>) request.getAttribute("beginning");
+end = (ArrayList<String>) request.getAttribute("end");
+task = (String) request.getAttribute("task");
+
+requirement = (String) request.getAttribute("requirement");
+basic = (String) request.getAttribute("basic");
+details = (String) request.getAttribute("details");
+pg = (String) request.getAttribute("pg");
+single = (String) request.getAttribute("single");
+join = (String) request.getAttribute("join");
+customer = (String) request.getAttribute("customer");
+environment = (String) request.getAttribute("environment");
+peopleNumber = (String) request.getAttribute("peopleNumber");
+development = (String) request.getAttribute("development");
 %>
 
 <h1>スキルシート管理システム：スキルシート編集</h1>
@@ -148,18 +176,59 @@ beginning = (String) request.getAttribute("beginning");
 </table>
 
 <h2>■Background Note</h2>
+<%for (int i = 0; i < 5; i++) { %>
 <table>
 	<tr>
 		<td>No.</td>
-		<td><%=noteNumber %></td>
+		<td><%=noteNumber.get(i) %></td>
 	</tr>
 	<tr>
 		<td>開始</td>
-		<td><%=beginning %></td>
+		<td><%=beginning.get(i) %></td>
+	</tr>
+	<tr>
+		<td>終了</td>
+		<td><%=end.get(i) %></td>
+	</tr>
+	<tr>
+		<td>業務内容</td>
+		<td><%=task%></td>
+	</tr>
+	<tr>
+		<td>要件定義</td>
+		<td><%=requirement %></td>
+		<td>基本設計</td>
+		<td><%=basic %></td>
+	</tr>
+	<tr>
+		<td>詳細設計</td>
+		<td><%=details %></td>
+		<td>PG製造</td>
+		<td><%=pg %></td>
+	</tr>
+	<tr>
+		<td>単体試験</td>
+		<td><%=single %></td>
+		<td>結合試験</td>
+		<td><%=join %></td>
+	</tr>
+	<tr>
+		<td>客先試験</td>
+		<td><%=customer %></td>
+		<td>環境設定</td>
+		<td><%=environment %></td>
+	</tr>
+	<tr>
+		<td>人数</td>
+		<td><%=peopleNumber %></td>
+	</tr>
+	<tr>
+		<td>開発環境</td>
+		<td><%=development %></td>
 	</tr>
 
 </table>
-
+<%} %>
 
 
 <!-- DB input -->
