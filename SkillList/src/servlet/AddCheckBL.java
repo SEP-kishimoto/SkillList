@@ -15,17 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AddCheckBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddCheckBL() {
-        super();
 
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
@@ -42,24 +33,44 @@ public class AddCheckBL extends HttpServlet {
 		request.setAttribute("backgroundNumber",request.getParameter("backgroundNumber"));
 		request.setAttribute("nearestStation",request.getParameter("nearestStation"));
 		request.setAttribute("stationName",request.getParameter("stationName"));
-		System.out.println(request.getParameter("kana"));
-		System.out.println(request.getParameter("name"));
-		System.out.println(request.getParameter("address"));
-		System.out.println(request.getParameter("birthday"));
-		System.out.println(request.getParameter("age"));
-		System.out.println(request.getParameter("gender"));
-		System.out.println(request.getParameter("background"));
-		System.out.println(request.getParameter("backgroundNumber"));
-		System.out.println(request.getParameter("nearestStation"));
-		System.out.println(request.getParameter("stationName"));
+
+
+		// Skill Info
+		request.setAttribute("os",request.getParameter("os"));
+		String skill = request.getParameter("skill");
+		skill = skill.replace(",", "｜");
+		request.setAttribute("skill",skill);
+		String tool = request.getParameter("tool");
+		tool = tool.replace(",", "｜");
+		request.setAttribute("tool",tool);
+		request.setAttribute("db",request.getParameter("db"));
+		request.setAttribute("qualification",request.getParameter("qualification"));
+
+
+		// Background Note
+		request.setAttribute("noteNumber",request.getParameter("noteNumber"));
+		request.setAttribute("beginning",request.getParameter("beginning"));
+		request.setAttribute("end",request.getParameter("end"));
+		request.setAttribute("task",request.getParameter("task"));
+		request.setAttribute("requirement",request.getParameter("requirement"));
+		request.setAttribute("basic",request.getParameter("basic"));
+		request.setAttribute("details",request.getParameter("details"));
+		request.setAttribute("pg",request.getParameter("pg"));
+		request.setAttribute("single",request.getParameter("single"));
+		request.setAttribute("join",request.getParameter("join"));
+		request.setAttribute("customer",request.getParameter("customer"));
+		request.setAttribute("environment",request.getParameter("environment"));
+		request.setAttribute("peopleNumber",request.getParameter("peopleNumber"));
+		request.setAttribute("development",request.getParameter("development"));
+
+
+
 
 
 		getServletContext().getRequestDispatcher("/jsp/AddCheck.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
