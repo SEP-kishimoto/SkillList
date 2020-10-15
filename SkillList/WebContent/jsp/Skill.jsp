@@ -176,7 +176,7 @@ development = (String) request.getAttribute("development");
 </table>
 
 <h2>■Background Note</h2>
-<%for (int i = 0; i < 5; i++) { %>
+<%for (int i = 0; i < noteNumber.size(); i++) { %>
 <table>
 	<tr>
 		<td>No.</td>
