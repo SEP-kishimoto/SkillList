@@ -3,6 +3,10 @@ package servlet;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,8 +46,33 @@ public class SkillBL extends HttpServlet {
 	public static Cell getCell(Sheet sheet, int rowPoint, int cellPoint) {
 		Row row = sheet.getRow(rowPoint);
 		Cell cell = row.getCell(cellPoint);
+  		if (cell.getStringCellValue() != null) {
+  			System.out.println(cell);
+  		} else {
+  			cell.setCellValue("");
+  		}
+		return cell;
+	}
+
+	public static Cell getCellNum(Sheet sheet, int rowPoint, int cellPoint) {
+		Row row = sheet.getRow(rowPoint);
+		Cell cell = row.getCell(cellPoint);
 
 		return cell;
+	}
+
+	public static Cell getCellDate(Sheet sheet, int rowPoint, int cellPoint) {
+		Row row = sheet.getRow(rowPoint);
+
+		if (row != null) {
+			Cell cell = row.getCell(cellPoint);
+			if (Objects.equals(cell.getDateCellValue(), null)) {
+				System.out.println(cell);
+				return null;
+			}
+			return cell;
+		}
+		return null;
 	}
 
 	/**
@@ -66,6 +95,12 @@ public class SkillBL extends HttpServlet {
 	    db_name = (String) request.getAttribute("db_name");
 	    master_flg = (String) request.getAttribute("master_flg");
 	    filename = (String) request.getAttribute("filename");
+	    if(db_number==null) {
+		    db_number = request.getParameter("db_number");
+		    db_name = request.getParameter("db_name");
+		    master_flg = request.getParameter("master_flg");
+		    filename = request.getParameter("filename");
+	    }
 
 	    request.setAttribute("db_number", db_number);
 	    request.setAttribute("db_name", db_name);
@@ -79,6 +114,8 @@ public class SkillBL extends HttpServlet {
 
 
 	      Sheet sh = wb.getSheetAt(0); //シート番号で読み込みたい場合はこちら
+
+	      int wonderland = sh.getLastRowNum() - 17;
 
 	      // Profile読み込み
 	      String value = getCell(sh, 3, 2).getStringCellValue();
@@ -139,6 +176,121 @@ public class SkillBL extends HttpServlet {
 
 	      value = getCell(sh, 14, 2).getStringCellValue();
 	      request.setAttribute("qualification", value);
+
+
+	      // Background Note読み込み表示
+
+	      // noteNumber
+	      value = "";
+	      List<String> valueList = new ArrayList<String>();
+	      int n = 18;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  valueList.add(i, Integer.toString((int)getCellNum(sh, n, 0).getNumericCellValue()));
+	    	  n = n + 10;
+	      }
+	      System.out.println(valueList);
+	      request.setAttribute("noteNumber", valueList);
+
+	      // beginning
+	      /*
+	      value = new SimpleDateFormat().format(getCellDate(sh, 38, 2).getDateCellValue());
+	      System.out.println(value);
+	      System.out.println(value);
+	      */
+
+	      value = "";
+	      valueList = new ArrayList<String>();
+	      n = 18;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  try {
+	    		  if (Objects.equals(getCellDate(sh, n, 2), null)) {
+	    			  value = "";
+	    		  } else {
+	    			  String dateStr = new SimpleDateFormat("yyyy/MM/dd").format(getCellDate(sh, n, 2).getDateCellValue());
+	    			  value = dateStr;
+	    		  }
+	    		  System.out.println(value);
+	    		  if (value != null) {
+	    			  System.out.println(valueList);
+	    			  valueList.add(i, value);
+	    		  } else {
+	    			  throw new NullPointerException();
+	    		  }
+	    	  } catch (NullPointerException e) {
+	    		  e.printStackTrace();
+	    	  }
+	    	  n = n + 10;
+	      }
+	      request.setAttribute("beginning", valueList);
+
+	      // end
+	      value = "";
+	      valueList = new ArrayList<String>();
+	      n = 27;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  try {
+	    		  if (Objects.equals(getCellDate(sh, n, 2), null)) {
+	    			  value = "";
+	    		  } else {
+	    			  String dateStr = new SimpleDateFormat("yyyy/MM/dd").format(getCellDate(sh, n, 2).getDateCellValue());
+		    		  value = dateStr;
+	    		  }
+	    		  if (value != null) {
+	    			  System.out.println(value);
+	    			  valueList.add(i, value);
+	    		  } else {
+	    			  throw new NullPointerException();
+	    		  }
+
+	    	  } catch(NullPointerException e) {
+	    		  e.printStackTrace();
+	    	  }
+	    	  n = n + 10;
+	      }
+	      request.setAttribute("end", valueList);
+
+
+
+	      value = "";
+	      for (int i = 18; i <= 27; i++) {
+	    	  if (getCell(sh, i, 3).getStringCellValue() == "") {
+	    		  break;
+	    	  }
+	    	  value += getCell(sh, i, 3).getStringCellValue() + "|";
+	      }
+	      request.setAttribute("task", value);
+
+
+	      value = getCell(sh, 19, 9).getStringCellValue();
+	      request.setAttribute("requirement", value);
+
+	      value = getCell(sh, 20, 9).getStringCellValue();
+	      request.setAttribute("basic", value);
+
+	      value = getCell(sh, 21, 9).getStringCellValue();
+	      request.setAttribute("details", value);
+
+	      value = getCell(sh, 22, 9).getStringCellValue();
+	      request.setAttribute("pg", value);
+
+	      value = getCell(sh, 23, 9).getStringCellValue();
+	      request.setAttribute("single", value);
+
+	      value = getCell(sh, 24, 9).getStringCellValue();
+	      request.setAttribute("join", value);
+
+	      value = getCell(sh, 25, 9).getStringCellValue();
+	      request.setAttribute("customer", value);
+
+	      value = getCell(sh, 27, 9).getStringCellValue();
+	      request.setAttribute("environment", value);
+
+
+	      value = getCell(sh, 18, 10).getStringCellValue();
+	      request.setAttribute("peopleNumber", value);
+
+	      value = getCell(sh, 18, 11).getStringCellValue();
+	      request.setAttribute("development", value);
 
 	    } catch (Exception ex) {
 	      ex.printStackTrace();
