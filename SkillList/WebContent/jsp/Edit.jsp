@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.io.*,java.util.*,java.text.*"%>
 
 <%@ page
 import="servlet.EditBL"
@@ -44,6 +45,33 @@ String db = "";
 String qualification = "";
 %>
 
+<!-- Background Note変数 リスト構造 -->
+<%
+List<String> noteNumber = new ArrayList<String>();
+List<String> beginning = new ArrayList<String>();
+List<String> end = new ArrayList<String>();
+List<String> task = new ArrayList<String>();
+%>
+
+<!-- Background Note変数 フェーズ表示、List二重構造 -->
+<%
+ArrayList<List<String>> requirement = new ArrayList<>();
+ArrayList<List<String>> basic = new ArrayList<>();
+ArrayList<List<String>> details = new ArrayList<>();
+ArrayList<List<String>> pg = new ArrayList<>();
+ArrayList<List<String>> single = new ArrayList<>();
+ArrayList<List<String>> join = new ArrayList<>();
+ArrayList<List<String>> customer = new ArrayList<>();
+ArrayList<List<String>> environment = new ArrayList<>();
+%>
+
+<!-- Background Note変数 リスト構造 -->
+<%
+List<String> peopleNumber = new ArrayList<String>();
+List<String> development = new ArrayList<String>();
+
+%>
+
 <!-- DBからの値 -->
 <%
 db_number = (String) request.getAttribute("db_number");
@@ -71,6 +99,26 @@ skill = (String) request.getAttribute("skill");
 tool = (String) request.getAttribute("tool");
 db = (String) request.getAttribute("db");
 qualification = (String) request.getAttribute("qualification");
+%>
+
+<!-- Background Noteの設定 リスト構造 および二重構造 -->
+<%
+noteNumber = (ArrayList<String>) request.getAttribute("noteNumber");
+beginning = (ArrayList<String>) request.getAttribute("beginning");
+end = (ArrayList<String>) request.getAttribute("end");
+task = (ArrayList<String>) request.getAttribute("task");
+
+requirement = (ArrayList<List<String>>) request.getAttribute("requirement");
+basic = (ArrayList<List<String>>) request.getAttribute("basic");
+details = (ArrayList<List<String>>) request.getAttribute("details");
+pg = (ArrayList<List<String>>) request.getAttribute("pg");
+single = (ArrayList<List<String>>) request.getAttribute("single");
+join = (ArrayList<List<String>>) request.getAttribute("join");
+customer = (ArrayList<List<String>>) request.getAttribute("customer");
+environment = (ArrayList<List<String>>) request.getAttribute("environment");
+
+peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
+development = (ArrayList<String>) request.getAttribute("development");
 %>
 
 <h1>スキルシート管理システム：スキルシート編集</h1>
@@ -137,6 +185,66 @@ qualification = (String) request.getAttribute("qualification");
 	</tr>
 
 </table>
+<h2>■Background Note</h2>
+<table>
+	<tr>
+		<td>No.</td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="text" name="" value="<%= %>"></td>
+	</tr>
+
+
+
+
+</table>
+
+
+
 
 <!-- DB input -->
 <input type="hidden" name="db_number" value="<%=db_number %>">
@@ -145,6 +253,6 @@ qualification = (String) request.getAttribute("qualification");
 <input type="submit" value="確認" class="button">
 </form>
 
-<h2>■Background Note</h2>
+
 </body>
 </html>
