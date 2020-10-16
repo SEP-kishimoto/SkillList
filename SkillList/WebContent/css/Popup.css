@@ -1,0 +1,21 @@
+Popup.css
+
+@charset "UTF-8";
+
+body {
+	width:90%;
+	margin: 0 auto;
+}
+
+label {
+
+}
+
+.delete_div, input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"]:checked + .delete_div {
+	display:block;
+}
+
