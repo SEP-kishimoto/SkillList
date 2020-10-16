@@ -41,23 +41,30 @@ String db = "";
 String qualification = "";
 %>
 
-<!-- Background Note変数 -->
+<!-- Background Note変数 リスト構造 -->
 <%
 List<String> noteNumber = new ArrayList<String>();
 List<String> beginning = new ArrayList<String>();
 List<String> end = new ArrayList<String>();
-String task = "";
+List<String> task = new ArrayList<String>();
+%>
 
-String requirement = "";
-String basic = "";
-String details = "";
-String pg = "";
-String single = "";
-String join = "";
-String customer = "";
-String environment = "";
-String peopleNumber = "";
-String development = "";
+<!-- Background Note変数 フェーズ表示、List二重構造 -->
+<%
+ArrayList<List<String>> requirement = new ArrayList<>();
+ArrayList<List<String>> basic = new ArrayList<>();
+ArrayList<List<String>> details = new ArrayList<>();
+ArrayList<List<String>> pg = new ArrayList<>();
+ArrayList<List<String>> single = new ArrayList<>();
+ArrayList<List<String>> join = new ArrayList<>();
+ArrayList<List<String>> customer = new ArrayList<>();
+ArrayList<List<String>> environment = new ArrayList<>();
+%>
+
+<!-- Background Note変数 リスト構造 -->
+<%
+List<String> peopleNumber = new ArrayList<String>();
+List<String> development = new ArrayList<String>();
 
 %>
 
@@ -90,23 +97,24 @@ db = (String) request.getAttribute("db");
 qualification = (String) request.getAttribute("qualification");
 %>
 
-<!-- Background Noteの設定 -->
+<!-- Background Noteの設定 リスト構造 および二重構造 -->
 <%
 noteNumber = (ArrayList<String>) request.getAttribute("noteNumber");
 beginning = (ArrayList<String>) request.getAttribute("beginning");
 end = (ArrayList<String>) request.getAttribute("end");
-task = (String) request.getAttribute("task");
+task = (ArrayList<String>) request.getAttribute("task");
 
-requirement = (String) request.getAttribute("requirement");
-basic = (String) request.getAttribute("basic");
-details = (String) request.getAttribute("details");
-pg = (String) request.getAttribute("pg");
-single = (String) request.getAttribute("single");
-join = (String) request.getAttribute("join");
-customer = (String) request.getAttribute("customer");
-environment = (String) request.getAttribute("environment");
-peopleNumber = (String) request.getAttribute("peopleNumber");
-development = (String) request.getAttribute("development");
+requirement = (ArrayList<List<String>>) request.getAttribute("requirement");
+basic = (ArrayList<List<String>>) request.getAttribute("basic");
+details = (ArrayList<List<String>>) request.getAttribute("details");
+pg = (ArrayList<List<String>>) request.getAttribute("pg");
+single = (ArrayList<List<String>>) request.getAttribute("single");
+join = (ArrayList<List<String>>) request.getAttribute("join");
+customer = (ArrayList<List<String>>) request.getAttribute("customer");
+environment = (ArrayList<List<String>>) request.getAttribute("environment");
+
+peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
+development = (ArrayList<String>) request.getAttribute("development");
 %>
 
 <h1>スキルシート管理システム：スキルシート編集</h1>
@@ -192,39 +200,39 @@ development = (String) request.getAttribute("development");
 	</tr>
 	<tr>
 		<td>業務内容</td>
-		<td><%=task%></td>
+		<td><%=task.get(i) %></td>
 	</tr>
 	<tr>
 		<td>要件定義</td>
-		<td><%=requirement %></td>
+		<td><%=requirement.get(i).get(0) %></td>
 		<td>基本設計</td>
-		<td><%=basic %></td>
+		<td><%=basic.get(i).get(1) %></td>
 	</tr>
 	<tr>
 		<td>詳細設計</td>
-		<td><%=details %></td>
+		<td><%=details.get(i).get(2) %></td>
 		<td>PG製造</td>
-		<td><%=pg %></td>
+		<td><%=pg.get(i).get(3) %></td>
 	</tr>
 	<tr>
 		<td>単体試験</td>
-		<td><%=single %></td>
+		<td><%=single.get(i).get(4) %></td>
 		<td>結合試験</td>
-		<td><%=join %></td>
+		<td><%=join.get(i).get(5) %></td>
 	</tr>
 	<tr>
 		<td>客先試験</td>
-		<td><%=customer %></td>
+		<td><%=customer.get(i).get(6) %></td>
 		<td>環境設定</td>
-		<td><%=environment %></td>
+		<td><%=environment.get(i).get(7) %></td>
 	</tr>
 	<tr>
 		<td>人数</td>
-		<td><%=peopleNumber %></td>
+		<td><%=peopleNumber.get(i) %></td>
 	</tr>
 	<tr>
 		<td>開発環境</td>
-		<td><%=development %></td>
+		<td><%=development.get(i) %></td>
 	</tr>
 
 </table>
@@ -254,9 +262,27 @@ development = (String) request.getAttribute("development");
 <input type="hidden" name="db" value="<%=db%>">
 <input type="hidden" name="qualification" value="<%=qualification%>">
 
+<!-- BackgroundNote input -->
+<input type="hidden" name="noteNumber" value="<%=noteNumber %>">
+<input type="hidden" name="beginning" value="<%=beginning %>">
+<input type="hidden" name="end" value="<%=end %>">
+<input type="hidden" name="task" value="<%=task %>">
+
+<input type="hidden" name="requirement" value="<%=requirement %>">
+<input type="hidden" name="basic" value="<%=basic %>">
+<input type="hidden" name="details" value="<%=details %>">
+<input type="hidden" name="pg" value="<%=pg %>">
+<input type="hidden" name="single" value="<%=single %>">
+<input type="hidden" name="join" value="<%=join %>">
+<input type="hidden" name="customer" value="<%=customer %>">
+<input type="hidden" name="environment" value="<%=environment %>">
+
+<input type="hidden" name="peopleNumber" value="<%=peopleNumber %>">
+<input type="hidden" name="development" value="<%=development %>">
+
 <table>
 	<tr>
-		<td><input type="submit" value="編集" formaction="./EditBL"></td>
+		<td><input type="submit" value="編集" formaction="./jsp/Edit.jsp"></td>
 		<td><input type="submit" value="削除" formaction="./jsp/Delete.jsp"></td>
 		<td><input type="submit" value="ダウンロード" formaction="./DownloadBL.jsp"></td>
 		<td><input type="submit" value="ログアウト" formaction="./Logout.jsp"></td>

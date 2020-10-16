@@ -45,13 +45,16 @@ public class SkillBL extends HttpServlet {
 
 	public static Cell getCell(Sheet sheet, int rowPoint, int cellPoint) {
 		Row row = sheet.getRow(rowPoint);
-		Cell cell = row.getCell(cellPoint);
-  		if (cell.getStringCellValue() != null) {
-  			System.out.println(cell);
-  		} else {
-  			cell.setCellValue("");
-  		}
-		return cell;
+
+		if (row != null) {
+			Cell cell = row.getCell(cellPoint);
+			if (Objects.equals(cell.getStringCellValue(), null)) {
+				System.out.println(cell);
+				return null;
+			}
+			return cell;
+		}
+		return null;
 	}
 
 	public static Cell getCellNum(Sheet sheet, int rowPoint, int cellPoint) {
@@ -188,16 +191,9 @@ public class SkillBL extends HttpServlet {
 	    	  valueList.add(i, Integer.toString((int)getCellNum(sh, n, 0).getNumericCellValue()));
 	    	  n = n + 10;
 	      }
-	      System.out.println(valueList);
 	      request.setAttribute("noteNumber", valueList);
 
 	      // beginning
-	      /*
-	      value = new SimpleDateFormat().format(getCellDate(sh, 38, 2).getDateCellValue());
-	      System.out.println(value);
-	      System.out.println(value);
-	      */
-
 	      value = "";
 	      valueList = new ArrayList<String>();
 	      n = 18;
@@ -236,7 +232,6 @@ public class SkillBL extends HttpServlet {
 		    		  value = dateStr;
 	    		  }
 	    		  if (value != null) {
-	    			  System.out.println(value);
 	    			  valueList.add(i, value);
 	    		  } else {
 	    			  throw new NullPointerException();
@@ -249,48 +244,99 @@ public class SkillBL extends HttpServlet {
 	      }
 	      request.setAttribute("end", valueList);
 
-
-
+	      // 業務内容の処理
 	      value = "";
-	      for (int i = 18; i <= 27; i++) {
-	    	  if (getCell(sh, i, 3).getStringCellValue() == "") {
-	    		  break;
+	      valueList = new ArrayList<String>();
+	      n = 18;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  if (Objects.equals(getCell(sh, n, 3), null)) {
+	    		  value = "";
+	    		  valueList.add(i, value);
+	    	  } else {
+	    		  value = "";
+	    		  for (int s = n; s <= n + 9; s++) {
+	    	    	  if (getCell(sh, s, 3).getStringCellValue() == "") {
+	    	    		  break;
+	    	    	  }
+	    	    	  value += getCell(sh, s, 3).getStringCellValue() + "|";
+	    	      }
+	    		  valueList.add(i, value);
 	    	  }
-	    	  value += getCell(sh, i, 3).getStringCellValue() + "|";
+	    	  n = n + 10;
 	      }
-	      request.setAttribute("task", value);
+	      request.setAttribute("task", valueList);
+
+	      // フェーズの表示部分を記述しています
+	      n = 19;
+	      valueList = new ArrayList<String>();
+    	  List<List<String>> checkList = new ArrayList<>();
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  valueList = new ArrayList<String>();
+	    	  if (Objects.equals(getCell(sh, n, 9), null)) {
+	    		  value = "";
+	    		  valueList.add(i, value);
+	    	  } else {
+	    		  for (int s = 0; s < 8; s++) {
+	    			  if (Objects.equals(getCell(sh, n, 9), null)) {
+	    				  value = "";
+	    				  valueList.add(s, value);
+	    			  } else {
+	    				  value = getCell(sh, n, 9).getStringCellValue();
+	    				  valueList.add(s, value);
+	    			  }
+	    			  n = n + 1;
+	    		  }
+	    		  n = n + 3;
+	    	  }
+	    	  checkList.add(i, valueList);
+	      }
+	      request.setAttribute("requirement", checkList);
+	      request.setAttribute("basic", checkList);
+	      request.setAttribute("details", checkList);
+	      request.setAttribute("pg", checkList);
+	      request.setAttribute("single", checkList);
+	      request.setAttribute("join", checkList);
+	      request.setAttribute("customer", checkList);
+	      request.setAttribute("environment", checkList);
 
 
-	      value = getCell(sh, 19, 9).getStringCellValue();
-	      request.setAttribute("requirement", value);
+	      // 人数部分の表示処理
+	      value = "";
+	      valueList = new ArrayList<String>();
+	      n = 18;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  if (Objects.equals(getCell(sh, n, 10), null)) {
+    			  value = "";
+    			  valueList.add(i, value);
+    		  } else {
+    			  value = getCell(sh, n, 10).getStringCellValue();
+    			  valueList.add(i, value);
+    		  }
+	    	  n = n + 10;
+	      }
+	      request.setAttribute("peopleNumber", valueList);
 
-	      value = getCell(sh, 20, 9).getStringCellValue();
-	      request.setAttribute("basic", value);
-
-	      value = getCell(sh, 21, 9).getStringCellValue();
-	      request.setAttribute("details", value);
-
-	      value = getCell(sh, 22, 9).getStringCellValue();
-	      request.setAttribute("pg", value);
-
-	      value = getCell(sh, 23, 9).getStringCellValue();
-	      request.setAttribute("single", value);
-
-	      value = getCell(sh, 24, 9).getStringCellValue();
-	      request.setAttribute("join", value);
-
-	      value = getCell(sh, 25, 9).getStringCellValue();
-	      request.setAttribute("customer", value);
-
-	      value = getCell(sh, 27, 9).getStringCellValue();
-	      request.setAttribute("environment", value);
-
-
-	      value = getCell(sh, 18, 10).getStringCellValue();
-	      request.setAttribute("peopleNumber", value);
-
-	      value = getCell(sh, 18, 11).getStringCellValue();
-	      request.setAttribute("development", value);
+	      // 開発環境の表示処理
+	      value = "";
+	      valueList = new ArrayList<String>();
+	      n = 18;
+	      for (int i = 0; i < wonderland / 10; i++) {
+	    	  if (Objects.equals(getCell(sh, n, 11), null)) {
+	    		  value = "";
+	    		  valueList.add(i, value);
+	    	  } else {
+	    		  value = "";
+	    		  for (int s = n; s <= n + 9; s++) {
+	    	    	  if (getCell(sh, s, 11).getStringCellValue() == "") {
+	    	    		  break;
+	    	    	  }
+	    	    	  value += getCell(sh, s,11).getStringCellValue() + "|";
+	    	      }
+	    		  valueList.add(i, value);
+	    	  }
+	    	  n = n + 10;
+	      }
+	      request.setAttribute("development", valueList);
 
 	    } catch (Exception ex) {
 	      ex.printStackTrace();
