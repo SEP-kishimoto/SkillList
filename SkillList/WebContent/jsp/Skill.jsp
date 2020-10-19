@@ -22,6 +22,7 @@ request.setCharacterEncoding("UTF-8");
 <%
 String db_number = "";
 String db_name = "";
+String master_flg = "";
 String filename = "";
 %>
 
@@ -78,6 +79,7 @@ List<String> development = new ArrayList<String>();
 <%
 db_number = (String) request.getAttribute("db_number");
 db_name = (String) request.getAttribute("db_name");
+master_flg = (String) request.getAttribute("master_flg");
 filename = (String) request.getAttribute("filename");
 %>
 
@@ -291,18 +293,6 @@ session.setAttribute("peopleNumber", peopleNumber);
 session.setAttribute("development", development);
 %>
 
-<!-- <table>
-	<tr>
-		<td><input type="submit" value="編集" formaction="./jsp/Edit.jsp"></td>
-		<td><input type="submit" value="削除" formaction="./jsp/Delete.jsp"></td>
-		<td><input type="submit" value="ダウンロード" formaction="./DownloadBL.jsp"></td>
-		<td><input type="submit" value="ログアウト" formaction="./Logout.jsp"></td>
-		<%if(request.getParameter("master_flg") == "1") {%>
-		<td><input type="submit" value="戻る" formaction="./jsp/List.jsp"></td>
-		<%} %>
-	</tr>
-</table>
-</form> -->
 <div style="display:inline-flex">
 <form><input type="submit" value="編集" formaction="./jsp/Edit.jsp"></form>
 <form id="delete_form" method="post" action="/SkillList/DeleteBL">
