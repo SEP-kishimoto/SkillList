@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="java.io.*,java.util.*,java.text.*"%>
+    import="java.io.*,java.util.*,java.text.*"
+    session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +13,16 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+<%!
+@SuppressWarnings("unchecked")
+%>
 
 <!-- DB変数 -->
 <%
 String db_number = "";
 String db_name = "";
+String master_flg = "";
+String filename = "";
 %>
 
 <!-- Profile変数 -->
@@ -72,6 +78,8 @@ List<String> development = new ArrayList<String>();
 <%
 db_number = (String) request.getAttribute("db_number");
 db_name = (String) request.getAttribute("db_name");
+master_flg = (String) request.getAttribute("master=flg");
+filename = (String) request.getAttribute("filename");
 %>
 
 <!-- Profile変数の設定 -->
@@ -117,7 +125,7 @@ peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
 development = (ArrayList<String>) request.getAttribute("development");
 %>
 
-<h1>スキルシート管理システム：スキルシート編集</h1>
+<h1>スキルシート管理システム：詳細</h1>
 
 <h2>■Profile</h2>
 <form method="post" action="/SkillList/EditBL">
@@ -242,6 +250,8 @@ development = (ArrayList<String>) request.getAttribute("development");
 <!-- DB input -->
 <input type="hidden" name="db_number" value="<%=db_number %>">
 <input type="hidden" name="db_name" value="<%=db_name %>">
+<input type="hidden" name="master_flg" value="<%=master_flg %>">
+<input type="hidden" name="filename" value="<%=filename %>">
 
 <!-- Pfrofile input -->
 <input type="hidden" name="kana" value="<%=kana %>">
@@ -263,22 +273,24 @@ development = (ArrayList<String>) request.getAttribute("development");
 <input type="hidden" name="qualification" value="<%=qualification%>">
 
 <!-- BackgroundNote input -->
-<input type="hidden" name="noteNumber" value="<%=noteNumber %>">
-<input type="hidden" name="beginning" value="<%=beginning %>">
-<input type="hidden" name="end" value="<%=end %>">
-<input type="hidden" name="task" value="<%=task %>">
+<%
+session.setAttribute("noteNumber", noteNumber);
+session.setAttribute("beginning", beginning);
+session.setAttribute("end", end);
+session.setAttribute("task", task);
 
-<input type="hidden" name="requirement" value="<%=requirement %>">
-<input type="hidden" name="basic" value="<%=basic %>">
-<input type="hidden" name="details" value="<%=details %>">
-<input type="hidden" name="pg" value="<%=pg %>">
-<input type="hidden" name="single" value="<%=single %>">
-<input type="hidden" name="join" value="<%=join %>">
-<input type="hidden" name="customer" value="<%=customer %>">
-<input type="hidden" name="environment" value="<%=environment %>">
+session.setAttribute("requirement", requirement);
+session.setAttribute("basic", basic);
+session.setAttribute("details", details);
+session.setAttribute("pg", pg);
+session.setAttribute("single", single);
+session.setAttribute("join", join);
+session.setAttribute("customer", customer);
+session.setAttribute("environment", environment);
 
-<input type="hidden" name="peopleNumber" value="<%=peopleNumber %>">
-<input type="hidden" name="development" value="<%=development %>">
+session.setAttribute("peopleNumber", peopleNumber);
+session.setAttribute("development", development);
+%>
 
 <table>
 	<tr>
