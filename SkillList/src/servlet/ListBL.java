@@ -21,18 +21,19 @@ import javax.servlet.http.HttpServletResponse;
 public class ListBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ListBL() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ListBL() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String db_number = (String) request.getAttribute("db_number");
 		String db_name = (String) request.getAttribute("db_name");
@@ -42,20 +43,20 @@ public class ListBL extends HttpServlet {
 			try {
 				Connection commst = Common.getConnection();
 				Statement stmt = commst.createStatement();
-				String sqlmst = "SELECT * FROM skillsheet ORDER BY id ASC";
+				String sqlmst = "SELECT * FROM skillsheet";
 				ResultSet rs = stmt.executeQuery(sqlmst);
 				request.setAttribute("ResultSet", rs);
 				System.out.println("管理者です");
 				getServletContext().getRequestDispatcher("/jsp/List.jsp").forward(request, response);
 			} catch (SQLException e) {
-				System.out.println("SQLException" +e);
+				System.out.println("SQLException" + e);
 			} catch (ClassNotFoundException e) {
 				System.out.println("ClassNotFoundException");
 			} catch (Exception e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-		}else{
+		} else {
 			request.setAttribute("db_number", db_number);
 			request.setAttribute("db_name", db_name);
 			request.setAttribute("master_flg", master_flg);
@@ -71,7 +72,8 @@ public class ListBL extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
