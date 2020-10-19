@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.io.*,java.util.*,java.text.*"
+    session="true" %>
 <%@ page
 import="servlet.EditBL"
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +17,16 @@ import="servlet.EditBL"
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+<%!
+@SuppressWarnings("unchecked")
+%>
 
 <!-- DB変数 -->
 <%
 String db_number = "";
 String db_name = "";
+String master_flg = "";
+String filename = "";
 %>
 
 <!-- Profile変数 -->
@@ -43,10 +51,39 @@ String db = "";
 String qualification = "";
 %>
 
+<!-- Background Note変数 リスト構造 -->
+<%
+List<String> noteNumber = new ArrayList<String>();
+List<String> beginning = new ArrayList<String>();
+List<String> end = new ArrayList<String>();
+List<String> task = new ArrayList<String>();
+%>
+
+<!-- Background Note変数 フェーズ表示、List二重構造 -->
+<%
+ArrayList<List<String>> requirement = new ArrayList<>();
+ArrayList<List<String>> basic = new ArrayList<>();
+ArrayList<List<String>> details = new ArrayList<>();
+ArrayList<List<String>> pg = new ArrayList<>();
+ArrayList<List<String>> single = new ArrayList<>();
+ArrayList<List<String>> join = new ArrayList<>();
+ArrayList<List<String>> customer = new ArrayList<>();
+ArrayList<List<String>> environment = new ArrayList<>();
+%>
+
+<!-- Background Note変数 リスト構造 -->
+<%
+List<String> peopleNumber = new ArrayList<String>();
+List<String> development = new ArrayList<String>();
+
+%>
+
 <!-- DBからの値 -->
 <%
 db_number = (String) request.getAttribute("db_number");
 db_name = (String) request.getAttribute("db_name");
+master_flg = (String) request.getAttribute("master=flg");
+filename = (String) request.getAttribute("filename");
 %>
 
 <!-- Profile変数の設定 -->
@@ -72,7 +109,27 @@ db = (String) request.getAttribute("db");
 qualification = (String) request.getAttribute("qualification");
 %>
 
-<h1>スキルシート管理システム：スキルシート編集</h1>
+<!-- Background Noteの設定 リスト構造 および二重構造 -->
+<%
+noteNumber = (ArrayList<String>) request.getAttribute("noteNumber");
+beginning = (ArrayList<String>) request.getAttribute("beginning");
+end = (ArrayList<String>) request.getAttribute("end");
+task = (ArrayList<String>) request.getAttribute("task");
+
+requirement = (ArrayList<List<String>>) session.getAttribute("requirement");
+basic = (ArrayList<List<String>>) session.getAttribute("basic");
+details = (ArrayList<List<String>>) session.getAttribute("details");
+pg = (ArrayList<List<String>>) session.getAttribute("pg");
+single = (ArrayList<List<String>>) session.getAttribute("single");
+join = (ArrayList<List<String>>) session.getAttribute("join");
+customer = (ArrayList<List<String>>) session.getAttribute("customer");
+environment = (ArrayList<List<String>>) session.getAttribute("environment");
+
+peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
+development = (ArrayList<String>) request.getAttribute("development");
+%>
+
+<h1>スキルシート管理システム：編集確認</h1>
 <h2>■Profile</h2>
 <form method="post" action="/SkillList/EditCommitBL">
 <table>
@@ -134,12 +191,71 @@ qualification = (String) request.getAttribute("qualification");
 		<td>資格</td>
 		<td><%=qualification%></td>
 	</tr>
+</table>
+
+<h2>■Background Note</h2>
+<%for (int i = 0; i < noteNumber.size(); i++) { %>
+<table>
+	<tr>
+		<td>No.</td>
+		<td><%=noteNumber.get(i) %></td>
+	</tr>
+	<tr>
+		<td>開始</td>
+		<td><%=beginning.get(i) %></td>
+	</tr>
+	<tr>
+		<td>終了</td>
+		<td><%=end.get(i) %></td>
+	</tr>
+	<tr>
+		<td>業務内容</td>
+		<td><%=task.get(i) %></td>
+	</tr>
+	<tr>
+		<td>要件定義</td>
+		<td><%=requirement.get(i).get(0) %></td>
+		<td>基本設計</td>
+		<td><%=basic.get(i).get(1) %></td>
+	</tr>
+	<tr>
+		<td>詳細設計</td>
+		<td><%=details.get(i).get(2) %></td>
+		<td>PG製造</td>
+		<td><%=pg.get(i).get(3) %></td>
+	</tr>
+	<tr>
+		<td>単体試験</td>
+		<td><%=single.get(i).get(4) %></td>
+		<td>結合試験</td>
+		<td><%=join.get(i).get(5) %></td>
+	</tr>
+	<tr>
+		<td>客先試験</td>
+		<td><%=customer.get(i).get(6) %></td>
+		<td>環境設定</td>
+		<td><%=environment.get(i).get(7) %></td>
+	</tr>
+	<tr>
+		<td>人数</td>
+		<td><%=peopleNumber.get(i) %></td>
+	</tr>
+	<tr>
+		<td>開発環境</td>
+		<td><%=development.get(i) %></td>
+	</tr>
 
 </table>
+<%} %>
+
+
+
 
 <!-- DB input -->
 <input type="hidden" name="db_number" value="<%=db_number %>">
 <input type="hidden" name="db_name" value="<%=db_name %>">
+<input type="hidden" name="master_flg" value="<%=master_flg %>">
+<input type="hidden" name="filename" value="<%=filename %>">
 
 <!-- Pfrofile input -->
 <input type="hidden" name="kana" value="<%=kana %>">
@@ -160,9 +276,29 @@ qualification = (String) request.getAttribute("qualification");
 <input type="hidden" name="db" value="<%=db%>">
 <input type="hidden" name="qualification" value="<%=qualification%>">
 
-<input type="submit" value="編集">
-</form>
 
-<h2>■Background Note</h2>
+<!-- BackgroundNote input -->
+<%
+session.setAttribute("noteNumber", noteNumber);
+session.setAttribute("beginning", beginning);
+session.setAttribute("end", end);
+session.setAttribute("task", task);
+
+session.setAttribute("requirement", requirement);
+session.setAttribute("basic", basic);
+session.setAttribute("details", details);
+session.setAttribute("pg", pg);
+session.setAttribute("single", single);
+session.setAttribute("join", join);
+session.setAttribute("customer", customer);
+session.setAttribute("environment", environment);
+
+session.setAttribute("peopleNumber", peopleNumber);
+session.setAttribute("development", development);
+%>
+
+<input type="submit" value="更新する">
+<input type="button" value="戻る" onclick="history.back()">
+</form>
 </body>
 </html>

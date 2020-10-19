@@ -202,7 +202,7 @@ public class SkillBL extends HttpServlet {
 	    		  if (Objects.equals(getCellDate(sh, n, 2), null)) {
 	    			  value = "";
 	    		  } else {
-	    			  String dateStr = new SimpleDateFormat("yyyy/MM/dd").format(getCellDate(sh, n, 2).getDateCellValue());
+	    			  String dateStr = new SimpleDateFormat("yyyy/MM/dd").format(getCellNum(sh, n, 2).getDateCellValue());
 	    			  value = dateStr;
 	    		  }
 	    		  System.out.println(value);
