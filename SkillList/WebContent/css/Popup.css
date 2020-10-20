@@ -1,21 +1,30 @@
-Popup.css
-
 @charset "UTF-8";
 
 body {
-	width:90%;
+	width: 90%;
 	margin: 0 auto;
 }
 
-label {
-
-}
-
-.delete_div, input[type="checkbox"] {
+.modal {
 	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
-input[type="checkbox"]:checked + .delete_div {
-	display:block;
+.modal-content {
+	text-align: center;
+	padding: 30px;
+	width: 300px;
+	border: 5px double #333333;
+	background-color: white;
+	position: fixed;
+	top: 200px; left : 50%;
+	transform: translate(-50%, -50%);
+	left: 50%;
 }
-

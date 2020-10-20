@@ -63,7 +63,7 @@ public class DeleteBL extends HttpServlet {
 		}
 	    File file = new File("C:\\temp\\" + filename);
 	    if (file.exists()){//ファイルの存在を判定
-	        System.out.println("C:\\temp\\" + filename + "ファイルは存在します");
+	        System.out.println("C:\\temp\\" + filename + "ファイルの存在を確認、削除します。");
 	        File delete_file = new File("C:\\temp\\" + filename);
 	        delete_file.delete();//deleteメソッドを使用してファイルを削除する
 	    }else{
