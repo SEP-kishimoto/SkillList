@@ -11,9 +11,13 @@
 
 	request.setCharacterEncoding("utf-8");
 
+	//DB登録情報
+	String db_number = (String) request.getAttribute("db_number");
+	String db_name = (String) request.getAttribute("db_name");	// Profileの氏名も同じものを使用
+	String password = (String) request.getAttribute("password");
+
 	// Profile
 	String kana = (String) request.getAttribute("kana");
-	String name = (String) request.getAttribute("name");
 	String address = (String) request.getAttribute("address");
 	String birthday = (String) request.getAttribute("birthday");
 	String age = (String) request.getAttribute("age");
@@ -60,7 +64,7 @@
 <div class="table">
 <table>
 	<tr><th>フリガナ* : </th><td><%=kana%></td></tr>
-	<tr><th>氏名* : </th><td><%=name%></td></tr>
+	<tr><th>氏名* : </th><td><%=db_name%></td></tr>
 	<tr><th>現住所* : </th><td><%=address%></td></tr>
 	<tr><th>生年月日* : </th><td><%=birthday%></td></tr>
 	<tr><th>年齢 : </th><td><%=age%></td></tr>	<!-- javascriptを使って自動表示 -->
@@ -103,9 +107,12 @@
 	<tr><th>開発環境 : </th><td><%=development%></td></tr>
 </table>
 </div>
+<!-- DB登録情報 -->
+<input type="hidden" name="db_number" value=<%=db_number%>>
+<input type="hidden" name="db_name" value=<%=db_name%>><!-- Profileの氏名も同じものを使用 -->
+<input type="hidden" name="password" value=<%=password%>>
 <!-- Profile -->
 <input type="hidden" name="kana" value=<%=kana%>>
-<input type="hidden" name="name" value=<%=name%>>
 <input type="hidden" name="address" value=<%=address%>>
 <input type="hidden" name="birthday" value=<%=birthday%>>
 <input type="hidden" name="age" value=<%=age%>>
@@ -138,7 +145,7 @@
 <button type="submit" class="btn">確認</button>
 </form>
 
-<form action="../SkillList/jsp/Add.jsp" method="post">
+<form action="/SkillList/jsp/Add.jsp" method="post">
 <button type="submit" class="btn">戻る</button>
 </form>
 </body>

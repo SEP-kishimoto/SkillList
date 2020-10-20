@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList "%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +14,27 @@
 </script>
 </head>
 <body>
+<%
+
+// DB登録情報
+String db_number = (String) request.getAttribute("db_number");
+String db_name = (String) request.getAttribute("db_name");
+String password = (String) request.getAttribute("password");
+
+
+
+%>
+
 <h1>スキルシート管理システム:スキルシート登録</h1>
 <br>
 <h2>■Profile</h2>
-<form action="../AddCheckBL" method="post">
+<form action="/SkillList/AddCheckBL" method="post">
+<input type="hidden" name="db_number" value=<%=db_number%>>
+<input type="hidden" name="password" value=<%=password%>>
 <div class="table">
 <table>
 	<tr><th>フリガナ* : </th><td><input type="text" name="kana" value=""></td></tr>
-	<tr><th>氏名* : </th><td><input type="text" class="address-txt" name="name" value=""></td></tr>
+	<tr><th>氏名* : </th><td><input type="text" class="address-txt" name="db_name" value=<%=db_name %>></td></tr>
 	<tr><th>現住所* : </th><td><input type="text" name="address" value=""></td></tr>
 	<tr><th>生年月日* : </th><td><input type="text" name="birthday"></td></tr>
 	<tr><th>年齢 : </th><td><input type="text" name="age"></td></tr>	<!-- javascriptを使って自動表示 -->
@@ -71,7 +85,7 @@
 
 </div></form>
 
-<form action="../SkillList/List.jsp" method="post">
+<form action="/SkillList/jsp/DB_Add.jsp" method="post">
 <button type="submit" class="btn">戻る</button>
 </form>
 </body>
