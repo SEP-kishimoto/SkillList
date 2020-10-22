@@ -307,7 +307,7 @@ session.setAttribute("development", development);
 						<p class="delete_p">Ｐタグ</p>
 
 						<input
-							form="delete_form" type="submit" value="OK" formaction="/SkillList/DeleteBL"> <input
+							type="submit" value="OK" formaction="/SkillList/DeleteBL"> <input
 							type="button" id="deleteCloseBtn" value="キャンセル">
 					</div>
 				</div>
@@ -323,7 +323,7 @@ session.setAttribute("development", development);
 						<p class="download_p">Ｐタグ</p>
 
 							<input
-							form="download_form" type="submit" value="OK" formaction="/SkillList/DownloadBL"> <input
+							type="submit" value="OK" formaction="/SkillList/DownloadBL"> <input
 							type="button" id="DownloadCloseBtn" value="キャンセル">
 					</div>
 				</div>
@@ -337,7 +337,7 @@ session.setAttribute("development", development);
 						</span>
 						<p></p>
 							<input
-							form="logout_form" type="submit" value="OK" formaction="/SkillList/LoginBL"> <input
+							type="submit" value="OK" formaction="/SkillList/LoginBL"> <input
 							type="button" id="logoutCloseBtn" value="キャンセル">
 					</div>
 				</div>
