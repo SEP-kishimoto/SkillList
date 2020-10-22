@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,17 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class EditCheckBL
+ * Servlet implementation class ItemAddBL
  */
 @SuppressWarnings("unchecked")
-@WebServlet("/EditCheckBL")
-public class EditCheckBL extends HttpServlet {
+@WebServlet("/ItemAddBL")
+public class ItemAddBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditCheckBL() {
+    public ItemAddBL() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,18 +40,17 @@ public class EditCheckBL extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// 文字コードの設定
 	    request.setCharacterEncoding("UTF-8");
 	    response.setContentType("text/html; charset=UTF-8");
 
-	    // 変数を宣言
-	    // DB変数
+		// 変数を宣言
 	    String db_number = "";
 	    String db_name = "";
 	    String master_flg = "";
 	    String filename = "";
 
-	    // Profile変数
 	    String kana = "";
 	    String name = "";
 	    String address = "";
@@ -62,20 +62,19 @@ public class EditCheckBL extends HttpServlet {
 	    String nearestStation = "";
 	    String stationName = "";
 
-	    // スキル変数
 	    String os = "";
 	    String skill = "";
 	    String tool = "";
 	    String db = "";
 	    String qualification = "";
 
-	    // 履歴変数
+	    // Background Note変数
 	    List<String> noteNumber = new ArrayList<String>();
 	    List<String> beginning = new ArrayList<String>();
 	    List<String> end = new ArrayList<String>();
 	    List<String> task = new ArrayList<String>();
 
-    	List<String> valueList = new ArrayList<>();
+	    List<String> valueList = new ArrayList<>();
     	List<List<String>> checkList = new ArrayList<>();
 
 	    List<String> peopleNumber = new ArrayList<String>();
@@ -106,6 +105,7 @@ public class EditCheckBL extends HttpServlet {
 
 	    HttpSession session = request.getSession();
 	    noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
+	    noteNumber.add(Integer.toString(Integer.parseInt(noteNumber.get(noteNumber.size() - 1)) + 1));
 
 	    for (int i = 0; i < noteNumber.size(); i++) {
 	    	String backgroundValue = "beginning" + Integer.toString(i);
@@ -118,32 +118,30 @@ public class EditCheckBL extends HttpServlet {
 	    	a = request.getParameter(backgroundValue);
 	    	task.add(i, a);
 
-
 	    	valueList = new ArrayList<>();
 
-
-	    	backgroundValue = "basic" + Integer.toString(i);
+	    	backgroundValue = "requirement" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(0, a);
-		    backgroundValue = "details" + Integer.toString(i);
+		    backgroundValue = "basic" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(1, a);
-		    backgroundValue = "pg" + Integer.toString(i);
+		    backgroundValue = "details" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(2, a);
-		    backgroundValue = "single" + Integer.toString(i);
+		    backgroundValue = "pg" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(3, a);
-		    backgroundValue = "join" + Integer.toString(i);
+		    backgroundValue = "single" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(4, a);
-		    backgroundValue = "customer" + Integer.toString(i);
+		    backgroundValue = "join" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(5, a);
-		    backgroundValue = "development" + Integer.toString(i);
+		    backgroundValue = "customer" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(6, a);
-		    backgroundValue = "requirement" + Integer.toString(i);
+		    backgroundValue = "environment" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(7, a);
 	    	checkList.add(i, valueList);
@@ -155,6 +153,15 @@ public class EditCheckBL extends HttpServlet {
 	    	a = request.getParameter(backgroundValue);
 	    	development.add(i, a);
 	    }
+
+	    // 空白を追加
+	    beginning.add(beginning.size() - 1, "");
+	    end.add(end.size() - 1, "");
+	    task.add(task.size() - 1, "");
+	    List<String> ListAdd = Arrays.asList("", "", "", "", "", "", "", "");
+	    checkList.add(checkList.size() - 1, ListAdd);
+	    peopleNumber.add(peopleNumber.size() - 1, "");
+	    development.add(development.size() - 1, "");
 
 	    // db
 	    request.setAttribute("db_number", db_number);
@@ -182,27 +189,27 @@ public class EditCheckBL extends HttpServlet {
 	    request.setAttribute("qualification", qualification);
 
 	    // BackgroundNote
-	    request.setAttribute("noteNumber", noteNumber);
-	    request.setAttribute("beginning", beginning);
-	    request.setAttribute("end", end);
-	    request.setAttribute("task", task);
+	    session.setAttribute("noteNumber", noteNumber);
+	    session.setAttribute("beginning", beginning);
+	    session.setAttribute("end", end);
+	    session.setAttribute("task", task);
 
-	    request.setAttribute("requirement", checkList);
-	    request.setAttribute("basic", checkList);
-	    request.setAttribute("details", checkList);
-	    request.setAttribute("pg", checkList);
-	    request.setAttribute("single", checkList);
-	    request.setAttribute("join", checkList);
-	    request.setAttribute("customer", checkList);
-	    request.setAttribute("environment", checkList);
+	    session.setAttribute("requirement", checkList);
+	    session.setAttribute("basic", checkList);
+	    session.setAttribute("details", checkList);
+	    session.setAttribute("pg", checkList);
+	    session.setAttribute("single", checkList);
+	    session.setAttribute("join", checkList);
+	    session.setAttribute("customer", checkList);
+	    session.setAttribute("environment", checkList);
 
-	    request.setAttribute("peopleNumber", peopleNumber);
-	    request.setAttribute("development", development);
+	    session.setAttribute("peopleNumber", peopleNumber);
+	    session.setAttribute("development", development);
 
-	    String view = "/jsp/EditCheck.jsp";
+	    // 追加処理
+	    String view = "/jsp/Edit.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
-
 
 	}
 
