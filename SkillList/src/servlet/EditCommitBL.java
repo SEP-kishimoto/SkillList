@@ -17,11 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
  * Servlet implementation class EditCmmit
@@ -50,11 +52,65 @@ public class EditCommitBL extends HttpServlet {
 
 	public static Cell getCell(Sheet sheet, int rowPoint, int cellPoint) {
 		Row row = sheet.getRow(rowPoint);
+		if (row == null) {
+			return null;
+		}
 		Cell cell = row.getCell(cellPoint);
 
 		return cell;
 
 	}
+	public static Cell createCell(Sheet sheet, int rowPoint, int cellPoint) {
+		Row row = sheet.createRow(rowPoint);
+		Cell cell = row.createCell(cellPoint);
+
+		return cell;
+
+	}
+
+	private static void copyRow(Workbook workbook, Sheet worksheet, int sourceRowNum, int destinationRowNum) {
+		  Row newRow = worksheet.getRow(destinationRowNum);
+		  Row sourceRow = worksheet.getRow(sourceRowNum);
+
+		  if (newRow != null) {
+		    //コピー先に行が既に存在する場合、１行下にずらす
+		    worksheet.shiftRows(destinationRowNum, worksheet.getLastRowNum(), 1);
+		    newRow = worksheet.createRow(destinationRowNum);
+		    newRow.setHeight(sourceRow.getHeight());
+		  } else {
+		    //存在しない場合は作成
+		    newRow = worksheet.createRow(destinationRowNum);
+		    newRow.setHeight(sourceRow.getHeight());
+		  }
+
+		  // セルの型、スタイル、値などをすべてコピーする
+		  for (int i = 0; i < sourceRow.getLastCellNum(); i++) {
+		    Cell oldCell = sourceRow.getCell(i);
+		    Cell newCell = newRow.createCell(i);
+
+		    // コピー元の行が存在しない場合、処理を中断
+		    if (oldCell == null) {
+		      newCell = null;
+		      continue;
+		    }
+
+		    //スタイルのコピー
+		    CellStyle newCellStyle = workbook.createCellStyle();
+		    newCellStyle.cloneStyleFrom(oldCell.getCellStyle());
+		    newCell.setCellStyle(newCellStyle);
+		  }
+
+		  //セル結合のコピー
+		  for (int i = 0; i < worksheet.getNumMergedRegions(); i++) {
+		    CellRangeAddress cellRangeAddress = worksheet.getMergedRegion(i);
+		    if (cellRangeAddress.getFirstRow() == sourceRow.getRowNum()) {
+		      CellRangeAddress newCellRangeAddress = new CellRangeAddress(newRow.getRowNum(),
+		          (newRow.getRowNum() + (cellRangeAddress.getLastRow() - cellRangeAddress.getFirstRow())),
+		          cellRangeAddress.getFirstColumn(), cellRangeAddress.getLastColumn());
+		      worksheet.addMergedRegion(newCellRangeAddress);
+		    }
+		  }
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -196,8 +252,32 @@ public class EditCommitBL extends HttpServlet {
 		      getCell(sh, 13, 2).setCellValue(db);
 		      getCell(sh, 14, 2).setCellValue(qualification);
 
+
+		      // Background Note 項目を生成
 		      n = 0;
+		      for (int i = 0; i < noteNumber.size(); i++) {
+		    	  if (getCell(sh, 18 + n, 0) == null) {
+		    		  for (int s = 0; s < 10; s++) {
+		    			  copyRow(wb, sh, 18 + s, 18 + n + s);
+		    		  }
+		    		  getCell(sh, 18 + n, 0).setCellFormula(("A" + (18 + n - 9)) + "+1");
+		    		  getCell(sh, 18 + n, 1).setCellValue("始");
+		    		  getCell(sh, 27 + n, 1).setCellValue("終");
+		    		  getCell(sh, 19 + n, 1).setCellFormula("IF(AND(C" + (19 + n) + "<>\"\",C" + (28 + n) + "<>\"\"),(DATEDIF(C" + (19 + n) + ",C" + (28 + n) +  ",\"M\")+1)&\"ヶ月\",\"\")");
+		    		  getCell(sh, 19 + n, 8).setCellValue("要件定義");
+		    		  getCell(sh, 20 + n, 8).setCellValue("基本設計");
+		    		  getCell(sh, 21 + n, 8).setCellValue("詳細設計");
+		    		  getCell(sh, 22 + n, 8).setCellValue("PG製造");
+		    		  getCell(sh, 23 + n, 8).setCellValue("単体試験");
+		    		  getCell(sh, 24 + n, 8).setCellValue("結合試験");
+		    		  getCell(sh, 25 + n, 8).setCellValue("客先試験");
+		    		  getCell(sh, 26 + n, 8).setCellValue("環境設定");
+		    	  }
+		    	  n = n + 10;
+		      }
+
 		      // Background Note 書き込み設定
+		      n = 0;
 		      for (int i = 0; i < noteNumber.size();i++) {
 		    	  Date date = null;
 		    	  if (beginning.get(i) == "") {
@@ -232,6 +312,7 @@ public class EditCommitBL extends HttpServlet {
 			    	  getCell(sh, 19 + n + s, 9).setCellValue(customer.get(i).get(s));
 			    	  getCell(sh, 19 + n + s, 9).setCellValue(environment.get(i).get(s));
 		    	  }
+
 		    	  getCell(sh, 18 + n, 10).setCellValue(peopleNumber.get(i));
 
 		    	  for (int s = 0; s < 10; s++) {
@@ -244,10 +325,10 @@ public class EditCommitBL extends HttpServlet {
 		    	  n = n + 10;
 		      }
 
-
 		      // Excelファイルに書き込む
 		      out = new FileOutputStream("C:\\temp\\" + filename);
 		      wb.write(out);
+		      sh.setForceFormulaRecalculation(true);
 
 		    } catch (Exception ex) {
 		      ex.printStackTrace();
@@ -260,11 +341,12 @@ public class EditCommitBL extends HttpServlet {
 		      }
 		}
 
-		// データベースに投げる情報
+		// 投げる情報
 		request.setAttribute("db_number", db_number);
 		request.setAttribute("db_name", db_name);
 		request.setAttribute("master_flg", master_flg);
 		request.setAttribute("filename", filename);
+
 
 		String view = "";
 		if (master_flg == "1") {
@@ -275,6 +357,7 @@ public class EditCommitBL extends HttpServlet {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
+
 
 	}
 

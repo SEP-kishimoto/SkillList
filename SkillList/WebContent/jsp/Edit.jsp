@@ -248,7 +248,7 @@ development = (ArrayList<String>) session.getAttribute("development");
 	</tr>
 </table>
 <%} %>
-<input type="button" onclick="" value="項目追加">
+
 
 <%
 session.setAttribute("noteNumber", noteNumber);
@@ -259,8 +259,9 @@ session.setAttribute("noteNumber", noteNumber);
 <input type="hidden" name="master_flg" value="<%=master_flg %>">
 <input type="hidden" name="filename" value="<%=filename %>">
 
-<input type="submit" value="確認" class="button">
-<input type="button" onclick="history.back()" value="戻る">
+<input type="submit" value="項目追加" formaction="/SkillList/ItemAddBL">
+<input type="submit" value="確認">
+<input type="submit" value="戻る" formaction="/SkillList/SkillBL">
 </form>
 
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -188,7 +189,9 @@ public class SkillBL extends HttpServlet {
 	      List<String> valueList = new ArrayList<String>();
 	      int n = 18;
 	      for (int i = 0; i < wonderland / 10; i++) {
-	    	  valueList.add(i, Integer.toString((int)getCellNum(sh, n, 0).getNumericCellValue()));
+	    	  DataFormatter formatter = new DataFormatter();
+	    	  value = formatter.formatCellValue(wb.getCreationHelper().createFormulaEvaluator().evaluateInCell(getCellNum(sh, n, 0)));
+	    	  valueList.add(i, value);
 	    	  n = n + 10;
 	      }
 	      request.setAttribute("noteNumber", valueList);
@@ -205,9 +208,7 @@ public class SkillBL extends HttpServlet {
 	    			  String dateStr = new SimpleDateFormat("yyyy/MM/dd").format(getCellNum(sh, n, 2).getDateCellValue());
 	    			  value = dateStr;
 	    		  }
-	    		  System.out.println(value);
 	    		  if (value != null) {
-	    			  System.out.println(valueList);
 	    			  valueList.add(i, value);
 	    		  } else {
 	    			  throw new NullPointerException();
@@ -286,7 +287,7 @@ public class SkillBL extends HttpServlet {
 	    			  }
 	    			  n = n + 1;
 	    		  }
-	    		  n = n + 3;
+	    		  n = n + 2;
 	    	  }
 	    	  checkList.add(i, valueList);
 	      }
