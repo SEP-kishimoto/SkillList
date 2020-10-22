@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>技術者一覧画面</title>
+<link rel="stylesheet" type="text/css" href="/SkillList/css/Popup.css">
 </head>
 <body>
 	<h1>スキルシート管理システム：技術者一覧</h1>
 	<!-- 新規登録 -->
 	<form>
-		<input formaction="http://localhost:8080/SkillList/Add.jsp"
+		<input formaction="./jsp/DB_Add.jsp"
 			type="submit" name="send" value="新規登録"
 			style="width: 100px; height: 25px">
 	</form>
