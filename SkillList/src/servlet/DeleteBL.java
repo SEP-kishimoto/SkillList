@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class DeleteBL
@@ -45,6 +46,8 @@ public class DeleteBL extends HttpServlet {
 		String db_number=request.getParameter("db_number");
 	    String db_name = request.getParameter("db_name");
 	    String filename=request.getParameter("filename");
+	    HttpSession session = request.getSession();
+	    String master_flg=(String)session.getAttribute("master_flg");
 
 	    try {//DBからユーザーを物理削除
 			Connection con = Common.getConnection();
@@ -63,19 +66,36 @@ public class DeleteBL extends HttpServlet {
 		}
 	    File file = new File("C:\\temp\\" + filename);
 	    if (file.exists()){//ファイルの存在を判定
-	        System.out.println("C:\\temp\\" + filename + "ファイルは存在します");
+	        System.out.println("C:\\temp\\" + filename + "ファイルの存在を確認、削除します。");
 	        File delete_file = new File("C:\\temp\\" + filename);
 	        delete_file.delete();//deleteメソッドを使用してファイルを削除する
+
+	        //画面遷移先
+	        if(master_flg.equals("1")) {
+	        	request.setAttribute("master_flg", master_flg);
+	        	ServletContext sc = getServletContext();
+	    		RequestDispatcher dispatcher = sc.getRequestDispatcher("/ListBL");
+	    		dispatcher.forward(request, response);
+	        }else {
+	        	ServletContext sc = getServletContext();
+	    		RequestDispatcher dispatcher = sc.getRequestDispatcher("/LoginBL");
+	    		dispatcher.forward(request, response);
+	        }
 	    }else{
 	        System.out.println("ファイルは存在しません");
+	        if(master_flg.equals("1")) {
+	        	request.setAttribute("master_flg", master_flg);
+	        	ServletContext sc = getServletContext();
+	    		RequestDispatcher dispatcher = sc.getRequestDispatcher("/ListBL");
+	    		dispatcher.forward(request, response);
+	        }else {
+	        	ServletContext sc = getServletContext();
+	    		RequestDispatcher dispatcher = sc.getRequestDispatcher("/LoginBL");
+	    		dispatcher.forward(request, response);
+	        }
 	    }
 
-//画面遷移先保留
-	    ServletContext sc = getServletContext();
-		RequestDispatcher dispatcher = sc.getRequestDispatcher("/LoginBL");
-		dispatcher.forward(request, response);
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
-}
+	}

@@ -293,26 +293,100 @@ session.setAttribute("peopleNumber", peopleNumber);
 session.setAttribute("development", development);
 %>
 
-<div style="display:inline-flex">
-<form><input type="submit" value="編集" formaction="./jsp/Edit.jsp"></form>
-<form id="delete_form" method="post" action="/SkillList/DeleteBL">
-<label for="delete_btn" style="width:300px">ユーザーを削除</label>
-	<input class="checkbox" type="checkbox" id="delete_btn">
-	<div class="delete_div" style="text-align: center; width:100%; padding: 10px; margin-bottom: 10px; border: 5px double #333333;">
-	<span class="delete_span" style="text-align: center;">下記の技術者の
-<br>・ユーザーアカウント<br>・スキルシート<br>を削除します。よろしいですか？
-</span>
+	<div style="display: inline-flex">
+			<input class="edit_btn" type="submit" value="編集"
+				formaction="./jsp/Edit.jsp">
+			<input type="button" id="deleteBtn" value='ユーザーを削除' onclick="DeletePopUp()">
+			<div id="deleteModal" class="modal">
+				<div class="modal-content">
+					<div class="modal-body">
+						<span class="delete_span" style="text-align: center;">下記の技術者の
+							<br>・ユーザーアカウント<br>・スキルシート<br>を削除します。よろしいですか？
+						</span>
 
-<p class="delete_p"><%=db_name%></p>
+						<p class="delete_p">Ｐタグ</p>
 
-<input type="hidden" name="db_number" value="<%=db_number %>">
-<input type="hidden" name="filename" value="<%=filename %>">
-<input form="delete_form" type="submit" value="OK">
-<input type="submit" value="キャンセル" formaction="">
-</div>
-</form>
-<form><input type="submit" value="ダウンロード" formaction="./DownloadBL.jsp"></form>
-<form><input type="submit" value="ログアウト" formaction="./LoginBL"></form>
-</div>
+						<input
+							type="submit" value="OK" formaction="/SkillList/DeleteBL"> <input
+							type="button" id="deleteCloseBtn" value="キャンセル">
+					</div>
+				</div>
+			</div>
+			<input type="button" id="downloadBtn" value='ダウンロード' onclick="DownloadPopUp()">
+			<div id="downloadModal" class="modal">
+				<div class="modal-content">
+					<div class="modal-body">
+						<span class="download_span" style="text-align: center;">下記の技術者のスキルシートをダウンロードします。
+							<br>よろしいですか？
+						</span>
+
+						<p class="download_p">Ｐタグ</p>
+
+							<input
+							type="submit" value="OK" formaction="/SkillList/DownloadBL"> <input
+							type="button" id="DownloadCloseBtn" value="キャンセル">
+					</div>
+				</div>
+			</div>
+			<input type="button" id="logoutBtn" value='ログアウト' onclick="LogoutPopUp()">
+			<div id="logoutModal" class="modal">
+				<div class="modal-content">
+					<div class="modal-body">
+						<span class="logout_span" style="text-align: center;">ログアウトします。
+							<br>よろしいですか？
+						</span>
+						<p></p>
+							<input
+							type="submit" value="OK" formaction="/SkillList/LoginBL"> <input
+							type="button" id="logoutCloseBtn" value="キャンセル">
+					</div>
+				</div>
+			</div>
+	</div>
+
+
+	<script>
+		function DeletePopUp() {
+			var btn = document.getElementById('deleteBtn');
+			var modal = document.getElementById('deleteModal');
+
+			btn.addEventListener('click', function() {
+				modal.style.display = 'block';
+			})
+			var closeBtn = document.getElementById('deleteCloseBtn');
+
+			closeBtn.addEventListener('click', function() {
+				modal.style.display = 'none';
+			})
+		}
+
+		function DownloadPopUp() {
+			var btn = document.getElementById('downloadBtn');
+			var modal = document.getElementById('downloadModal');
+
+			btn.addEventListener('click', function() {
+				modal.style.display = 'block';
+			})
+			var closeBtn = document.getElementById('DownloadCloseBtn');
+
+			closeBtn.addEventListener('click', function() {
+				modal.style.display = 'none';
+			})
+		}
+
+		function LogoutPopUp() {
+			var btn = document.getElementById('logoutBtn');
+			var modal = document.getElementById('logoutModal');
+
+			btn.addEventListener('click', function() {
+				modal.style.display = 'block';
+			})
+			var closeBtn = document.getElementById('logoutCloseBtn');
+
+			closeBtn.addEventListener('click', function() {
+				modal.style.display = 'none';
+			})
+		}
+	</script>
 </body>
 </html>

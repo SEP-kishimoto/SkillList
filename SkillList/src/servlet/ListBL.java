@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ListBL
@@ -39,6 +40,8 @@ public class ListBL extends HttpServlet {
 		String db_name = (String) request.getAttribute("db_name");
 		String master_flg = (String) request.getAttribute("master_flg");
 		String filename = (String) request.getAttribute("filename");
+		HttpSession session = request.getSession();
+		session.setAttribute("master_flg",master_flg);
 		if (master_flg.equals("1")) {//管理者ログインの場合
 			try {
 				Connection commst = Common.getConnection();

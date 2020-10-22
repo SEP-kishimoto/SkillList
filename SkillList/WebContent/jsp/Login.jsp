@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン画面</title>
+<link rel="stylesheet" type="text/css" href="/SkillList/css/Popup.css">
 </head>
 <body>
 	<h1>スキルシート管理システム：ログイン</h1>
