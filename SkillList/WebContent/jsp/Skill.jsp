@@ -321,7 +321,9 @@ session.setAttribute("development", development);
 						</span>
 
 						<p class="download_p">Ｐタグ</p>
-
+        <p><label>パラメタ1:</label><input type="text" name="param1" /></p>
+        <p><label>パラメタ2:</label><input type="text" name="param2" /></p>
+        <p><label>パラメタ3:</label><input type="text" name="param3" /></p>
 							<input
 							type="submit" value="OK" formaction="/SkillList/DownloadBL"> <input
 							type="button" id="DownloadCloseBtn" value="キャンセル">
@@ -343,7 +345,9 @@ session.setAttribute("development", development);
 				</div>
 			</div>
 	</div>
-
+<%if(master_flg.equals("1")){%>
+<input type="submit" value="戻る" formaction="/SkillList/LoginBL">
+<%}%>
 
 	<script>
 		function DeletePopUp() {
