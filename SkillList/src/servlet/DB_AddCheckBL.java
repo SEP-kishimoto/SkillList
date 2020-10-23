@@ -29,6 +29,8 @@ public class DB_AddCheckBL extends HttpServlet {
 		String db_number = request.getParameter("db_number");
 		String db_name = request.getParameter("db_name");
 		String password = request.getParameter("password");
+		// フリガナ
+		String kana = request.getParameter("kana");
 
 		// 社員Noチェックのために使う変数
 		String get_name = null;
@@ -54,6 +56,7 @@ public class DB_AddCheckBL extends HttpServlet {
 		}
 		request.setAttribute("db_number",db_number);
 		request.setAttribute("db_name",db_name);
+		request.setAttribute("kana",kana);
 		request.setAttribute("password",password);
 
 		if (get_name != null || db_number.isEmpty()) {	// get_nameがnullでなければ社員Noが重複している

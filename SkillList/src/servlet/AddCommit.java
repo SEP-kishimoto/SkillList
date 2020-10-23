@@ -9,15 +9,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -116,6 +121,8 @@ public class AddCommit extends HttpServlet {
 
 
 
+
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
@@ -136,26 +143,139 @@ public class AddCommit extends HttpServlet {
 		String tool = request.getParameter("tool");
 		String db = request.getParameter("db");
 		String qualification = request.getParameter("qualification");
-		// Background Note
-		String noteNumber = request.getParameter("noteNumber");
-		String beginning = request.getParameter("beginning");
-		String end = request.getParameter("end");
-		String task = request.getParameter("task");
-		String requirement = request.getParameter("requirement");
-		String basic = request.getParameter("basic");
-		String details = request.getParameter("details");
-		String pg = request.getParameter("pg");
-		String single = request.getParameter("single");
-		String join = request.getParameter("join");
-		String customer = request.getParameter("customer");
-		String environment = request.getParameter("environment");
-		String peopleNumber = request.getParameter("peopleNumber");
-		String development = request.getParameter("development");
+		// Background Note	1つだけ出力
+//		String noteNumber = request.getParameter("noteNumber");
+//		String beginning = request.getParameter("beginning");
+//		String end = request.getParameter("end");
+//		String task = request.getParameter("task");
+//		String requirement = request.getParameter("requirement");
+//		String basic = request.getParameter("basic");
+//		String details = request.getParameter("details");
+//		String pg = request.getParameter("pg");
+//		String single = request.getParameter("single");
+//		String join = request.getParameter("join");
+//		String customer = request.getParameter("customer");
+//		String environment = request.getParameter("environment");
+//		String peopleNumber = request.getParameter("peopleNumber");
+//		String development = request.getParameter("development");
 
 		// DB登録情報
 		String db_number = request.getParameter("db_number");
 	    String db_name = request.getParameter("db_name");
 	    String password = request.getParameter("password");
+
+
+
+	    // Background Note変数	リスト構造	定義
+	    List<String> noteNumber = new ArrayList<String>();
+	    List<String> beginning = new ArrayList<String>();
+	    List<String> end = new ArrayList<String>();
+	    List<String> task = new ArrayList<String>();
+	    // 二重構造
+	    ArrayList<List<String>> requirement = new ArrayList<>();
+	    ArrayList<List<String>> basic = new ArrayList<>();
+	    ArrayList<List<String>> details = new ArrayList<>();
+	    ArrayList<List<String>> pg = new ArrayList<>();
+	    ArrayList<List<String>> single = new ArrayList<>();
+	    ArrayList<List<String>> join = new ArrayList<>();
+	    ArrayList<List<String>> customer = new ArrayList<>();
+	    ArrayList<List<String>> environment = new ArrayList<>();
+	    // リスト構造
+	    List<String> peopleNumber = new ArrayList<String>();
+	    List<String> development = new ArrayList<String>();
+
+
+
+	    // テストデータ
+	    List<String> test_noteNumber = new ArrayList<String>() {{add("1"); add("2"); add("3");}};
+	    List<String> test_beginning = new ArrayList<String>() {{add("2000/01/01"); add("2001/01/01"); add("2002/01/01");}};
+	    List<String> test_end = new ArrayList<String>() {{add("2003/01/01"); add("2004/01/01"); add("2005/01/01");}};
+	    List<String> test_task = new ArrayList<String>() {{add("task1"); add("task2"); add("task3");}};
+
+	    // フェーズ
+	    List<String> test_requirementList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_test_basicList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_detailsList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_noteNumberList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_pgList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_singleList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_jointList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_customerList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+//	    List<String> test_environmentList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+	    ArrayList<List<String>> test_requirement =  new ArrayList<>();
+	    ArrayList<List<String>> test_basic =  new ArrayList<>();
+	    ArrayList<List<String>> test_details =  new ArrayList<>();
+	    ArrayList<List<String>> test_pg =  new ArrayList<>();
+	    ArrayList<List<String>> test_single =  new ArrayList<>();
+	    ArrayList<List<String>> test_join =  new ArrayList<>();
+	    ArrayList<List<String>> test_customer =  new ArrayList<>();
+	    ArrayList<List<String>> test_environment =  new ArrayList<>();
+
+	    test_requirement.add(test_requirementList);
+	    test_requirement.add(test_requirementList);
+	    test_basic.add(test_requirementList);
+	    test_basic.add(test_requirementList);
+	    test_details.add(test_requirementList);
+	    test_details.add(test_requirementList);
+	    test_pg.add(test_requirementList);
+	    test_pg.add(test_requirementList);
+	    test_single.add(test_requirementList);
+	    test_single.add(test_requirementList);
+	    test_join.add(test_requirementList);
+	    test_join.add(test_requirementList);
+	    test_customer.add(test_requirementList);
+	    test_customer.add(test_requirementList);
+	    test_environment.add(test_requirementList);
+	    test_environment.add(test_requirementList);
+
+
+	    List<String> test_peopleNumber = new ArrayList<String>() {{add("task1"); add("task2"); add("task3");}};
+	    List<String> test_development = new ArrayList<String>() {{add("task1"); add("task2"); add("task3");}};
+
+
+
+
+
+
+	    HttpSession session = request.getSession();
+	    noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
+	    beginning = (ArrayList<String>) session.getAttribute("beginning");
+	    end = (ArrayList<String>) session.getAttribute("end");
+	    task = (ArrayList<String>) session.getAttribute("task");
+
+	    requirement = (ArrayList<List<String>>) session.getAttribute("requirement");
+	    basic = (ArrayList<List<String>>) session.getAttribute("basic");
+	    details = (ArrayList<List<String>>) session.getAttribute("details");
+	    pg = (ArrayList<List<String>>) session.getAttribute("pg");
+	    single = (ArrayList<List<String>>) session.getAttribute("single");
+	    join = (ArrayList<List<String>>) session.getAttribute("join");
+	    customer = (ArrayList<List<String>>) session.getAttribute("customer");
+	    environment = (ArrayList<List<String>>) session.getAttribute("environment");
+
+	    peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
+	    development = (ArrayList<String>) session.getAttribute("development");
+
+
+	    // テストデータ代入
+	    noteNumber = test_noteNumber;
+	    beginning = test_beginning;
+	    end = test_end;
+	    task = test_task;
+
+	    requirement = test_requirement;
+	    basic = test_basic;
+	    details = test_details;
+	    pg = test_pg;
+	    single = test_single;
+	    join = test_join;
+	    customer = test_customer;
+	    environment = test_environment;
+
+	    peopleNumber = test_peopleNumber;
+	    development = test_development;
+
+
+
 
         // 出力ファイル
         FileOutputStream outPutFile = null;
@@ -214,51 +334,7 @@ public class AddCommit extends HttpServlet {
 
 
 
-//			      int count = 0; //ループカウント
-//
-//			      StringTokenizer st = new StringTokenizer(skill ,",");	// "｜"で分ける
-//
-//			      while (st.hasMoreTokens()) {
-//			            System.out.println(st.nextToken());
-//			        }
-//
-//
-//
-//
-//
-//
-//
-//			      //String[] skillList = skill.split(",", -1);
-//			      int p = 9;
-//
-//			      while (st.hasMoreTokens()) {
-//			    	  if (count < st.countTokens()) {
-//			    		  getCell(wb.getSheetAt(0), p, 2).setCellValue(moji);
-//			    		  break;
-//			    	  }
-//			    	  if (moji.length() + st.nextToken().length() + 1 > 33) {	// 行に設定する文字数 + これから設定しようとしている文字数 + カンマ分 > 行に入る文字数(全角)
-//			    		  getCell(wb.getSheetAt(0), p, 2).setCellValue(moji);
-//			    		  p++;
-//			    		  charcount = 0;
-//			    	  }
-//
-//			    	  if (charcount == 0) {
-//			    		  moji = st.nextToken();
-//			    		  charcount = st.nextToken().length();
-//			    	  } else {
-//			    		  moji += "," + st.nextToken();
-//			    		  charcount = st.nextToken().length() + 1;
-//			    	  }
-//
-//			    	  if (n <= 12) {
-//			    		  n++;
-//			    	  } else {
-//			    		  break;
-//			    	  }
-//			    	  System.out.println();
-//			    	  count++;
-//
-//			      }
+
 
 
 
@@ -325,21 +401,72 @@ public class AddCommit extends HttpServlet {
 
 
 
-			      // ここからBackground Note
+			      // ここからBackground Note	1つだけ出力
 			      //getCell(wb.getSheetAt(0), 18, 0).setCellValue(noteNumber);
-	              getCell(wb.getSheetAt(0), 18, 2).setCellValue(beginning);
-			      getCell(wb.getSheetAt(0), 27, 2).setCellValue(end);
-			      getCell(wb.getSheetAt(0), 18, 3).setCellValue(task);
-			      getCell(wb.getSheetAt(0), 19, 9).setCellValue(requirement);
-			      getCell(wb.getSheetAt(0), 20, 9).setCellValue(basic);
-			      getCell(wb.getSheetAt(0), 21, 9).setCellValue(details);
-			      getCell(wb.getSheetAt(0), 22, 9).setCellValue(pg);
-			      getCell(wb.getSheetAt(0), 23, 9).setCellValue(single);
-			      getCell(wb.getSheetAt(0), 24, 9).setCellValue(join);
-			      getCell(wb.getSheetAt(0), 25, 9).setCellValue(customer);
-			      getCell(wb.getSheetAt(0), 26, 9).setCellValue(environment);
-			      getCell(wb.getSheetAt(0), 18, 10).setCellValue(peopleNumber);
-			      getCell(wb.getSheetAt(0), 18, 11).setCellValue(development);
+//	              getCell(wb.getSheetAt(0), 18, 2).setCellValue(beginning);
+//			      getCell(wb.getSheetAt(0), 27, 2).setCellValue(end);
+//			      getCell(wb.getSheetAt(0), 18, 3).setCellValue(task);
+//			      getCell(wb.getSheetAt(0), 19, 9).setCellValue(requirement);
+//			      getCell(wb.getSheetAt(0), 20, 9).setCellValue(basic);
+//			      getCell(wb.getSheetAt(0), 21, 9).setCellValue(details);
+//			      getCell(wb.getSheetAt(0), 22, 9).setCellValue(pg);
+//			      getCell(wb.getSheetAt(0), 23, 9).setCellValue(single);
+//			      getCell(wb.getSheetAt(0), 24, 9).setCellValue(join);
+//			      getCell(wb.getSheetAt(0), 25, 9).setCellValue(customer);
+//			      getCell(wb.getSheetAt(0), 26, 9).setCellValue(environment);
+//			      getCell(wb.getSheetAt(0), 18, 10).setCellValue(peopleNumber);
+//			      getCell(wb.getSheetAt(0), 18, 11).setCellValue(development);
+
+
+
+			      n = 0;
+			      // Background Note 書き込み設定
+			      for (int i = 0; i < noteNumber.size();i++) {
+			    	  Date date = null;
+			    	  if (beginning.get(i) == "") {
+			    		  getCell(wb.getSheetAt(0), 18 + n, 2).setCellValue("");
+			    	  } else {
+			    		  date = DateUtil.parseYYYYMMDDDate(beginning.get(i));
+			    	  }
+			    	  getCell(wb.getSheetAt(0), 18 + n, 2).setCellValue(date);
+
+			    	  if (end.get(i) == "") {
+			    		  getCell(wb.getSheetAt(0), 27 + n, 2).setCellValue("");
+			    	  } else {
+			    		  date = DateUtil.parseYYYYMMDDDate(end.get(i));
+			    	  }
+			    	  getCell(wb.getSheetAt(0), 27 + n, 2).setCellValue(date);
+
+
+			    	  String[] taskList = task.get(i).split(",", -1);
+			    	  for (int s = 0; s < 10; s++) {
+			    		  getCell(wb.getSheetAt(0), 18 + n + s, 3).setCellValue(taskList[s]);
+			    		  if (taskList[s].equals("")) {
+			    			  break;
+			    		  }
+			    	  }
+
+			    	  for (int s = 0; s < 8; s ++) {
+			    		  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(requirement.get(i).get(s));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(basic.get(i).get(s));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(details.get(i).get(s));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(pg.get(i).get(s));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(single.get(i).get(s));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(join.get(i).get(s));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(customer.get(i).get(s));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(environment.get(i).get(s));
+			    	  }
+			    	  getCell(wb.getSheetAt(0), 18 + n, 10).setCellValue(peopleNumber.get(i));
+
+			    	  for (int s = 0; s < 10; s++) {
+			    		  String[] developmentList = development.get(i).split("[\\|]", -1);
+			    		  getCell(wb.getSheetAt(0), 18 + n + s, 11).setCellValue(developmentList[s]);
+			    		  if (developmentList[s].equals("")) {
+			    			  break;
+			    		  }
+			    	  }
+			    	  n = n + 10;
+			      }
 
 
 

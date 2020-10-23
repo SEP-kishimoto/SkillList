@@ -29,6 +29,7 @@ if (err_message != null) {
 %>
 <table>
 	<tr><th>社員No* : </th><td><input type="text" name="db_number" value=""></td></tr>
+	<tr><th>フリガナ* : </th><td><input type="text" class="address-txt" name="kana" value=""></td></tr>
 	<tr><th>氏名* : </th><td><input type="text" class="address-txt" name="db_name" value=""></td></tr>
 	<tr><th>パスワード* : </th><td><input type="password" name="password" value=""></td></tr>
 

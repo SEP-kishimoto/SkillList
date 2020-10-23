@@ -22,19 +22,30 @@ String db_name = (String) request.getAttribute("db_name");
 String password = (String) request.getAttribute("password");
 
 
+String kana = (String) request.getAttribute("kana");
+String errmsg = (String) request.getAttribute("errmsg");
+
+
 
 %>
 
 <h1>スキルシート管理システム:スキルシート登録</h1>
 <br>
+<%if (errmsg != null) {
+	out.print(errmsg);
+}
+	%>
+
 <h2>■Profile</h2>
 <form action="/SkillList/AddCheckBL" method="post">
 <input type="hidden" name="db_number" value=<%=db_number%>>
 <input type="hidden" name="password" value=<%=password%>>
+<input type="hidden" name="db_name" value=<%=db_name%>>
+<input type="hidden" name="kana" value=<%=kana%>>
 <div class="table">
 <table>
-	<tr><th>フリガナ* : </th><td><input type="text" name="kana" value=""></td></tr>
-	<tr><th>氏名* : </th><td><input type="text" class="address-txt" name="db_name" value=<%=db_name %>></td></tr>
+	<tr><th>フリガナ* : </th><td><%=kana %></td></tr>
+	<tr><th>氏名* : </th><td><%=db_name %></td></tr>
 	<tr><th>現住所* : </th><td><input type="text" name="address" value=""></td></tr>
 	<tr><th>生年月日* : </th><td><input type="text" name="birthday"></td></tr>
 	<tr><th>年齢 : </th><td><input type="text" name="age"></td></tr>	<!-- javascriptを使って自動表示 -->
