@@ -10,7 +10,7 @@ import="servlet.EditBL"
 <html>
 <head>
 <meta charset="UTF-8">
-<title>スキルシート編集</title>
+<title>スキルシート編集確認</title>
 </head>
 <body>
 <!-- 文字コード宣言 -->
@@ -82,7 +82,7 @@ List<String> development = new ArrayList<String>();
 <%
 db_number = (String) request.getAttribute("db_number");
 db_name = (String) request.getAttribute("db_name");
-master_flg = (String) request.getAttribute("master=flg");
+master_flg = (String) request.getAttribute("master_flg");
 filename = (String) request.getAttribute("filename");
 %>
 
@@ -151,7 +151,7 @@ development = (ArrayList<String>) request.getAttribute("development");
 	</tr>
 	<tr>
 		<td>年齢＊</td>
-		<td><%=age%></td>
+		<td><%=age%>歳</td>
 	</tr>
 	<tr>
 		<td>性別＊</td>
@@ -298,6 +298,7 @@ session.setAttribute("development", development);
 %>
 
 <input type="submit" value="更新する">
+<!-- 値保持のためです -->
 <input type="button" value="戻る" onclick="history.back()">
 </form>
 </body>

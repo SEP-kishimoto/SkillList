@@ -183,6 +183,7 @@ public class EditCommitBL extends HttpServlet {
 
 	    os = request.getParameter("os");
 	    skill = request.getParameter("skill");
+	    skill = skill.replace("、", ",");	// 全角カンマから半角に置換
 	    tool = request.getParameter("tool");
 	    db = request.getParameter("db");
 	    qualification = request.getParameter("qualification");
@@ -214,37 +215,71 @@ public class EditCommitBL extends HttpServlet {
 		      wb = WorkbookFactory.create(is);
 
 		      Sheet sh = wb.getSheetAt(0);
+		      sh.setForceFormulaRecalculation(true);
+
+		      birthday = birthday.replace("年", "/").replace("月", "/").replace("日", "");
+		      Date date = DateUtil.parseYYYYMMDDDate(birthday);
 
 		      // Profile 書き込み設定
 		      getCell(sh, 3, 2).setCellValue(kana);
 		      getCell(sh, 4, 2).setCellValue(name);
 		      getCell(sh, 5, 2).setCellValue(address);
-		      getCell(sh, 3, 8).setCellValue(birthday);
-		      getCell(sh, 3, 12).setCellValue(age);
+		      getCell(sh, 3, 8).setCellValue(date);
+		      //getCell(sh, 3, 12).setCellFormula("IF(I4<>\"\", DATEDIF(I4,K2,\"Y\")&\"歳\", \"\")");
 		      getCell(sh, 4, 8).setCellValue(gender);
 		      getCell(sh, 4, 10).setCellValue(background);
 		      getCell(sh, 4, 12).setCellValue(backgroundNumber);
 		      getCell(sh, 5, 8).setCellValue(nearestStation);
 		      getCell(sh, 5, 10).setCellValue(stationName);
 
-		      // Skill Info 書き込み設定
-		      getCell(sh, 10, 2).setCellValue(os);
 
+		      // Skill Info 書き込み設定
+		      getCell(sh, 8, 2).setCellValue(os);
+
+		      // ','で改行
 		      int n = 0;
-		      String[] skillList = skill.split("[\\|]", -1);
-		      for (int i = 9; i <= 12; i++) {
-		    	  getCell(sh, i, 2).setCellValue(skillList[n]);
-		    	  if (skillList[n].equals("")) {
+		      int charcount = 0;	// 文字数カウントs
+		      String moji ="";
+		      int p = 9;
+		      String[] skillList = skill.split(",", -1);
+		      for (int i = 0; i < skillList.length; i++) {
+		    	  if (i == skillList.length - 1) {
+		    		  getCell(sh, p, 2).setCellValue(moji);
+		    		  if (skillList[n].equals("")) {
+			    		  for (int brank = 0; brank <= 12 - p - 1; brank++) {
+			    			  getCell(sh, brank + p + 1, 2).setCellValue("");
+			    		  }
+			    	  }
 		    		  break;
 		    	  }
-		    	  n++;
+		    	  if (moji.length() + skillList[n].length() + 1 > 33) {
+		    		  getCell(sh, p, 2).setCellValue(moji);
+		    		  p++;
+		    		  charcount = 0;
+		    	  }
+		    	  if (charcount == 0) {
+		    		  moji = skillList[n];
+		    		  charcount = skillList[n].length();
+		    	  } else {
+		    		  moji += "," + skillList[n];
+		    		  charcount += skillList[n].length() + 1;
+		    	  }
+
+		    	  if (p <= 12) {
+		    		  n++;
+		    	  } else {
+		    		  break;
+		    	  }
 		      }
 
 		      n = 0;
-		      String[] toolList = tool.split("[\\|]", -1);
+		      String[] toolList = tool.split(",", -1);
 		      for (int i = 9; i <= 12; i++) {
 		    	  getCell(sh, i, 9).setCellValue(toolList[n]);
 		    	  if (toolList[n].equals("")) {
+		    		  for (int brank = 0; brank <= 12 - i; brank++) {
+		    			  getCell(sh, brank + i, 9).setCellValue("");
+		    		  }
 		    		  break;
 		    	  }
 		    	  n++;
@@ -264,6 +299,7 @@ public class EditCommitBL extends HttpServlet {
 		    		  getCell(sh, 18 + n, 1).setCellValue("始");
 		    		  getCell(sh, 27 + n, 1).setCellValue("終");
 		    		  getCell(sh, 19 + n, 1).setCellFormula("IF(AND(C" + (19 + n) + "<>\"\",C" + (28 + n) + "<>\"\"),(DATEDIF(C" + (19 + n) + ",C" + (28 + n) +  ",\"M\")+1)&\"ヶ月\",\"\")");
+		    		  wb.getCreationHelper().createFormulaEvaluator().evaluateFormulaCell(getCell(sh, 19 + n, 1));
 		    		  getCell(sh, 19 + n, 8).setCellValue("要件定義");
 		    		  getCell(sh, 20 + n, 8).setCellValue("基本設計");
 		    		  getCell(sh, 21 + n, 8).setCellValue("詳細設計");
@@ -279,7 +315,7 @@ public class EditCommitBL extends HttpServlet {
 		      // Background Note 書き込み設定
 		      n = 0;
 		      for (int i = 0; i < noteNumber.size();i++) {
-		    	  Date date = null;
+		    	  date = null;
 		    	  if (beginning.get(i) == "") {
 		    		  getCell(sh, 18 + n, 2).setCellValue("");
 		    	  } else {
@@ -294,7 +330,7 @@ public class EditCommitBL extends HttpServlet {
 		    	  }
 		    	  getCell(sh, 27 + n, 2).setCellValue(date);
 
-		    	  String[] taskList = task.get(i).split("[\\|]", -1);
+		    	  String[] taskList = task.get(i).split(",", -1);
 		    	  for (int s = 0; s < 10; s++) {
 		    		  getCell(sh, 18 + n + s, 3).setCellValue(taskList[s]);
 		    		  if (taskList[s].equals("")) {
@@ -316,7 +352,7 @@ public class EditCommitBL extends HttpServlet {
 		    	  getCell(sh, 18 + n, 10).setCellValue(peopleNumber.get(i));
 
 		    	  for (int s = 0; s < 10; s++) {
-		    		  String[] developmentList = development.get(i).split("[\\|]", -1);
+		    		  String[] developmentList = development.get(i).split(",", -1);
 		    		  getCell(sh, 18 + n + s, 11).setCellValue(developmentList[s]);
 		    		  if (developmentList[s].equals("")) {
 		    			  break;
@@ -325,17 +361,21 @@ public class EditCommitBL extends HttpServlet {
 		    	  n = n + 10;
 		      }
 
+
+		      // 再計算
+		      wb.getCreationHelper().createFormulaEvaluator().evaluateFormulaCell(getCell(sh, 3, 8));
+
 		      // Excelファイルに書き込む
 		      out = new FileOutputStream("C:\\temp\\" + filename);
 		      wb.write(out);
-		      sh.setForceFormulaRecalculation(true);
+
 
 		    } catch (Exception ex) {
 		      ex.printStackTrace();
 
 		    } finally {
 		      try {
-		        // wb.close();
+		        wb.close();
 		      } catch (Exception ex2) {
 		        ex2.printStackTrace();
 		      }
@@ -349,7 +389,7 @@ public class EditCommitBL extends HttpServlet {
 
 
 		String view = "";
-		if (master_flg == "1") {
+		if (master_flg.equals("1")) {
 			view = "/ListBL";
 		} else {
 			view = "/SkillBL";

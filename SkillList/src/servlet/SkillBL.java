@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -50,7 +52,6 @@ public class SkillBL extends HttpServlet {
 		if (row != null) {
 			Cell cell = row.getCell(cellPoint);
 			if (Objects.equals(cell.getStringCellValue(), null)) {
-				System.out.println(cell);
 				return null;
 			}
 			return cell;
@@ -71,7 +72,6 @@ public class SkillBL extends HttpServlet {
 		if (row != null) {
 			Cell cell = row.getCell(cellPoint);
 			if (Objects.equals(cell.getDateCellValue(), null)) {
-				System.out.println(cell);
 				return null;
 			}
 			return cell;
@@ -131,11 +131,17 @@ public class SkillBL extends HttpServlet {
 	      value = getCell(sh, 5, 2).getStringCellValue();
 	      request.setAttribute("address", value);
 
-	      value = getCell(sh, 3, 8).getStringCellValue();
+	      //value = getCell(sh, 3, 8).getStringCellValue();
+	      double birthVal = getCellNum(sh, 3, 8).getNumericCellValue();
+	      Date a = DateUtil.getJavaDate(birthVal);
+	      String birthStr = new SimpleDateFormat("yyyy/MM/dd").format(a);
+	      value = birthStr;
 	      request.setAttribute("birthday", value);
 
-	      value = getCell(sh, 3, 12).getStringCellValue();
-	      request.setAttribute("age", value);
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	      Date now = new Date();
+	      int ageValue = (Integer.parseInt(sdf.format(now)) - Integer.parseInt(sdf.format(a))) / 10000;
+	      request.setAttribute("age", Integer.toString((ageValue)));
 
 	      value = getCell(sh, 4, 8).getStringCellValue();
 	      request.setAttribute("gender", value);
@@ -159,10 +165,10 @@ public class SkillBL extends HttpServlet {
 
 	      value = "";
 	      for (int i = 9; i <= 12; i++) {
-	    	  if (getCell(sh, i, 9).getStringCellValue() == "") {
+	    	  if (getCell(sh, i, 2).getStringCellValue() == "") {
 	    		  break;
 	    	  }
-	    	  value += getCell(sh, i, 2).getStringCellValue() + "|";
+	    	  value += getCell(sh, i, 2).getStringCellValue() + ",";
 	      }
 	      request.setAttribute("skill", value);
 
@@ -171,7 +177,7 @@ public class SkillBL extends HttpServlet {
 	    	  if (getCell(sh, i, 9).getStringCellValue() == "") {
 	    		  break;
 	    	  }
-	    	  value += getCell(sh, i, 9).getStringCellValue() + "|";
+	    	  value += getCell(sh, i, 9).getStringCellValue() + ",";
 	      }
 	      request.setAttribute("tool", value);
 
@@ -190,7 +196,7 @@ public class SkillBL extends HttpServlet {
 	      int n = 18;
 	      for (int i = 0; i < wonderland / 10; i++) {
 	    	  DataFormatter formatter = new DataFormatter();
-	    	  value = formatter.formatCellValue(wb.getCreationHelper().createFormulaEvaluator().evaluateInCell(getCellNum(sh, n, 0)));
+	    	  value = formatter.formatCellValue(wb.getCreationHelper().createFormulaEvaluator().evaluateInCell(getCellDate(sh, n, 0)));
 	    	  valueList.add(i, value);
 	    	  n = n + 10;
 	      }
@@ -259,7 +265,7 @@ public class SkillBL extends HttpServlet {
 	    	    	  if (getCell(sh, s, 3).getStringCellValue() == "") {
 	    	    		  break;
 	    	    	  }
-	    	    	  value += getCell(sh, s, 3).getStringCellValue() + "|";
+	    	    	  value += getCell(sh, s, 3).getStringCellValue() + ",";
 	    	      }
 	    		  valueList.add(i, value);
 	    	  }
@@ -331,7 +337,7 @@ public class SkillBL extends HttpServlet {
 	    	    	  if (getCell(sh, s, 11).getStringCellValue() == "") {
 	    	    		  break;
 	    	    	  }
-	    	    	  value += getCell(sh, s,11).getStringCellValue() + "|";
+	    	    	  value += getCell(sh, s,11).getStringCellValue() + ",";
 	    	      }
 	    		  valueList.add(i, value);
 	    	  }

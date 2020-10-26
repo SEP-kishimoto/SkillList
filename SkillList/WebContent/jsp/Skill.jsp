@@ -149,7 +149,7 @@ development = (ArrayList<String>) request.getAttribute("development");
 	</tr>
 	<tr>
 		<td>年齢＊</td>
-		<td><%=age%></td>
+		<td><%=age%>歳</td>
 	</tr>
 	<tr>
 		<td>性別＊</td>
