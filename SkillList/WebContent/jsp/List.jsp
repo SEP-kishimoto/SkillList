@@ -44,5 +44,36 @@
 			}
 		%>
 	</table>
+	<form>
+	<input type="button" id="logoutBtn" value='ログアウト' onclick="LogoutPopUp()">
+			<div id="logoutModal" class="modal">
+				<div class="modal-content">
+					<div class="modal-body">
+						<span class="logout_span" style="text-align: center;">ログアウトします。
+							<br>よろしいですか？
+						</span>
+						<p></p>
+							<input
+							type="submit" value="OK" formaction="/SkillList/LoginBL"> <input
+							type="button" id="logoutCloseBtn" value="キャンセル">
+					</div>
+				</div>
+			</div>
+	</form>
+	<script type="text/javascript">
+	function LogoutPopUp() {
+			var btn = document.getElementById('logoutBtn');
+			var modal = document.getElementById('logoutModal');
+
+			btn.addEventListener('click', function() {
+				modal.style.display = 'block';
+			})
+			var closeBtn = document.getElementById('logoutCloseBtn');
+
+			closeBtn.addEventListener('click', function() {
+				modal.style.display = 'none';
+			})
+		}
+	</script>
 </body>
 </html>

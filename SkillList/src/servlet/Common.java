@@ -151,6 +151,7 @@ public class Common {
 			cell.setCellStyle(style);
 			}
 
+		row = sheet.createRow(0);
 		cell = row.createCell((short) 4);
 		cell.setCellStyle(style2);//中央寄せにする
 		cell.setCellValue("Skill Sheet");//見出し
