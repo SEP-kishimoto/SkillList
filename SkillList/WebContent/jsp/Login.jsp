@@ -17,7 +17,7 @@
 			</tr>
 			<tr>
 				<th class="password">パスワード：</th>
-				<td><input style="border =1: width:40px;" type="text"
+				<td><input style="border =1: width:40px;" type="password"
 					name="password"></td>
 			</tr>
 		</table>

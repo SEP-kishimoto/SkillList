@@ -27,14 +27,14 @@ public class Common {
 
 		// シート作成
 		XSSFSheet sheet = wb.createSheet("SkillSheet");
-//中央寄せなしの変数
+//罫線の変数
 			XSSFCellStyle style = wb.createCellStyle();
 			style.setBorderTop(BorderStyle.THIN);
 			style.setBorderBottom(BorderStyle.THIN);
 			style.setBorderLeft(BorderStyle.THIN);
 			style.setBorderRight(BorderStyle.THIN);
 
-//中央寄せありの変数
+//中央寄せ・罫線の変数
 		XSSFCellStyle style2 = wb.createCellStyle();
 		style2.setAlignment(HorizontalAlignment.CENTER);
 		style2.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -101,8 +101,58 @@ public class Common {
 
 //項目名
 		XSSFRow row = sheet.createRow(0);//各項目作成
-		XSSFCell cell = row.createCell((short) 4);// セル作成
-	    cell.setCellStyle(style2);//中央寄せにする
+		XSSFCell cell = row.createCell(0);// セル作成
+
+//全体に罫線
+		for(int n =0;n<=67;n++) {
+			row = sheet.createRow(n);
+//			cell = row.createCell(0);
+//			cell.setCellStyle(style);
+//			sheet.createRow(n).createCell(0).setCellStyle(style);
+//			sheet.createRow(n).createCell(1).setCellStyle(style);
+//			sheet.createRow(n).createCell(2).setCellStyle(style);
+//			sheet.createRow(n).createCell(3).setCellStyle(style);
+//			sheet.createRow(n).createCell(4).setCellStyle(style);
+//			sheet.createRow(n).createCell(5).setCellStyle(style);
+//			sheet.createRow(n).createCell(6).setCellStyle(style);
+//			sheet.createRow(n).createCell(7).setCellStyle(style);
+//			sheet.createRow(n).createCell(8).setCellStyle(style);
+//			sheet.createRow(n).createCell(9).setCellStyle(style);
+//			sheet.createRow(n).createCell(10).setCellStyle(style);
+//			sheet.createRow(n).createCell(11).setCellStyle(style);
+//			sheet.createRow(n).createCell(12).setCellStyle(style);
+//			cell = row.createCell(0);
+//			cell = row.createCell(1);
+			cell = row.createCell((short) 0);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 1);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 2);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 3);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 4);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 5);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 6);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 7);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 8);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 9);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 10);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 11);
+			cell.setCellStyle(style);
+			cell = row.createCell((short) 12);
+			cell.setCellStyle(style);
+			}
+
+		cell = row.createCell((short) 4);
+		cell.setCellStyle(style2);//中央寄せにする
 		cell.setCellValue("Skill Sheet");//見出し
 		row = sheet.createRow(1);
 		cell = row.createCell((short) 9);
@@ -196,12 +246,6 @@ public class Common {
 		cell.setCellStyle(style2);
 		cell.setCellValue("終");
 
-//各情報
-		for(int n =0;n<=10;n++) {
-		row = sheet.createRow(1);
-		cell = row.createCell((short) n);
-		cell.setCellStyle(style2);
-		}
 
 		return sheet;
    }

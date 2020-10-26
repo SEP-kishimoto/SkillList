@@ -304,7 +304,7 @@ session.setAttribute("development", development);
 							<br>・ユーザーアカウント<br>・スキルシート<br>を削除します。よろしいですか？
 						</span>
 
-						<p class="delete_p">Ｐタグ</p>
+						<p class="delete_p"><%=db_name %></p>
 
 						<input
 							type="submit" value="OK" formaction="/SkillList/DeleteBL"> <input
@@ -320,10 +320,7 @@ session.setAttribute("development", development);
 							<br>よろしいですか？
 						</span>
 
-						<p class="download_p">Ｐタグ</p>
-        <p><label>パラメタ1:</label><input type="text" name="param1" /></p>
-        <p><label>パラメタ2:</label><input type="text" name="param2" /></p>
-        <p><label>パラメタ3:</label><input type="text" name="param3" /></p>
+						<p class="download_p"><%=db_name %></p>
 							<input
 							type="submit" value="OK" formaction="/SkillList/DownloadBL"> <input
 							type="button" id="DownloadCloseBtn" value="キャンセル">
@@ -344,10 +341,14 @@ session.setAttribute("development", development);
 					</div>
 				</div>
 			</div>
+			<form>
+			<%String master_flg2=(String)session.getAttribute("master_flg");
+			if(master_flg2.equals("1")){
+			%>
+			<input type="hidden" value="<%=master_flg2%>" name="master_flg2">
+<input type="submit" value="戻る" formaction="/SkillList/ListBL">
+<%}%></form>
 	</div>
-<%if(master_flg.equals("1")){%>
-<input type="submit" value="戻る" formaction="/SkillList/LoginBL">
-<%}%>
 
 	<script>
 		function DeletePopUp() {
