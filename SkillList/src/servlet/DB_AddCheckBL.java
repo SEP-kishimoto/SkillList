@@ -5,12 +5,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AddCheckBL
@@ -37,7 +40,48 @@ public class DB_AddCheckBL extends HttpServlet {
 		// エラーメッセージ
 		String err_message = "";
 
+		// テストデータ
+		 List<String> noteNumber = new ArrayList<String>() {{add("1");}};
+		 List<String> beginning = new ArrayList<String>() {{add("");}};
+		 List<String> end = new ArrayList<String>() {{add("");}};
+		 List<String> task = new ArrayList<String>() {{add("");}};
 
+		 // フェーズ部分(本来二重構造)
+		 List<String> requirement = new ArrayList<String>() {{add("");}};
+		 List<String> basic = new ArrayList<String>() {{add("");}};
+		 List<String> details = new ArrayList<String>() {{add("");}};
+		 List<String> pg = new ArrayList<String>() {{add("");}};
+		 List<String> single = new ArrayList<String>() {{add("");}};
+		 List<String> join = new ArrayList<String>() {{add("");}};
+		 List<String> customer = new ArrayList<String>() {{add(""); }};
+		 List<String> environment = new ArrayList<String>() {{add("");}};
+
+
+		 List<String> peopleNumber = new ArrayList<String>() {{add("");}};
+		 List<String> development = new ArrayList<String>() {{add("");}};
+
+
+
+		// フェーズ
+//		    List<String> test_requirementList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
+		    // 二重構造
+//		    ArrayList<List<String>> requirement = new ArrayList<>();
+//		    ArrayList<List<String>> basic = new ArrayList<>();
+//		    ArrayList<List<String>> details = new ArrayList<>();
+//		    ArrayList<List<String>> pg = new ArrayList<>();
+//		    ArrayList<List<String>> single = new ArrayList<>();
+//		    ArrayList<List<String>> join = new ArrayList<>();
+//		    ArrayList<List<String>> customer = new ArrayList<>();
+//		    ArrayList<List<String>> environment = new ArrayList<>();
+//		 requirement.add(test_requirementList);
+//		 basic.add(test_requirementList);
+//		 details.add(test_requirementList);
+//		 pg.add(test_requirementList);
+//		 single.add(test_requirementList);
+//		 join.add(test_requirementList);
+//		 customer.add(test_requirementList);
+//		 environment.add(test_requirementList);
+		 HttpSession session = request.getSession();
 
 		try {
 			Connection con = Common.getConnection();
@@ -58,13 +102,26 @@ public class DB_AddCheckBL extends HttpServlet {
 		request.setAttribute("db_name",db_name);
 		request.setAttribute("kana",kana);
 		request.setAttribute("password",password);
+		session.setAttribute("noteNumber",noteNumber);
+		session.setAttribute("beginning",beginning);
+		session.setAttribute("end",end);
+		session.setAttribute("task",task);
+		session.setAttribute("requirement",requirement);
+		session.setAttribute("basic",basic);
+		session.setAttribute("details",details);
+		session.setAttribute("pg",pg);
+		session.setAttribute("single",single);
+		session.setAttribute("join",join);
+		session.setAttribute("customer",customer);
+		session.setAttribute("environment",environment);
+		session.setAttribute("peopleNumber",peopleNumber);
+		session.setAttribute("development",development);
 
 		if (get_name != null || db_number.isEmpty()) {	// get_nameがnullでなければ社員Noが重複している
 			err_message = "すでに使われている社員Noまたは社員Noが入力されていません";
 			request.setAttribute("err_message",err_message);
 			getServletContext().getRequestDispatcher("/jsp/DB_Add.jsp").forward(request, response);
 		} else {
-
 			getServletContext().getRequestDispatcher("/jsp/Add.jsp").forward(request, response);
 		}
 
