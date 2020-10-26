@@ -40,6 +40,11 @@ public class ListBL extends HttpServlet {
 		String db_name = (String) request.getAttribute("db_name");
 		String master_flg = (String) request.getAttribute("master_flg");
 		String filename = (String) request.getAttribute("filename");
+
+		if(master_flg==null) {//管理者がSkill.jspから戻るボタンを押下した際の処理
+		    master_flg = request.getParameter("master_flg2");
+	    }
+
 		HttpSession session = request.getSession();
 		session.setAttribute("master_flg",master_flg);
 		if (master_flg.equals("1")) {//管理者ログインの場合
