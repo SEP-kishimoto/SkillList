@@ -166,72 +166,25 @@ public class AddCommit extends HttpServlet {
 
 
 
-	    // Background Note変数	リスト構造	定義
+	    // Background Note
 	    List<String> noteNumber = new ArrayList<String>();
 	    List<String> beginning = new ArrayList<String>();
 	    List<String> end = new ArrayList<String>();
 	    List<String> task = new ArrayList<String>();
-	    // 二重構造
-	    ArrayList<List<String>> requirement = new ArrayList<>();
-	    ArrayList<List<String>> basic = new ArrayList<>();
-	    ArrayList<List<String>> details = new ArrayList<>();
-	    ArrayList<List<String>> pg = new ArrayList<>();
-	    ArrayList<List<String>> single = new ArrayList<>();
-	    ArrayList<List<String>> join = new ArrayList<>();
-	    ArrayList<List<String>> customer = new ArrayList<>();
-	    ArrayList<List<String>> environment = new ArrayList<>();
-	    // リスト構造
-	    List<String> peopleNumber = new ArrayList<String>();
-	    List<String> development = new ArrayList<String>();
-
-
-
-	    // テストデータ
-	    List<String> test_noteNumber = new ArrayList<String>() {{add("1"); add("2"); add("3");}};
-	    List<String> test_beginning = new ArrayList<String>() {{add("2000/01/01"); add("2001/01/01"); add("2002/01/01");}};
-	    List<String> test_end = new ArrayList<String>() {{add("2003/01/01"); add("2004/01/01"); add("2005/01/01");}};
-	    List<String> test_task = new ArrayList<String>() {{add("task1"); add("task2"); add("task3");}};
 
 	    // フェーズ
-	    List<String> test_requirementList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_test_basicList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_detailsList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_noteNumberList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_pgList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_singleList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_jointList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_customerList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-//	    List<String> test_environmentList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-	    ArrayList<List<String>> test_requirement =  new ArrayList<>();
-	    ArrayList<List<String>> test_basic =  new ArrayList<>();
-	    ArrayList<List<String>> test_details =  new ArrayList<>();
-	    ArrayList<List<String>> test_pg =  new ArrayList<>();
-	    ArrayList<List<String>> test_single =  new ArrayList<>();
-	    ArrayList<List<String>> test_join =  new ArrayList<>();
-	    ArrayList<List<String>> test_customer =  new ArrayList<>();
-	    ArrayList<List<String>> test_environment =  new ArrayList<>();
+	    List<String> requirement = new ArrayList<String>();
+	    List<String> basic = new ArrayList<String>();
+	    List<String> details = new ArrayList<String>();
+	    List<String> pg = new ArrayList<String>();
+	    List<String> single = new ArrayList<String>();
+	    List<String> join = new ArrayList<String>();
+	    List<String> customer = new ArrayList<String>();
+	    List<String> environment = new ArrayList<String>();
+	    // フェーズここまで
 
-	    test_requirement.add(test_requirementList);
-	    test_requirement.add(test_requirementList);
-	    test_basic.add(test_requirementList);
-	    test_basic.add(test_requirementList);
-	    test_details.add(test_requirementList);
-	    test_details.add(test_requirementList);
-	    test_pg.add(test_requirementList);
-	    test_pg.add(test_requirementList);
-	    test_single.add(test_requirementList);
-	    test_single.add(test_requirementList);
-	    test_join.add(test_requirementList);
-	    test_join.add(test_requirementList);
-	    test_customer.add(test_requirementList);
-	    test_customer.add(test_requirementList);
-	    test_environment.add(test_requirementList);
-	    test_environment.add(test_requirementList);
-
-
-	    List<String> test_peopleNumber = new ArrayList<String>() {{add("task1"); add("task2"); add("task3");}};
-	    List<String> test_development = new ArrayList<String>() {{add("task1"); add("task2"); add("task3");}};
-
+	    List<String> peopleNumber = new ArrayList<String>();
+	    List<String> development = new ArrayList<String>();
 
 
 
@@ -242,38 +195,16 @@ public class AddCommit extends HttpServlet {
 	    beginning = (ArrayList<String>) session.getAttribute("beginning");
 	    end = (ArrayList<String>) session.getAttribute("end");
 	    task = (ArrayList<String>) session.getAttribute("task");
-
-	    requirement = (ArrayList<List<String>>) session.getAttribute("requirement");
-	    basic = (ArrayList<List<String>>) session.getAttribute("basic");
-	    details = (ArrayList<List<String>>) session.getAttribute("details");
-	    pg = (ArrayList<List<String>>) session.getAttribute("pg");
-	    single = (ArrayList<List<String>>) session.getAttribute("single");
-	    join = (ArrayList<List<String>>) session.getAttribute("join");
-	    customer = (ArrayList<List<String>>) session.getAttribute("customer");
-	    environment = (ArrayList<List<String>>) session.getAttribute("environment");
-
+	    requirement = (ArrayList<String>) session.getAttribute("requirement");
+	    basic = (ArrayList<String>) session.getAttribute("basic");
+	    details = (ArrayList<String>) session.getAttribute("details");
+	    pg = (ArrayList<String>) session.getAttribute("pg");
+	    single = (ArrayList<String>) session.getAttribute("single");
+	    join = (ArrayList<String>) session.getAttribute("join");
+	    customer = (ArrayList<String>) session.getAttribute("customer");
+	    environment = (ArrayList<String>) session.getAttribute("environment");
 	    peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
 	    development = (ArrayList<String>) session.getAttribute("development");
-
-
-	    // テストデータ代入
-	    noteNumber = test_noteNumber;
-	    beginning = test_beginning;
-	    end = test_end;
-	    task = test_task;
-
-	    requirement = test_requirement;
-	    basic = test_basic;
-	    details = test_details;
-	    pg = test_pg;
-	    single = test_single;
-	    join = test_join;
-	    customer = test_customer;
-	    environment = test_environment;
-
-	    peopleNumber = test_peopleNumber;
-	    development = test_development;
-
 
 
 
@@ -298,14 +229,18 @@ public class AddCommit extends HttpServlet {
 //	            //getStringCellValueにて文字列を読み込みます。
 //	            XSSFCell cell = row.getCell((short) 10);
 
+	            int roop = noteNumber.size() - 5;		// コピーするBackground Noteの数
 
-	            for (int p = 0;p < 5;p++) { // Background Note追加数分ループ
+	            if (roop >= 1) {
+	            	 for (int p = 0;p < roop;p++) { // Background Note追加数分ループ
 
-	            	for (int i = 0;i < 10;i++) {	// Background Note追加処理
-		            	copyRow(wb,wb.getSheetAt(0),18 + i,68 + i + (p * 10));
-		            }
+	 	            	for (int i = 0;i < 10;i++) {	// Background Note追加処理
+	 		            	copyRow(wb,wb.getSheetAt(0),18 + i,68 + i + (p * 10));
+	 		            }
 
+	 	            }
 	            }
+
 
 
 
@@ -319,7 +254,7 @@ public class AddCommit extends HttpServlet {
 			      getCell(wb.getSheetAt(0), 4, 2).setCellValue(db_name);
 			      getCell(wb.getSheetAt(0), 5, 2).setCellValue(address);
 			      getCell(wb.getSheetAt(0), 3, 8).setCellValue(birthday);
-			      getCell(wb.getSheetAt(0), 3, 12).setCellValue(age + "歳");
+			      //getCell(wb.getSheetAt(0), 3, 12).setCellValue(age + "歳");
 			      getCell(wb.getSheetAt(0), 4, 8).setCellValue(gender);
 			      getCell(wb.getSheetAt(0), 4, 10).setCellValue(background);
 			      getCell(wb.getSheetAt(0), 4, 12).setCellValue(backgroundNumber);
@@ -330,17 +265,6 @@ public class AddCommit extends HttpServlet {
 			      getCell(wb.getSheetAt(0), 8, 2).setCellValue(os);
 //			      getCell(wb.getSheetAt(0), 9, 2).setCellValue(skill);
 //			      getCell(wb.getSheetAt(0), 9, 9).setCellValue(tool);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -400,25 +324,6 @@ public class AddCommit extends HttpServlet {
 
 
 
-
-			      // ここからBackground Note	1つだけ出力
-			      //getCell(wb.getSheetAt(0), 18, 0).setCellValue(noteNumber);
-//	              getCell(wb.getSheetAt(0), 18, 2).setCellValue(beginning);
-//			      getCell(wb.getSheetAt(0), 27, 2).setCellValue(end);
-//			      getCell(wb.getSheetAt(0), 18, 3).setCellValue(task);
-//			      getCell(wb.getSheetAt(0), 19, 9).setCellValue(requirement);
-//			      getCell(wb.getSheetAt(0), 20, 9).setCellValue(basic);
-//			      getCell(wb.getSheetAt(0), 21, 9).setCellValue(details);
-//			      getCell(wb.getSheetAt(0), 22, 9).setCellValue(pg);
-//			      getCell(wb.getSheetAt(0), 23, 9).setCellValue(single);
-//			      getCell(wb.getSheetAt(0), 24, 9).setCellValue(join);
-//			      getCell(wb.getSheetAt(0), 25, 9).setCellValue(customer);
-//			      getCell(wb.getSheetAt(0), 26, 9).setCellValue(environment);
-//			      getCell(wb.getSheetAt(0), 18, 10).setCellValue(peopleNumber);
-//			      getCell(wb.getSheetAt(0), 18, 11).setCellValue(development);
-
-
-
 			      n = 0;
 			      // Background Note 書き込み設定
 			      for (int i = 0; i < noteNumber.size();i++) {
@@ -437,7 +342,7 @@ public class AddCommit extends HttpServlet {
 			    	  }
 			    	  getCell(wb.getSheetAt(0), 27 + n, 2).setCellValue(date);
 
-
+			    	  task.set(i,task.get(i) + ",");
 			    	  String[] taskList = task.get(i).split(",", -1);
 			    	  for (int s = 0; s < 10; s++) {
 			    		  getCell(wb.getSheetAt(0), 18 + n + s, 3).setCellValue(taskList[s]);
@@ -445,21 +350,20 @@ public class AddCommit extends HttpServlet {
 			    			  break;
 			    		  }
 			    	  }
-
 			    	  for (int s = 0; s < 8; s ++) {
-			    		  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(requirement.get(i).get(s));
-				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(basic.get(i).get(s));
-				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(details.get(i).get(s));
-				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(pg.get(i).get(s));
-				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(single.get(i).get(s));
-				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(join.get(i).get(s));
-				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(customer.get(i).get(s));
-				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(environment.get(i).get(s));
+			    		  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(requirement.get(i));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(basic.get(i));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(details.get(i));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(pg.get(i));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(single.get(i));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(join.get(i));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(customer.get(i));
+				    	  getCell(wb.getSheetAt(0), 19 + n + s, 9).setCellValue(environment.get(i));
 			    	  }
 			    	  getCell(wb.getSheetAt(0), 18 + n, 10).setCellValue(peopleNumber.get(i));
-
+			    	  development.set(i,development.get(i) + ",");
 			    	  for (int s = 0; s < 10; s++) {
-			    		  String[] developmentList = development.get(i).split("[\\|]", -1);
+			    		  String[] developmentList = development.get(i).split(",", -1);
 			    		  getCell(wb.getSheetAt(0), 18 + n + s, 11).setCellValue(developmentList[s]);
 			    		  if (developmentList[s].equals("")) {
 			    			  break;
@@ -468,8 +372,7 @@ public class AddCommit extends HttpServlet {
 			    	  n = n + 10;
 			      }
 
-
-
+			      wb.getSheetAt(0).setForceFormulaRecalculation(true);	// 関数を使えるようにする
 	         // エクセルファイルを出力
 	            try {
 
@@ -513,8 +416,8 @@ public class AddCommit extends HttpServlet {
 
 
 
-
-        getServletContext().getRequestDispatcher("/jsp/Add.jsp").forward(request, response);
+		 request.setAttribute("master_flg","1");
+        getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 
 	}
 

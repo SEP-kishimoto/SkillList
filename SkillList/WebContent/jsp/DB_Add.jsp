@@ -24,7 +24,7 @@ request.getSession().setAttribute("master_flg", 1);
 if (err_message != null) {
 	out.println("<h2>" + err_message + "</h2>");
 }
-
+String master_flg = "1";
 
 %>
 <table>
@@ -43,7 +43,7 @@ if (err_message != null) {
 </form>
 
 <form action="/SkillList/ListBL" method="post">
-<input type="hidden" name="master_flg" value="1">
+<input type="hidden" name="master_flg2" value="1">
 <button type="submit" class="btn">戻る</button>
 </form>
 </body>
