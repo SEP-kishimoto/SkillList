@@ -78,6 +78,11 @@ List<String> development = new ArrayList<String>();
 
 %>
 
+<!-- errmsg -->
+<%
+String errmsg = (String) request.getAttribute("errmsg");
+%>
+
 <!-- DBからの値 -->
 <%
 db_number = request.getParameter("db_number");
@@ -111,25 +116,49 @@ qualification = request.getParameter("qualification");
 
 <!-- Background Noteの設定 リスト構造 および二重構造 -->
 <%
-noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
-beginning = (ArrayList<String>) session.getAttribute("beginning");
-end = (ArrayList<String>) session.getAttribute("end");
-task = (ArrayList<String>) session.getAttribute("task");
+if (errmsg != null) {
+	noteNumber = (ArrayList<String>) request.getAttribute("noteNumber");
+	beginning = (ArrayList<String>) request.getAttribute("beginning");
+	end = (ArrayList<String>) request.getAttribute("end");
+	task = (ArrayList<String>) request.getAttribute("task");
 
-requirement = (ArrayList<List<String>>) session.getAttribute("requirement");
-basic = (ArrayList<List<String>>) session.getAttribute("basic");
-details = (ArrayList<List<String>>) session.getAttribute("details");
-pg = (ArrayList<List<String>>) session.getAttribute("pg");
-single = (ArrayList<List<String>>) session.getAttribute("single");
-join = (ArrayList<List<String>>) session.getAttribute("join");
-customer = (ArrayList<List<String>>) session.getAttribute("customer");
-environment = (ArrayList<List<String>>) session.getAttribute("environment");
+	requirement = (ArrayList<List<String>>) request.getAttribute("requirement");
+	basic = (ArrayList<List<String>>) request.getAttribute("basic");
+	details = (ArrayList<List<String>>) request.getAttribute("details");
+	pg = (ArrayList<List<String>>) request.getAttribute("pg");
+	single = (ArrayList<List<String>>) request.getAttribute("single");
+	join = (ArrayList<List<String>>) request.getAttribute("join");
+	customer = (ArrayList<List<String>>) request.getAttribute("customer");
+	environment = (ArrayList<List<String>>) request.getAttribute("environment");
 
-peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
-development = (ArrayList<String>) session.getAttribute("development");
+	peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
+	development = (ArrayList<String>) request.getAttribute("development");
+} else {
+	noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
+	beginning = (ArrayList<String>) session.getAttribute("beginning");
+	end = (ArrayList<String>) session.getAttribute("end");
+	task = (ArrayList<String>) session.getAttribute("task");
+
+	requirement = (ArrayList<List<String>>) session.getAttribute("requirement");
+	basic = (ArrayList<List<String>>) session.getAttribute("basic");
+	details = (ArrayList<List<String>>) session.getAttribute("details");
+	pg = (ArrayList<List<String>>) session.getAttribute("pg");
+	single = (ArrayList<List<String>>) session.getAttribute("single");
+	join = (ArrayList<List<String>>) session.getAttribute("join");
+	customer = (ArrayList<List<String>>) session.getAttribute("customer");
+	environment = (ArrayList<List<String>>) session.getAttribute("environment");
+
+	peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
+	development = (ArrayList<String>) session.getAttribute("development");
+}
 %>
 
 <h1>スキルシート管理システム：編集</h1>
+<%
+if (errmsg != null) {
+	out.print(errmsg);
+}
+%>
 <h2>■Profile</h2>
 <form method="post" action="/SkillList/EditCheckBL">
 <table>
@@ -151,7 +180,7 @@ development = (ArrayList<String>) session.getAttribute("development");
 	</tr>
 	<tr>
 		<td>年齢＊</td>
-		<td><input type="text" name="age" value="<%=age%>"></td>
+		<td><input type="text" name="age" value="<%=age%>">歳</td>
 	</tr>
 	<tr>
 		<td>性別＊</td>

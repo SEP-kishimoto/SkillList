@@ -1,10 +1,12 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -104,8 +106,34 @@ public class EditCheckBL extends HttpServlet {
 	    db = request.getParameter("db");
 	    qualification = request.getParameter("qualification");
 
+	    skill = skill.replace("、", ",");	// 全角カンマから半角に置換
+	    if (!(skill.endsWith(","))) {
+	    	if (!(skill.equals(""))) {
+	    		skill += ",";
+	    	}
+	    }
+	    if (!(tool.endsWith(","))) {
+	    	if (!(tool.equals(""))) {
+	    		tool += ",";
+	    	}
+	    }
+
 	    HttpSession session = request.getSession();
 	    noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
+
+	    String errmsg = "";
+
+	    // ','で改行
+	    int n = 0;
+	    int skill_charcount = 0;	// スキル文字数カウント
+	    int tool_charcount = 0;		// ツール文字数カウント
+	    String moji ="";
+	    int skill_over = 0;	// スキル文字数オーバーフラグ
+	    int tool_over = 0;	// ツール文字数オーバーフラグ
+	    int count = 0;
+	    int lastrow_flg = 0;	// 最終行フラグ
+	    int task_over = 0;	// 業務内容オーバーフラグ
+	    int development_over = 0;	// 開発環境オーバーフラグ
 
 	    for (int i = 0; i < noteNumber.size(); i++) {
 	    	String backgroundValue = "beginning" + Integer.toString(i);
@@ -116,34 +144,44 @@ public class EditCheckBL extends HttpServlet {
 	    	end.add(i, a);
 	    	backgroundValue = "task" + Integer.toString(i);
 	    	a = request.getParameter(backgroundValue);
+	    	String[] konma = a.split(",", -1);
+	    	for (int cnt = 0; cnt < konma.length; cnt++) {
+	    		if (a.equals("")) {
+	    			break;
+	    		}
+	    		if (cnt == konma.length - 1 && !(a.endsWith(","))) {
+		    		a += ",";
+		    		break;
+		    	}
+	    	}
 	    	task.add(i, a);
 
 
 	    	valueList = new ArrayList<>();
 
 
-	    	backgroundValue = "basic" + Integer.toString(i);
+	    	backgroundValue = "requirement" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(0, a);
-		    backgroundValue = "details" + Integer.toString(i);
+	    	backgroundValue = "basic" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(1, a);
-		    backgroundValue = "pg" + Integer.toString(i);
+		    backgroundValue = "details" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(2, a);
-		    backgroundValue = "single" + Integer.toString(i);
+		    backgroundValue = "pg" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(3, a);
-		    backgroundValue = "join" + Integer.toString(i);
+		    backgroundValue = "single" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(4, a);
-		    backgroundValue = "customer" + Integer.toString(i);
+		    backgroundValue = "join" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(5, a);
-		    backgroundValue = "development" + Integer.toString(i);
+		    backgroundValue = "customer" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(6, a);
-		    backgroundValue = "requirement" + Integer.toString(i);
+		    backgroundValue = "environment" + Integer.toString(i);
 		    a = request.getParameter(backgroundValue);
 		    valueList.add(7, a);
 	    	checkList.add(i, valueList);
@@ -151,10 +189,216 @@ public class EditCheckBL extends HttpServlet {
 	    	backgroundValue = "peopleNumber" + Integer.toString(i);
 	    	a = request.getParameter(backgroundValue);
 	    	peopleNumber.add(i, a);
+
 	    	backgroundValue = "development" + Integer.toString(i);
 	    	a = request.getParameter(backgroundValue);
+	    	konma = a.split(",", -1);
+	    	for (int cnt = 0; cnt < konma.length; cnt++) {
+	    		if (a.equals("")) {
+	    			break;
+	    		}
+	    		if (cnt == konma.length - 1 && !(a.endsWith(","))) {
+		    		a += ",";
+		    		break;
+		    	}
+	    	}
 	    	development.add(i, a);
 	    }
+
+
+
+	    /*
+	     * Profileチェック
+	     * kana, name, address, birthday, age, gender,
+	     * background, backgroundNumber, nearestStation, stationName
+	     */
+	    String[] profileList = {kana, name, address, birthday, age, gender, background, backgroundNumber, nearestStation, stationName};
+	    for (int num = 0; num < profileList.length; num++) {
+	    	if (profileList[num].equals("")) {
+	    		errmsg += "Profileの項目を全て記入してください<br>";
+	    		break;
+	    	}
+	    }
+
+	    // 年齢のチェック
+
+	    SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+	    String a = birthday.replace("/", "");
+		Date date;
+		Date now = new Date();
+		try {
+			date = sdFormat.parse(a);
+			int ageValue = (Integer.parseInt(sdFormat.format(now)) - Integer.parseInt(sdFormat.format(date))) / 10000;
+			String str = Integer.toString(ageValue);
+			if (!(age.equals(str))) {
+				errmsg += "年齢を正しく入力してください<br>";
+			}
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+	    /*
+	     * 文字数チェック
+	     */
+
+	    /*
+	     * スキル文字数チェック
+	     */
+	    String[] skillList = skill.split(",", -1);
+	    for (int i = 0; i < skillList.length;i++) {
+	    	if (skillList[n].equals("")) {
+	    		  break;
+	    	}
+	    	System.out.println("ループ回数" + i + " 文字数" + skill_charcount);
+	    	if (moji.length() + skillList[n].length() + 1 > 33 && lastrow_flg == 0) {	// 行に設定する文字数 + これから設定しようとしている文字数 + カンマ分 > 行に入る文字数(全角)
+	    		skill_charcount = 0;
+	    		count++;
+	    	}
+
+	    	if (skill_charcount == 0) {
+	    		moji = skillList[n];
+	    		skill_charcount = skillList[n].length();
+	    	} else {
+	    		moji += skillList[n];
+	    		skill_charcount += skillList[n].length() + 1;
+	    	}
+
+	    	if (lastrow_flg == 1 && moji.length() > 33) {	// 最終行かつ33文字を超えるならフラグを立てる
+	    		skill_over = 1;
+	    	}
+
+	    	if (count <= 2) {
+	    		n++;
+	    	} else {
+	    		lastrow_flg = 1;	// 最終行フラグ
+	    		 n++;
+	    	}
+
+	    	if (i == skillList.length - 1) {
+	    		if(skill_over == 1) {
+	    			skill_charcount = skill_charcount - 33;	// 文字数を何文字オーバーしているか
+	    		}
+	    		break;
+	    	}
+	    }
+
+
+
+	    n = 0;
+	    String[] toolList = tool.split(",", -1);
+	    for (int i = 0; i < toolList.length; i++) {
+	    	if (toolList[n].equals("")) {
+	    		break;
+	    	}
+	    	System.out.println("ループ回数" + i + "文字数" + tool_charcount);
+	    	if (moji.length() + toolList[n].length() + 1 > 20 && lastrow_flg == 0) {
+	    		tool_charcount = 0;
+	    		count++;
+	    	}
+	    	if (tool_charcount == 0) {
+	    		moji = toolList[n];
+	    		tool_charcount = toolList[n].length();
+	    	} else {
+	    		moji += "," + toolList[n];
+	    		tool_charcount += toolList[n].length() + 1;
+	    	}
+	    	if (lastrow_flg == 1 && moji.length() > 20) {
+	    		tool_over = 1;
+	    	}
+	    	if (count <= 2) {
+	    		n++;
+	    	} else {
+	    		lastrow_flg = 1;
+	    		n++;
+	    	}
+	    	if (i == toolList.length - 1) {
+	    		if (tool_over == 1) {
+	    			tool_charcount = tool_charcount - 20;
+	    		}
+	    		break;
+	    	}
+	    }
+
+
+	    /*
+	     * エラーメッセージの追加
+	     * 変数名 errmsg
+	     */
+
+	    if (os.length() > 60) {
+			errmsg += "OSを60文字以内で入力してください<br>";
+		}
+
+		if (skill_over == 1) {
+			errmsg += "スキルの文字数が" + skill_charcount + "文字超えています<br>";
+		}
+//
+		if (tool.length() > 60) {
+			errmsg += "ツールの文字数が" + tool_charcount + "文字超えています<br>";
+		}
+
+		if (db.length() > 60) {
+			errmsg += "DBを60文字以内で入力してください<br>";
+		}
+
+		if (qualification.length() > 60) {
+			errmsg += "資格を60文字以内で入力してください<br>";
+		}
+
+	    // 業務内容文字数チェック
+	    n = 0;
+	    for (int s = 0; s < noteNumber.size(); s++) {
+	    	n = 0;
+	    	String[] taskList = task.get(s).split(",", -1);
+		    for (int i = 0; i < taskList.length;i++) {
+		    	if (taskList[n].length() >= 25) {
+		    		task_over = 1;
+		    		break;
+		    	}
+		    	if (taskList[n].equals("")) {
+		    		break;
+		    	}
+		    	n++;
+		    }
+		    // 開発環境文字数チェック
+		    n = 0;
+		    String[] developmentList = development.get(s).split(",", -1);
+		    for (int i = 0; i < developmentList.length;i++) {
+		    	if (developmentList[n].length() > 14) {
+		    		development_over = 1;
+		    		break;
+		    	}
+		    	if (developmentList[n].equals("")) {
+		    		break;
+		    	}
+		    	n++;
+
+		    }
+
+		    if (taskList.length - 1 > 10) {
+				errmsg += "業務内容は10項目以内で入力してください" + "(No." + (s + 1) + ")<br>";
+				break;
+			}
+		    if (task_over == 1) {
+				errmsg += "業務内容は一つの項目に対して24文字以内で入力してください" + "(No." + (s + 1) + ")<br>";
+				break;
+			}
+			if (developmentList.length - 1 > 10) {
+				errmsg += "開発環境は10項目以内で入力してください" + "(No." + (s + 1) + ")<br>";
+				break;
+			}
+			if (development_over == 1) {
+				errmsg += "開発環境は一つの項目に対して13文字以内で入力してください" + "(No." + (s + 1) + ")<br>";
+			}
+	    }
+
+		for (int i = 0; i < noteNumber.size(); i++) {
+			if (peopleNumber.get(i).length() >= 5) {
+				errmsg += "人数を4文字以内で入力してください<br>" + "(No." + (i + 1) + ")<br>";
+				break;
+			}
+		}
 
 	    // db
 	    request.setAttribute("db_number", db_number);
@@ -199,9 +443,13 @@ public class EditCheckBL extends HttpServlet {
 	    request.setAttribute("peopleNumber", peopleNumber);
 	    request.setAttribute("development", development);
 
-	    String view = "/jsp/EditCheck.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+	    if(errmsg == "") {
+			getServletContext().getRequestDispatcher("/jsp/EditCheck.jsp").forward(request, response);
+		} else {
+			System.out.println(errmsg);
+			request.setAttribute("errmsg",errmsg);
+			getServletContext().getRequestDispatcher("/jsp/Edit.jsp").forward(request, response);
+		}
 
 
 	}
