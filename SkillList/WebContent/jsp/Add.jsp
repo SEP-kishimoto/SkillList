@@ -52,7 +52,6 @@ String errmsg = (String) request.getAttribute("errmsg");
 		//Profile
 		address = (String) request.getAttribute("address");
 		birthday = (String) request.getAttribute("birthday");
-		age = (String) request.getAttribute("age");
 		gender = (String) request.getAttribute("gender");
 		background = (String) request.getAttribute("background");
 		backgroundNumber = (String) request.getAttribute("backgroundNumber");
@@ -138,10 +137,9 @@ System.out.println(noteNumber);
 	<tr><th>氏名* : </th><td><%=db_name %></td></tr>
 	<tr><th>現住所* : </th><td><input type="text" name="address" value=<%=address%>></td></tr>
 	<tr><th>生年月日* : </th><td><input type="text" name="birthday" value=<%=birthday%>></td></tr>
-	<tr><th>年齢 : </th><td><input type="text" name="age" value=<%=age%>></td></tr>	<!-- javascriptを使って自動表示 -->
 	<tr><th>性別* : </th><td><input type="text" name="gender" value=<%=gender%>></td></tr>
-	<tr><th>最終学歴* : </th><td><input type="text" name="background" value=<%=background%>></td><!-- 卒業した年 --><td><input type="text" name="backgroundNumber" value=<%=backgroundNumber%>>年</td></tr>
-	<tr><th>最寄り駅* : </th><!-- 路線名 --><td><input type="text" name="nearestStation" value=<%=nearestStation%>></td><!-- 駅名 --><td><input type="text" name="stationName" value=<%=stationName%>></td></tr>
+	<tr><th>最終学歴* : </th><td><input type="text" name="background" placeholder="学校名" value=<%=background%>></td><!-- 卒業した年 --><td><input type="text" name="backgroundNumber" placeholder="卒業した年" value=<%=backgroundNumber%>>年</td></tr>
+	<tr><th>最寄り駅* : </th><!-- 路線名 --><td><input type="text" name="nearestStation" placeholder="路線名" value=<%=nearestStation%>></td><!-- 駅名 --><td><input type="text" name="stationName" placeholder="駅名" value=<%=stationName%>></td></tr>
 
 </table>
 
