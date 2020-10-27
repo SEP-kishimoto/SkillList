@@ -332,10 +332,13 @@ public class EditCommitBL extends HttpServlet {
 
 		    	  String[] taskList = task.get(i).split(",", -1);
 		    	  for (int s = 0; s < 10; s++) {
-		    		  getCell(sh, 18 + n + s, 3).setCellValue(taskList[s]);
 		    		  if (taskList[s].equals("")) {
+		    			  for (int brank = 0; brank < 10 - s; brank++) {
+			    			  getCell(sh, 18 + n + s + brank, 3).setCellValue("");
+			    		  }
 		    			  break;
 		    		  }
+		    		  getCell(sh, 18 + n + s, 3).setCellValue(taskList[s]);
 		    	  }
 
 		    	  for (int s = 0; s < 8; s ++) {
@@ -351,12 +354,15 @@ public class EditCommitBL extends HttpServlet {
 
 		    	  getCell(sh, 18 + n, 10).setCellValue(peopleNumber.get(i));
 
+		    	  String[] developmentList = development.get(i).split(",", -1);
 		    	  for (int s = 0; s < 10; s++) {
-		    		  String[] developmentList = development.get(i).split(",", -1);
-		    		  getCell(sh, 18 + n + s, 11).setCellValue(developmentList[s]);
 		    		  if (developmentList[s].equals("")) {
+		    			  for (int brank = 0; brank < 10 - s; brank++) {
+			    			  getCell(sh, 18 + n + s + brank, 11).setCellValue("");
+			    		  }
 		    			  break;
 		    		  }
+		    		  getCell(sh, 18 + n + s, 11).setCellValue(developmentList[s]);
 		    	  }
 		    	  n = n + 10;
 		      }
