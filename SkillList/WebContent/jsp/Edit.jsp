@@ -154,6 +154,22 @@ if (errmsg != null) {
 %>
 
 <h1>スキルシート管理システム：編集</h1>
+<p>本日：<span id="view_time"></span></p>
+<script type="text/javascript">
+document.getElementById("view_time").innerHTML = getNow();
+
+function getNow() {
+	var now = new Date();
+	var year = now.getFullYear();
+	var mon = now.getMonth()+1; //１を足すこと
+	var day = now.getDate();
+
+	//出力用
+	var s = year + "年" + mon + "月" + day + "日";
+	return s;
+}
+</script>
+
 <%
 if (errmsg != null) {
 	out.print(errmsg);
@@ -288,8 +304,8 @@ session.setAttribute("noteNumber", noteNumber);
 <input type="hidden" name="master_flg" value="<%=master_flg %>">
 <input type="hidden" name="filename" value="<%=filename %>">
 
-<input type="submit" value="項目追加" formaction="/SkillList/ItemAddBL">
 <input type="submit" value="確認">
+<input type="submit" value="項目追加" formaction="/SkillList/ItemAddBL">
 <input type="submit" value="戻る" formaction="/SkillList/SkillBL">
 </form>
 
