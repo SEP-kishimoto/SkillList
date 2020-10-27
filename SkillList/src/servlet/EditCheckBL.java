@@ -107,6 +107,7 @@ public class EditCheckBL extends HttpServlet {
 	    qualification = request.getParameter("qualification");
 
 	    skill = skill.replace("、", ",");	// 全角カンマから半角に置換
+
 	    tool = tool.replace("、", ",");
 	    if (!(skill.endsWith(","))) {
 	    	if (!(skill.equals(""))) {
@@ -155,7 +156,7 @@ public class EditCheckBL extends HttpServlet {
 		    		break;
 		    	}
 	    	}
-	    	task.add(i, a);
+	    	task.add(i, a.replaceAll("、", ",").replaceAll(" ", "").replaceAll("　", ""));
 
 
 	    	valueList = new ArrayList<>();
@@ -203,7 +204,7 @@ public class EditCheckBL extends HttpServlet {
 		    		break;
 		    	}
 	    	}
-	    	development.add(i, a);
+	    	development.add(i, a.replaceAll("、", ",").replaceAll(" ", "").replaceAll("　", ""));
 	    }
 
 
@@ -363,7 +364,6 @@ public class EditCheckBL extends HttpServlet {
 	    	n = 0;
 	    	String[] taskList = task.get(s).split(",", -1);
 		    for (int i = 0; i < taskList.length;i++) {
-		    	taskList[n].replaceAll("　", " ").replaceAll(" ", "").replaceAll("、", ",").trim();
 		    	if (taskList[n].length() >= 25) {
 		    		task_over = 1;
 		    		break;
@@ -375,9 +375,8 @@ public class EditCheckBL extends HttpServlet {
 		    }
 		    // 開発環境文字数チェック
 		    n = 0;
-		    String[] developmentList = development.get(s).split(",", -1);
+		    String[] developmentList = development.get(s).replaceAll("、", ",").replaceAll(" ", "").replaceAll("　", "").split(",", -1);
 		    for (int i = 0; i < developmentList.length;i++) {
-		    	developmentList[n].replaceAll("　", " ").replaceAll(" ", "").replaceAll("、", ",").trim();
 		    	if (developmentList[n].length() > 14) {
 		    		development_over = 1;
 		    		break;

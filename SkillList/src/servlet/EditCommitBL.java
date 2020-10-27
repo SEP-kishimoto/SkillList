@@ -133,7 +133,7 @@ public class EditCommitBL extends HttpServlet {
 	    String name = "";
 	    String address = "";
 	    String birthday = "";
-	    String age = "";
+	    //String age = "";
 	    String gender = "";
 	    String background = "";
 	    String backgroundNumber = "";
@@ -174,7 +174,7 @@ public class EditCommitBL extends HttpServlet {
 	    name = request.getParameter("name");
 	    address = request.getParameter("address");
 	    birthday = request.getParameter("birthday");
-	    age = request.getParameter("age");
+	    //age = request.getParameter("age");
 	    gender = request.getParameter("gender");
 	    background = request.getParameter("background");
 	    backgroundNumber = request.getParameter("backgroundNumber");
