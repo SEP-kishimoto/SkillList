@@ -107,6 +107,7 @@ public class EditCheckBL extends HttpServlet {
 	    qualification = request.getParameter("qualification");
 
 	    skill = skill.replace("、", ",");	// 全角カンマから半角に置換
+	    tool = tool.replace("、", ",");
 	    if (!(skill.endsWith(","))) {
 	    	if (!(skill.equals(""))) {
 	    		skill += ",";
@@ -220,23 +221,33 @@ public class EditCheckBL extends HttpServlet {
 	    	}
 	    }
 
-	    // 年齢のチェック
+	    /*
+	     * Profile 生年月日形式
+	     */
+	    String regex = "\\d{4}\\/\\d{2}\\/\\d{2}$";
+	    if (!(birthday.matches(regex))) {
+	    	errmsg += "生年月日は「0000/00/00」の形式で入力してください";
+	    } else {
 
-	    SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-	    String a = birthday.replace("/", "");
-		Date date;
-		Date now = new Date();
-		try {
-			date = sdFormat.parse(a);
-			int ageValue = (Integer.parseInt(sdFormat.format(now)) - Integer.parseInt(sdFormat.format(date))) / 10000;
-			String str = Integer.toString(ageValue);
-			if (!(age.equals(str))) {
-				errmsg += "年齢を正しく入力してください<br>";
+	    	/*
+	    	 * 年齢のチェック
+	    	 */
+	    	SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+		    String a = birthday.replace("/", "");
+			Date date;
+			Date now = new Date();
+			try {
+				date = sdFormat.parse(a);
+				int ageValue = (Integer.parseInt(sdFormat.format(now)) - Integer.parseInt(sdFormat.format(date))) / 10000;
+				String str = Integer.toString(ageValue);
+				if (!(age.equals(str))) {
+					errmsg += "年齢を正しく入力してください<br>";
+				}
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
 			}
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+	    }
 
 	    /*
 	     * 文字数チェック
@@ -352,6 +363,7 @@ public class EditCheckBL extends HttpServlet {
 	    	n = 0;
 	    	String[] taskList = task.get(s).split(",", -1);
 		    for (int i = 0; i < taskList.length;i++) {
+		    	taskList[n].replaceAll("　", " ").replaceAll(" ", "").replaceAll("、", ",").trim();
 		    	if (taskList[n].length() >= 25) {
 		    		task_over = 1;
 		    		break;
@@ -365,6 +377,7 @@ public class EditCheckBL extends HttpServlet {
 		    n = 0;
 		    String[] developmentList = development.get(s).split(",", -1);
 		    for (int i = 0; i < developmentList.length;i++) {
+		    	developmentList[n].replaceAll("　", " ").replaceAll(" ", "").replaceAll("、", ",").trim();
 		    	if (developmentList[n].length() > 14) {
 		    		development_over = 1;
 		    		break;
