@@ -2,22 +2,14 @@ package servlet;
 
 import java.io.IOException;
 import java.io.OutputStream;
-//import java.net.URLEncoder;
 import java.net.URLEncoder;
 
-//import java.io.InputStream;
-//import java.io.OutputStream;
-//import java.net.URLEncoder;
-//
 //import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  * Servlet implementation class DownloadBL
  */
@@ -51,28 +43,28 @@ public class DownloadBL extends HttpServlet {
 
         // リクエストクエリを取得する。
         String filename = request.getParameter("filename");
-//        String filepath = "C:\\temp\\";
-//
-//        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-//        String encodedFilename = URLEncoder.encode(filename, "UTF-8");//ファイル名に全角使用の為エンコード
-//        response.setHeader("Content-Disposition",String.format("attachment; filename=\"%s\"", encodedFilename));
-//        java.io.FileInputStream fileInputStream=new java.io.FileInputStream(filepath + filename);
-//        OutputStream os = response.getOutputStream();
-//        int i;
-//        while ((i=fileInputStream.read()) != -1) {
-//          os.write(i);
-//         }
-//        fileInputStream.close();
+        String filepath = "C:\\temp\\";
+
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         String encodedFilename = URLEncoder.encode(filename, "UTF-8");//ファイル名に全角使用の為エンコード
         response.setHeader("Content-Disposition",String.format("attachment; filename=\"%s\"", encodedFilename));
-        try (XSSFWorkbook wb = new XSSFWorkbook();
-             OutputStream outputStream = response.getOutputStream()) {
-        	XSSFSheet sheet = Common.getSheet(wb);
-
-            // ワークブックをレスポンスに出力する。
-            wb.write(outputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        java.io.FileInputStream fileInputStream=new java.io.FileInputStream(filepath + filename);
+        OutputStream os = response.getOutputStream();
+        int i;
+        while ((i=fileInputStream.read()) != -1) {
+          os.write(i);
+         }
+        fileInputStream.close();
+//        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+//        String encodedFilename = URLEncoder.encode(filename, "UTF-8");//ファイル名に全角使用の為エンコード
+//        response.setHeader("Content-Disposition",String.format("attachment; filename=\"%s\"", encodedFilename));
+//        try (XSSFWorkbook wb = new XSSFWorkbook();
+//             OutputStream outputStream = response.getOutputStream()) {
+//        	XSSFSheet sheet = Common.getSheet(wb);
+//
+//            // ワークブックをレスポンスに出力する。
+//            wb.write(outputStream);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }}
