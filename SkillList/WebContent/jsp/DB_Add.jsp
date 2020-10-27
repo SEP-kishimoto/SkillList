@@ -19,6 +19,19 @@
 
 <form action="/SkillList/DB_AddCheckBL" method="post">
 <%
+String db_number = "";
+String kana = "";
+String db_name = "";
+String password = "";
+
+String return_flg = (String) request.getAttribute("return_flg");
+if (return_flg != null) {
+	db_number = (String) request.getAttribute("return_flg");
+	kana = (String) request.getAttribute("kana");
+	db_name = (String) request.getAttribute("db_name");
+	password = (String) request.getAttribute("password");
+}
+
 String err_message = (String) request.getAttribute("err_message");
 request.getSession().setAttribute("master_flg", 1);
 if (err_message != null) {
@@ -28,10 +41,10 @@ String master_flg = "1";
 
 %>
 <table>
-	<tr><th>社員No* : </th><td><input type="text" name="db_number" value=""></td></tr>
-	<tr><th>フリガナ* : </th><td><input type="text" class="address-txt" name="kana" value=""></td></tr>
-	<tr><th>氏名* : </th><td><input type="text" class="address-txt" name="db_name" value=""></td></tr>
-	<tr><th>パスワード* : </th><td><input type="password" name="password" value=""></td></tr>
+	<tr><th>社員No* : </th><td><input type="text" name="db_number" value=<%=db_number %>></td></tr>
+	<tr><th>フリガナ* : </th><td><input type="text" class="address-txt" name="kana" value=<%=kana %>></td></tr>
+	<tr><th>氏名* : </th><td><input type="text" class="address-txt" name="db_name" value=<%=db_name %>></td></tr>
+	<tr><th>パスワード* : </th><td><input type="password" name="password" value=<%=password %>></td></tr>
 
 
 </table>

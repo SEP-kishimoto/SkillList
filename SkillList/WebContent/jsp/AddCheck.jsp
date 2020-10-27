@@ -101,7 +101,7 @@ development = (ArrayList<String>) session.getAttribute("development");
 	<tr><th>年齢 : </th><td><%=age%></td></tr>	<!-- javascriptを使って自動表示 -->
 	<tr><th>性別* : </th><td><%=gender%></td></tr>
 	<tr><th>最終学歴* : </th><td><%=background%></td><td><%=backgroundNumber%>年</td></tr>
-	<tr><th>最寄り駅* : </th><td><%=stationName%></td><td><%=nearestStation%></td></tr>
+	<tr><th>最寄り駅* : </th><td><%=nearestStation%></td><td><%=stationName%></td></tr>
 
 
 </table>
