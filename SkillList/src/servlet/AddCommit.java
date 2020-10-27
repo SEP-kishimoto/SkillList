@@ -253,7 +253,9 @@ public class AddCommit extends HttpServlet {
 	              getCell(wb.getSheetAt(0), 3, 2).setCellValue(kana);
 			      getCell(wb.getSheetAt(0), 4, 2).setCellValue(db_name);
 			      getCell(wb.getSheetAt(0), 5, 2).setCellValue(address);
-			      getCell(wb.getSheetAt(0), 3, 8).setCellValue(birthday);
+			      Date date = DateUtil.parseYYYYMMDDDate(birthday);
+			      getCell(wb.getSheetAt(0), 3, 8).setCellValue(date);
+
 			      //getCell(wb.getSheetAt(0), 3, 12).setCellValue(age + "歳");
 			      getCell(wb.getSheetAt(0), 4, 8).setCellValue(gender);
 			      getCell(wb.getSheetAt(0), 4, 10).setCellValue(background);
@@ -327,7 +329,7 @@ public class AddCommit extends HttpServlet {
 			      n = 0;
 			      // Background Note 書き込み設定
 			      for (int i = 0; i < noteNumber.size();i++) {
-			    	  Date date = null;
+			    	  date = null;
 			    	  if (beginning.get(i) == "") {
 			    		  getCell(wb.getSheetAt(0), 18 + n, 2).setCellValue("");
 			    	  } else {
@@ -373,6 +375,8 @@ public class AddCommit extends HttpServlet {
 			      }
 
 			      wb.getSheetAt(0).setForceFormulaRecalculation(true);	// 関数を使えるようにする
+			      // 再計算
+			      wb.getCreationHelper().createFormulaEvaluator().evaluateFormulaCell(getCell(wb.getSheetAt(0), 3, 8));
 	         // エクセルファイルを出力
 	            try {
 
@@ -380,6 +384,7 @@ public class AddCommit extends HttpServlet {
 	                outPutFilePath = "C:\\temp\\";
 	                outPutFileName = "SkillSheet_"  + db_number + "_" + db_name +  ".xlsx";
 
+	                wb.getCreationHelper().createFormulaEvaluator().evaluateFormulaCell(getCell(wb.getSheetAt(0), 3, 8));
 	                // エクセルファイルを出力
 	                outPutFile = new FileOutputStream(outPutFilePath + outPutFileName);
 	                wb.write(outPutFile);

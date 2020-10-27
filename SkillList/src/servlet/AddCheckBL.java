@@ -120,12 +120,24 @@ public class AddCheckBL extends HttpServlet {
 
 		if(addition_flg == 0) {	// 追加処理ではない場合
 
+		// Profile
+		String kana = request.getParameter("kana");
+		String name = request.getParameter("db_name");	// db_nameと同じ
+		String address = request.getParameter("address");
+		String age = request.getParameter("age");
+		String gender = request.getParameter("gender");
+		String birthday = request.getParameter("birthday");
+		String background = request.getParameter("background");	// db_nameと同じ
+		String backgroundNumber = request.getParameter("backgroundNumber");
+		String nearestStation = request.getParameter("nearestStation");
+		String stationName = request.getParameter("stationName");
 
 		String os = request.getParameter("os");
 		String skill = request.getParameter("skill");
 		String tool = request.getParameter("tool");
 		String db = request.getParameter("db");
 		String qualification = request.getParameter("qualification");
+
 //		String task = request.getParameter("task");
 //		String peopleNumber = request.getParameter("peopleNumber");
 //		String development = request.getParameter("development");
@@ -144,6 +156,45 @@ public class AddCheckBL extends HttpServlet {
 		int lastrow_flg = 0; // 最終行フラグ
 		int task_over = 0; // 業務内容オーバーフラグ
 		int development_over = 0; // 開発環境オーバーフラグ
+
+
+
+
+
+		/*
+	     * Profileチェック
+	     * kana, name, address, birthday, age, gender,
+	     * background, backgroundNumber, nearestStation, stationName
+	     */
+	    String[] profileList = {kana, name, address, birthday, age, gender, background, backgroundNumber, nearestStation, stationName};
+	    for (int num = 0; num < profileList.length; num++) {
+	    	if (profileList[num].equals("")) {
+	    		errmsg += "Profileの項目を全て記入してください<br>";
+	    		break;
+	    	}
+	    }
+
+
+
+	    // 年齢のチェック
+	    SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+	    String a = birthday.replace("/", "");
+		Date date;
+		Date now = new Date();
+		try {
+			date = sdFormat.parse(a);
+			int ageValue = (Integer.parseInt(sdFormat.format(now)) - Integer.parseInt(sdFormat.format(date))) / 10000;
+			String str = Integer.toString(ageValue);
+			if (!(age.equals(str))) {
+				errmsg += "年齢を正しく入力してください<br>";
+			}
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+
+
 
 		/*
 		 * スキル文字数チェック
@@ -330,19 +381,19 @@ public class AddCheckBL extends HttpServlet {
 		}
 
 		// 年齢計算
-		try {
-			String strDate = "2000/01/01";
-
-			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
-			Date date = sdFormat.parse(strDate);
-
-			// 現在日時情報で初期化されたインスタンスの生成
-			Date dateObj = new Date();
-
-			//System.out.println(calcAge(date, dateObj));	// 年齢表示
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			String strDate = "2000/01/01";
+//
+//			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+//			Date date = sdFormat.parse(strDate);
+//
+//			// 現在日時情報で初期化されたインスタンスの生成
+//			Date dateObj = new Date();
+//
+//			//System.out.println(calcAge(date, dateObj));	// 年齢表示
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
 
 		if (errmsg == "") {	// エラーがない場合確認画面に遷移
 

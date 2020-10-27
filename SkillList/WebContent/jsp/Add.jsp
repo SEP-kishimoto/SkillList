@@ -221,7 +221,11 @@ System.out.println(noteNumber);
 </div></form>
 
 <form action="/SkillList/jsp/DB_Add.jsp" method="post">
-<button type="submit" class="btn">戻る</button>
+<input type="hidden" name="db_number" value=<%=db_number%>>
+<input type="hidden" name="password" value=<%=password%>>
+<input type="hidden" name="db_name" value=<%=db_name%>>
+<input type="hidden" name="kana" value=<%=kana%>>
+<button type="submit" class="btn" name="return_flg" value="1">戻る</button>
 </form>
 </body>
 </html>
