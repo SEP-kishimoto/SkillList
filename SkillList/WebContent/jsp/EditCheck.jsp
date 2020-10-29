@@ -35,7 +35,6 @@ String kana = "";
 String name = "";
 String address = "";
 String birthday = "";
-String age = "";
 String gender = "";
 String background = "";
 String backgroundNumber = "";
@@ -92,7 +91,6 @@ kana = (String) request.getAttribute("kana");
 name = (String) request.getAttribute("name");
 address = (String) request.getAttribute("address");
 birthday = (String) request.getAttribute("birthday");
-age = (String) request.getAttribute("age");
 gender = (String) request.getAttribute("gender");
 background = (String) request.getAttribute("background");
 backgroundNumber = (String) request.getAttribute("backgroundNumber");
@@ -148,10 +146,6 @@ development = (ArrayList<String>) request.getAttribute("development");
 	<tr>
 		<td>生年月＊</td>
 		<td><%=birthday%></td>
-	</tr>
-	<tr>
-		<td>年齢＊</td>
-		<td><%=age%>歳</td>
 	</tr>
 	<tr>
 		<td>性別＊</td>
@@ -262,7 +256,6 @@ development = (ArrayList<String>) request.getAttribute("development");
 <input type="hidden" name="name" value="<%=name%>">
 <input type="hidden" name="address" value="<%=address%>">
 <input type="hidden" name="birthday" value="<%=birthday%>">
-<input type="hidden" name="age" value="<%=age%>">
 <input type="hidden" name="gender" value="<%=gender%>">
 <input type="hidden" name="background" value="<%=background%>">
 <input type="hidden" name="backgroundNumber" value="<%=backgroundNumber%>">

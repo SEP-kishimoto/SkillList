@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/SkillList/css/Popup.css">
+<link rel="stylesheet" type="text/css" href="/SkillList/css/Skill.css">
 </head>
 <body>
 <!-- 文字コード宣言 -->
@@ -32,7 +32,6 @@ String kana = "";
 String name = "";
 String address = "";
 String birthday = "";
-String age = "";
 String gender = "";
 String background = "";
 String backgroundNumber = "";
@@ -89,7 +88,6 @@ kana = (String) request.getAttribute("kana");
 name = (String) request.getAttribute("name");
 address = (String) request.getAttribute("address");
 birthday = (String) request.getAttribute("birthday");
-age = (String) request.getAttribute("age");
 gender = (String) request.getAttribute("gender");
 background = (String) request.getAttribute("background");
 backgroundNumber = (String) request.getAttribute("backgroundNumber");
@@ -128,123 +126,127 @@ development = (ArrayList<String>) request.getAttribute("development");
 
 <h1>スキルシート管理システム：詳細</h1>
 
-<h2>■Profile</h2>
+<h2>&#9632;Profile</h2>
 <form method="post" action="/SkillList/EditBL">
 <table>
 	<tr>
-		<td>フリガナ＊</td>
-		<td><%=kana%></td>
+		<td class="tableText">フリガナ*</td>
+		<td>：&nbsp;<%=kana%></td>
 	</tr>
 	<tr>
-		<td>氏名＊</td>
-		<td><%=name%></td>
+		<td class="tableText">氏名*</td>
+		<td>：&nbsp;<%=name%></td>
 	</tr>
 	<tr>
-		<td>現住所＊</td>
-		<td><%=address%></td>
+		<td class="tableText">現住所*</td>
+		<td>：&nbsp;<%=address%></td>
 	</tr>
 	<tr>
-		<td>生年月＊</td>
-		<td><%=birthday%></td>
+		<td class="tableText">生年月*</td>
+		<td>：&nbsp;<%=birthday%></td>
 	</tr>
 	<tr>
-		<td>年齢＊</td>
-		<td><%=age%>歳</td>
+		<td class="tableText">性別*</td>
+		<td>：&nbsp;<%=gender%></td>
 	</tr>
 	<tr>
-		<td>性別＊</td>
-		<td><%=gender%></td>
+		<td class="tableText">最終学歴*</td>
+		<td>：&nbsp;<%=background%></td>
+		<td>：&nbsp;<%=backgroundNumber%></td>
 	</tr>
 	<tr>
-		<td>最終学歴＊</td>
-		<td><%=background%></td>
-		<td><%=backgroundNumber%></td>
-	</tr>
-	<tr>
-		<td>最寄り駅＊</td>
-		<td><%=nearestStation%></td>
-		<td><%=stationName%></td>
+		<td class="tableText">最寄り駅*</td>
+		<td>：&nbsp;<%=nearestStation%></td>
+		<td>：&nbsp;<%=stationName%></td>
 	</tr>
 </table>
 
 <h2>■Skill Info</h2>
 <table>
 	<tr>
-		<td>OS</td>
-		<td><%=os%></td>
+		<td class="tableText">OS</td>
+		<td>：&nbsp;<%=os%></td>
 	</tr>
 	<tr>
-		<td>スキル</td>
-		<td><%=skill%></td>
+		<td class="tableText">スキル</td>
+		<td>：&nbsp;<%=skill%></td>
 	</tr>
 	<tr>
-		<td>ツール</td>
-		<td><%=tool%></td>
+		<td class="tableText">ツール</td>
+		<td>：&nbsp;<%=tool%></td>
 	</tr>
 	<tr>
-		<td>データベース</td>
-		<td><%=db%></td>
+		<td class="tableText">データベース</td>
+		<td>：&nbsp;<%=db%></td>
 	</tr>
 	<tr>
-		<td>資格</td>
-		<td><%=qualification%></td>
+		<td class="tableText">資格</td>
+		<td>：&nbsp;<%=qualification%></td>
 	</tr>
 
 </table>
 
 <h2>■Background Note</h2>
 <%for (int i = 0; i < noteNumber.size(); i++) { %>
+<div style="border:1px solid #000000; margin-bottom: 20px;">
 <table>
 	<tr>
-		<td>No.</td>
-		<td><%=noteNumber.get(i) %></td>
+		<td class="tableText">No.</td>
+		<td>：&nbsp;<%=noteNumber.get(i) %></td>
 	</tr>
 	<tr>
-		<td>開始</td>
-		<td><%=beginning.get(i) %></td>
+		<td class="tableText">開始</td>
+		<td>：&nbsp;<%=beginning.get(i) %></td>
 	</tr>
 	<tr>
-		<td>終了</td>
-		<td><%=end.get(i) %></td>
+		<td class="tableText">終了</td>
+		<td>：&nbsp;<%=end.get(i) %></td>
 	</tr>
 	<tr>
-		<td>業務内容</td>
-		<td><%=task.get(i) %></td>
+		<td class="tableText">業務内容</td>
+		<td>：&nbsp;<%=task.get(i) %></td>
 	</tr>
-	<tr>
-		<td>要件定義</td>
-		<td><%=requirement.get(i).get(0) %></td>
-		<td>基本設計</td>
-		<td><%=basic.get(i).get(1) %></td>
-	</tr>
-	<tr>
-		<td>詳細設計</td>
-		<td><%=details.get(i).get(2) %></td>
-		<td>PG製造</td>
-		<td><%=pg.get(i).get(3) %></td>
-	</tr>
-	<tr>
-		<td>単体試験</td>
-		<td><%=single.get(i).get(4) %></td>
-		<td>結合試験</td>
-		<td><%=join.get(i).get(5) %></td>
-	</tr>
-	<tr>
-		<td>客先試験</td>
-		<td><%=customer.get(i).get(6) %></td>
-		<td>環境設定</td>
-		<td><%=environment.get(i).get(7) %></td>
-	</tr>
-	<tr>
-		<td>人数</td>
-		<td><%=peopleNumber.get(i) %></td>
-	</tr>
-	<tr>
-		<td>開発環境</td>
-		<td><%=development.get(i) %></td>
-	</tr>
-
 </table>
+<p>フェーズ</p>
+<table class="phaseTable">
+	<tr>
+		<td class="tableText">要件定義</td>
+		<td>：&nbsp;<%=requirement.get(i).get(0) %></td>
+		<td class="tableText">基本設計</td>
+		<td>：&nbsp;<%=basic.get(i).get(1) %></td>
+	</tr>
+	<tr>
+		<td class="tableText">詳細設計</td>
+		<td>：&nbsp;<%=details.get(i).get(2) %></td>
+		<td class="tableText">PG製造</td>
+		<td>：&nbsp;<%=pg.get(i).get(3) %></td>
+	</tr>
+	<tr>
+		<td class="tableText">単体試験</td>
+		<td>：&nbsp;<%=single.get(i).get(4) %></td>
+		<td class="tableText">結合試験</td>
+		<td>：&nbsp;<%=join.get(i).get(5) %></td>
+	</tr>
+	<tr>
+		<td class="tableText">客先試験</td>
+		<td>：&nbsp;<%=customer.get(i).get(6) %></td>
+		<td class="tableText">環境設定</td>
+		<td>：&nbsp;<%=environment.get(i).get(7) %></td>
+	</tr>
+</table>
+<p style="margin-bottom:1em;"></p>
+<table>
+	<tr>
+		<td class="tableText">人数</td>
+		<td>：&nbsp;<%=peopleNumber.get(i) %></td>
+	</tr>
+	<tr>
+		<td class="tableText">開発環境</td>
+		<td>：&nbsp;<%=development.get(i) %></td>
+	</tr>
+</table>
+<p style="margin-bottom:1em;"></p>
+</div>
 <%} %>
 
 
@@ -259,7 +261,6 @@ development = (ArrayList<String>) request.getAttribute("development");
 <input type="hidden" name="name" value="<%=name%>">
 <input type="hidden" name="address" value="<%=address%>">
 <input type="hidden" name="birthday" value="<%=birthday%>">
-<input type="hidden" name="age" value="<%=age%>">
 <input type="hidden" name="gender" value="<%=gender%>">
 <input type="hidden" name="background" value="<%=background%>">
 <input type="hidden" name="backgroundNumber" value="<%=backgroundNumber%>">
@@ -293,10 +294,11 @@ session.setAttribute("peopleNumber", peopleNumber);
 session.setAttribute("development", development);
 %>
 
-	<div style="display: inline-flex">
-			<input class="edit_btn" type="submit" value="編集"
-				formaction="./jsp/Edit.jsp">
-			<input type="button" id="deleteBtn" value='ユーザーを削除' onclick="DeletePopUp()">
+	<div class="buttonTable">
+			<!-- 編集ボタン -->
+			<input class="skillButton" type="submit" value="編集" formaction="./jsp/Edit.jsp">
+			<!-- 削除ボタン -->
+			<input class="skillButton" type="button" id="deleteBtn" value='ユーザーを削除' onclick="DeletePopUp()">
 			<div id="deleteModal" class="modal">
 				<div class="modal-content">
 					<div class="modal-body">
@@ -312,7 +314,8 @@ session.setAttribute("development", development);
 					</div>
 				</div>
 			</div>
-			<input type="button" id="downloadBtn" value='ダウンロード' onclick="DownloadPopUp()">
+			<!-- ダウンロードボタン -->
+			<input class="skillButton" type="button" id="downloadBtn" value='ダウンロード' onclick="DownloadPopUp()">
 			<div id="downloadModal" class="modal">
 				<div class="modal-content">
 					<div class="modal-body">
@@ -327,7 +330,8 @@ session.setAttribute("development", development);
 					</div>
 				</div>
 			</div>
-			<input type="button" id="logoutBtn" value='ログアウト' onclick="LogoutPopUp()">
+			<!-- ログアウトボタン -->
+			<input class="skillButton" type="button" id="logoutBtn" value='ログアウト' onclick="LogoutPopUp()">
 			<div id="logoutModal" class="modal">
 				<div class="modal-content">
 					<div class="modal-body">
