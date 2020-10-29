@@ -156,7 +156,7 @@ if (errmsg != null) {
 <% if (errmsg != null) {%>
 <p style="color: red"><%=errmsg %></p>
 <%} %>
-<h2>■Profile</h2>
+<h2>&#9632;Profile</h2>
 <form method="post" action="/SkillList/EditCheckBL">
 <table class="phaseTable">
 	<tr>
@@ -190,7 +190,7 @@ if (errmsg != null) {
 	</tr>
 </table>
 
-<h2>■Skill Info</h2>
+<h2>&#9632;Skill Info</h2>
 <table class="phaseTable">
 	<tr>
 		<td class="tableText">OS</td>
@@ -214,7 +214,7 @@ if (errmsg != null) {
 	</tr>
 
 </table>
-<h2>■Background Note</h2>
+<h2>&#9632;Background Note</h2>
 <%for (int i = 0; i < noteNumber.size(); i++) { %>
 <div style="border:1px solid #000000; margin-bottom: 20px;">
 <table class="phaseTable">
