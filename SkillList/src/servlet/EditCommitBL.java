@@ -133,7 +133,6 @@ public class EditCommitBL extends HttpServlet {
 	    String name = "";
 	    String address = "";
 	    String birthday = "";
-	    //String age = "";
 	    String gender = "";
 	    String background = "";
 	    String backgroundNumber = "";
@@ -174,7 +173,6 @@ public class EditCommitBL extends HttpServlet {
 	    name = request.getParameter("name");
 	    address = request.getParameter("address");
 	    birthday = request.getParameter("birthday");
-	    //age = request.getParameter("age");
 	    gender = request.getParameter("gender");
 	    background = request.getParameter("background");
 	    backgroundNumber = request.getParameter("backgroundNumber");
@@ -225,7 +223,6 @@ public class EditCommitBL extends HttpServlet {
 		      getCell(sh, 4, 2).setCellValue(name);
 		      getCell(sh, 5, 2).setCellValue(address);
 		      getCell(sh, 3, 8).setCellValue(date);
-		      //getCell(sh, 3, 12).setCellFormula("IF(I4<>\"\", DATEDIF(I4,K2,\"Y\")&\"歳\", \"\")");
 		      getCell(sh, 4, 8).setCellValue(gender);
 		      getCell(sh, 4, 10).setCellValue(background);
 		      getCell(sh, 4, 12).setCellValue(backgroundNumber);

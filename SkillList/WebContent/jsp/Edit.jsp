@@ -35,7 +35,6 @@ String kana = "";
 String name = "";
 String address = "";
 String birthday = "";
-String age = "";
 String gender = "";
 String background = "";
 String backgroundNumber = "";
@@ -97,7 +96,6 @@ kana = request.getParameter("kana");
 name = request.getParameter("name");
 address = request.getParameter("address");
 birthday = request.getParameter("birthday");
-age = request.getParameter("age");
 gender = request.getParameter("gender");
 background = request.getParameter("background");
 backgroundNumber = request.getParameter("backgroundNumber");
@@ -195,22 +193,18 @@ if (errmsg != null) {
 		<td><input type="text" name="birthday" value="<%=birthday%>"></td>
 	</tr>
 	<tr>
-		<td>年齢＊</td>
-		<td><input type="text" name="age" value="<%=age%>">歳</td>
-	</tr>
-	<tr>
 		<td>性別＊</td>
 		<td><input type="text" name="gender" value="<%=gender%>"></td>
 	</tr>
 	<tr>
 		<td>最終学歴＊</td>
-		<td><input type="text" name="background" value="<%=background%>"></td>
-		<td><input type="text" name="backgroundNumber" value="<%=backgroundNumber%>"></td>
+		<td><input type="text" name="background" placeholder="学校名" value="<%=background%>"></td>
+		<td><input type="text" name="backgroundNumber" placeholder="卒業した年" value="<%=backgroundNumber%>"></td>
 	</tr>
 	<tr>
 		<td>最寄り駅＊</td>
-		<td><input type="text" name="nearestStation" value="<%=nearestStation%>"></td>
-		<td><input type="text" name="stationName" value="<%=stationName%>"></td>
+		<td><input type="text" name="nearestStation" placeholder="路線名" value="<%=nearestStation%>"></td>
+		<td><input type="text" name="stationName" placeholder="駅名" value="<%=stationName%>"></td>
 	</tr>
 </table>
 

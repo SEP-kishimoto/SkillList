@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+body {
+	width: 60%;
+	margin-right: auto;
+	margin-left : auto;
+}
+h1 {
+	font-size: 25px;
+}
+h2 {
+	font-size: 20px;
+}
+.phaseTable {
+	margin-left: 20px;
+}
+.tableText {
+	font-weight: bold;
+}
+
+.buttonTable {
+	text-align: center;
+}
+.skillButton {
+	display: inline-block;
+	background-color: #2983CC;
+	text-align: center;
+	font-weight: bold;
+	width: 20%;
+	padding: 12px 12px;
+	margin: 0 10px;
+	border: 1px solid #000000;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+	text-align: center;
+	padding: 30px;
+	width: 300px;
+	border: 5px double #333333;
+	background-color: white;
+	position: fixed;
+	top: 200px; left : 50%;
+	transform: translate(-50%, -50%);
+	left: 50%;
+}

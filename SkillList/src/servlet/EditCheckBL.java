@@ -1,10 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -57,7 +54,6 @@ public class EditCheckBL extends HttpServlet {
 	    String name = "";
 	    String address = "";
 	    String birthday = "";
-	    String age = "";
 	    String gender = "";
 	    String background = "";
 	    String backgroundNumber = "";
@@ -93,7 +89,6 @@ public class EditCheckBL extends HttpServlet {
 	    name = request.getParameter("name");
 	    address = request.getParameter("address");
 	    birthday = request.getParameter("birthday");
-	    age = request.getParameter("age");
 	    gender = request.getParameter("gender");
 	    background = request.getParameter("background");
 	    backgroundNumber = request.getParameter("backgroundNumber");
@@ -214,7 +209,7 @@ public class EditCheckBL extends HttpServlet {
 	     * kana, name, address, birthday, age, gender,
 	     * background, backgroundNumber, nearestStation, stationName
 	     */
-	    String[] profileList = {kana, name, address, birthday, age, gender, background, backgroundNumber, nearestStation, stationName};
+	    String[] profileList = {kana, name, address, birthday, gender, background, backgroundNumber, nearestStation, stationName};
 	    for (int num = 0; num < profileList.length; num++) {
 	    	if (profileList[num].equals("")) {
 	    		errmsg += "Profileの項目を全て記入してください<br>";
@@ -228,26 +223,6 @@ public class EditCheckBL extends HttpServlet {
 	    String regex = "\\d{4}\\/\\d{2}\\/\\d{2}$";
 	    if (!(birthday.matches(regex))) {
 	    	errmsg += "生年月日は「0000/00/00」の形式で入力してください";
-	    } else {
-
-	    	/*
-	    	 * 年齢のチェック
-	    	 */
-	    	SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-		    String a = birthday.replace("/", "");
-			Date date;
-			Date now = new Date();
-			try {
-				date = sdFormat.parse(a);
-				int ageValue = (Integer.parseInt(sdFormat.format(now)) - Integer.parseInt(sdFormat.format(date))) / 10000;
-				String str = Integer.toString(ageValue);
-				if (!(age.equals(str))) {
-					errmsg += "年齢を正しく入力してください<br>";
-				}
-			} catch (ParseException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
 	    }
 
 	    /*
@@ -423,7 +398,6 @@ public class EditCheckBL extends HttpServlet {
 	    request.setAttribute("name", name);
 	    request.setAttribute("address", address);
 	    request.setAttribute("birthday", birthday);
-	    request.setAttribute("age", age);
 	    request.setAttribute("gender", gender);
 	    request.setAttribute("background", background);
 	    request.setAttribute("backgroundNumber", backgroundNumber);
