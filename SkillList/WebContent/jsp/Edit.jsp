@@ -11,6 +11,7 @@ import="servlet.EditBL"
 <head>
 <meta charset="UTF-8">
 <title>スキルシート編集</title>
+<link rel="stylesheet" type="text/css" href="/SkillList/css/Edit.css">
 </head>
 <body>
 <!-- 文字コード宣言 -->
@@ -152,140 +153,128 @@ if (errmsg != null) {
 %>
 
 <h1>スキルシート管理システム：編集</h1>
-<p>本日：<span id="view_time"></span></p>
-<script type="text/javascript">
-document.getElementById("view_time").innerHTML = getNow();
-
-function getNow() {
-	var now = new Date();
-	var year = now.getFullYear();
-	var mon = now.getMonth()+1; //１を足すこと
-	var day = now.getDate();
-
-	//出力用
-	var s = year + "年" + mon + "月" + day + "日";
-	return s;
-}
-</script>
-
-<%
-if (errmsg != null) {
-	out.print(errmsg);
-}
-%>
+<% if (errmsg != null) {%>
+<p style="color: red"><%=errmsg %></p>
+<%} %>
 <h2>■Profile</h2>
 <form method="post" action="/SkillList/EditCheckBL">
-<table>
+<table class="phaseTable">
 	<tr>
-		<td>フリガナ＊</td>
-		<td><input type="text" name="kana" value="<%=kana%>"></td>
+		<td class="tableText">フリガナ*</td>
+		<td class="profileTd">&nbsp;：&nbsp;<input class="inputLine" type="text" name="kana" value="<%=kana%>"></td>
 	</tr>
 	<tr>
-		<td>氏名＊</td>
-		<td><input type="text" name="name" value="<%=name%>"></td>
+		<td class="tableText">氏名*</td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="name" value="<%=name%>"></td>
 	</tr>
 	<tr>
-		<td>現住所＊</td>
-		<td><input type="text" name="address" value="<%=address%>"></td>
+		<td class="tableText">現住所*</td>
+		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="address" value="<%=address%>"></td>
 	</tr>
 	<tr>
-		<td>生年月＊</td>
-		<td><input type="text" name="birthday" value="<%=birthday%>"></td>
+		<td class="tableText">生年月*</td>
+		<td>&nbsp;：&nbsp;<input class="inputLine"type="text" name="birthday" value="<%=birthday%>"></td>
 	</tr>
 	<tr>
-		<td>性別＊</td>
-		<td><input type="text" name="gender" value="<%=gender%>"></td>
+		<td class="tableText">性別*</td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="gender" value="<%=gender%>"></td>
+	</tr>
+
+	<tr>
+		<td class="tableText">最終学歴*</td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="background" placeholder="学校名" value="<%=background%>">&nbsp;：&nbsp;<input class="inputLine" type="text" name="backgroundNumber" placeholder="卒業した年" value="<%=backgroundNumber%>"></td>
 	</tr>
 	<tr>
-		<td>最終学歴＊</td>
-		<td><input type="text" name="background" placeholder="学校名" value="<%=background%>"></td>
-		<td><input type="text" name="backgroundNumber" placeholder="卒業した年" value="<%=backgroundNumber%>"></td>
-	</tr>
-	<tr>
-		<td>最寄り駅＊</td>
-		<td><input type="text" name="nearestStation" placeholder="路線名" value="<%=nearestStation%>"></td>
-		<td><input type="text" name="stationName" placeholder="駅名" value="<%=stationName%>"></td>
+		<td class="tableText">最寄り駅*</td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="nearestStation" placeholder="路線名" value="<%=nearestStation%>">&nbsp;：&nbsp;<input class="inputLine" type="text" name="stationName" placeholder="駅名" value="<%=stationName%>"></td>
 	</tr>
 </table>
 
 <h2>■Skill Info</h2>
-<table>
+<table class="phaseTable">
 	<tr>
-		<td>OS</td>
-		<td><input type="text" name="os" value="<%=os%>"></td>
+		<td class="tableText">OS</td>
+		<td class="profileTd">&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="os" value="<%=os%>"></td>
 	</tr>
 	<tr>
-		<td>スキル</td>
-		<td><input type="text" name="skill" value="<%=skill%>"></td>
+		<td class="tableText">スキル</td>
+		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="skill" value="<%=skill%>"></td>
 	</tr>
 	<tr>
-		<td>ツール</td>
-		<td><input type="text" name="tool" value="<%=tool%>"></td>
+		<td class="tableText">ツール</td>
+		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="tool" value="<%=tool%>"></td>
 	</tr>
 	<tr>
-		<td>データベース</td>
-		<td><input type="text" name="db" value="<%=db%>"></td>
+		<td class="tableText">データベース</td>
+		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="db" value="<%=db%>"></td>
 	</tr>
 	<tr>
-		<td>資格</td>
-		<td><input type="text" name="qualification" value="<%=qualification%>"></td>
+		<td class="tableText">資格</td>
+		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="qualification" value="<%=qualification%>"></td>
 	</tr>
 
 </table>
 <h2>■Background Note</h2>
 <%for (int i = 0; i < noteNumber.size(); i++) { %>
-<table>
+<div style="border:1px solid #000000; margin-bottom: 20px;">
+<table class="phaseTable">
 	<tr>
-		<td>No.</td>
-		<td><%=noteNumber.get(i) %></td>
+		<td class="tableText">No.</td>
+		<td>&nbsp;：&nbsp;<%=noteNumber.get(i) %></td>
 	</tr>
 	<tr>
-		<td>開始</td>
-		<td><input type="text" name="beginning<%=i %>" value="<%=beginning.get(i) %>"></td>
+		<td class="tableText">開始</td>
+		<td>&nbsp;：&nbsp;<input style="height: 24px" type="text" name="beginning<%=i %>" value="<%=beginning.get(i) %>"></td>
 	</tr>
 	<tr>
-		<td>終了</td>
-		<td><input type="text" name="end<%=i %>" value="<%=end.get(i) %>"></td>
+		<td class="tableText">終了</td>
+		<td>&nbsp;：&nbsp;<input style="height: 24px" type="text" name="end<%=i %>" value="<%=end.get(i) %>"></td>
 	</tr>
 	<tr>
-		<td>業務内容</td>
-		<td><input type="text" name="task<%=i %>" value="<%=task.get(i) %>"></td>
-	</tr>
-
-	<tr>
-		<td>要件定義</td>
-		<td><input type="text" name="requirement<%=i %>" value="<%=requirement.get(i).get(0) %>"></td>
-		<td>基本設計</td>
-		<td><input type="text" name="basic<%=i %>" value="<%=basic.get(i).get(1) %>"></td>
-	</tr>
-	<tr>
-		<td>詳細設計</td>
-		<td><input type="text" name="details<%=i %>" value="<%=details.get(i).get(2) %>"></td>
-		<td>PG製造</td>
-		<td><input type="text" name="pg<%=i %>" value="<%=pg.get(i).get(3) %>"></td>
-	</tr>
-	<tr>
-		<td>単体試験</td>
-		<td><input type="text" name="single<%=i %>" value="<%=single.get(i).get(4) %>"></td>
-		<td>結合試験</td>
-		<td><input type="text" name="join<%=i %>" value="<%=join.get(i).get(5) %>"></td>
-	</tr>
-	<tr>
-		<td>客先試験</td>
-		<td><input type="text" name="customer<%=i %>" value="<%=customer.get(i).get(6) %>"></td>
-		<td>環境設定</td>
-		<td><input type="text" name="environment<%=i %>" value="<%=environment.get(i).get(7) %>"></td>
-	</tr>
-
-	<tr>
-		<td>人数</td>
-		<td><input type="text" name="peopleNumber<%=i %>" value="<%=peopleNumber.get(i) %>"></td>
-	</tr>
-	<tr>
-		<td>開発環境</td>
-		<td><input type="text" name="development<%=i %>" value="<%=development.get(i) %>"></td>
+		<td class="tableText" style="vertical-align: top">業務内容</td>
+		<td class="textWidth" style="width: 600px; height: 24px">&nbsp;：&nbsp;<textarea class="textRow" name="task<%=i %>"><%=task.get(i) %></textarea></td>
 	</tr>
 </table>
+<p style="font-weight: bold">フェーズ</p>
+<table class="phaseTable">
+	<tr>
+		<td class="tableText">要件定義</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="requirement<%=i %>" value="<%=requirement.get(i).get(0) %>"></td>
+		<td class="tableText">基本設計</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="basic<%=i %>" value="<%=basic.get(i).get(1) %>"></td>
+	</tr>
+	<tr>
+		<td class="tableText">詳細設計</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="details<%=i %>" value="<%=details.get(i).get(2) %>"></td>
+		<td class="tableText">PG製造</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="pg<%=i %>" value="<%=pg.get(i).get(3) %>"></td>
+	</tr>
+	<tr>
+		<td class="tableText">単体試験</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="single<%=i %>" value="<%=single.get(i).get(4) %>"></td>
+		<td class="tableText">結合試験</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="join<%=i %>" value="<%=join.get(i).get(5) %>"></td>
+	</tr>
+	<tr>
+		<td class="tableText">客先試験</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="customer<%=i %>" value="<%=customer.get(i).get(6) %>"></td>
+		<td class="tableText">環境設定</td>
+		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="environment<%=i %>" value="<%=environment.get(i).get(7) %>"></td>
+	</tr>
+</table>
+<p style="margin-bottom:1em;"></p>
+<table class="phaseTable">
+	<tr>
+		<td class="tableText">人数</td>
+		<td style="width: 600px">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="peopleNumber<%=i %>" value="<%=peopleNumber.get(i) %>"></td>
+	</tr>
+	<tr>
+		<td class="tableText" style="vertical-align: top">開発環境</td>
+		<td>&nbsp;：&nbsp;<textarea class="textRow" name="development<%=i %>"><%=development.get(i) %></textarea></td>
+	</tr>
+</table>
+<p style="margin-bottom:1em;"></p>
+</div>
 <%} %>
 
 
@@ -297,10 +286,11 @@ session.setAttribute("noteNumber", noteNumber);
 <input type="hidden" name="db_name" value="<%=db_name %>">
 <input type="hidden" name="master_flg" value="<%=master_flg %>">
 <input type="hidden" name="filename" value="<%=filename %>">
-
-<input type="submit" value="確認">
-<input type="submit" value="項目追加" formaction="/SkillList/ItemAddBL">
-<input type="submit" value="戻る" formaction="/SkillList/SkillBL">
+<div class="buttonTable">
+<input class="editButton" type="submit" value="確認">
+<input class="editButton" type="submit" value="項目追加" formaction="/SkillList/ItemAddBL">
+<input class="editButton" type="submit" value="戻る" formaction="/SkillList/SkillBL">
+</div>
 </form>
 
 
