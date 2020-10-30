@@ -300,12 +300,16 @@ session.setAttribute("development", development);
 			<!-- 編集ボタン -->
 			<input class="skillButton" type="submit" value="編集" formaction="./jsp/Edit.jsp">
 			<!-- 削除ボタン -->
+			<%String master_flg2=(String)session.getAttribute("master_flg");
+			if(master_flg2.equals("1")){
+			%>
+			<input type="hidden" value="<%=master_flg2%>" name="master_flg2">
 			<input class="skillButton" type="button" id="deleteBtn" value='ユーザーを削除' onclick="DeletePopUp()">
 			<div id="deleteModal" class="modal">
 				<div class="modal-content">
 					<div class="modal-body">
 						<span class="delete_span" style="text-align: center;">下記の技術者の
-							<br>・ユーザーアカウント<br>・スキルシート<br>を削除します。よろしいですか？
+							<br>・ユーザーアカウント<br>・スキルシート<br>を削除します<br>削除を行った場合<br>データの復元はできません<br>本当に削除してもよろしいですか？
 						</span>
 
 						<p class="delete_p"><%=db_name %></p>
@@ -316,6 +320,7 @@ session.setAttribute("development", development);
 					</div>
 				</div>
 			</div>
+			<%}%>
 			<!-- ダウンロードボタン -->
 			<input class="skillButton" type="button" id="downloadBtn" value='ダウンロード' onclick="DownloadPopUp()">
 			<div id="downloadModal" class="modal">
@@ -347,7 +352,7 @@ session.setAttribute("development", development);
 					</div>
 				</div>
 			</div>
-			<%String master_flg2=(String)session.getAttribute("master_flg");
+			<%
 			if(master_flg2.equals("1")){
 			%>
 			<input type="hidden" value="<%=master_flg2%>" name="master_flg2">
