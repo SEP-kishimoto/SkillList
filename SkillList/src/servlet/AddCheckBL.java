@@ -105,10 +105,9 @@ public class AddCheckBL extends HttpServlet {
 			String kana = request.getParameter("kana");
 			String name = request.getParameter("db_name"); // db_nameと同じ
 			String address = request.getParameter("address");
-			String age = request.getParameter("age");
 			String gender = request.getParameter("gender");
 			String birthday = request.getParameter("birthday");
-			String background = request.getParameter("background"); // db_nameと同じ
+			String background = request.getParameter("background");
 			String backgroundNumber = request.getParameter("backgroundNumber");
 			String nearestStation = request.getParameter("nearestStation");
 			String stationName = request.getParameter("stationName");
@@ -124,6 +123,7 @@ public class AddCheckBL extends HttpServlet {
 			//		String development = request.getParameter("development");
 			String errmsg = "";
 			skill = skill.replace("、", ","); // 全角カンマから半角に置換
+			skill = skill.replace("、", ",");
 
 			skill += ",";
 			// ','で改行
@@ -281,6 +281,7 @@ public class AddCheckBL extends HttpServlet {
 			String task_check = "";
 			for (int p = 0; p < task.size(); p++) {
 				task_check = task.get(p);
+				task.set(p, task.get(p).replace("、", ","));	// 全角カンマから半角に置換
 				task_check += ",";
 				n = 0;
 				String[] taskList = task_check.split(",", -1);

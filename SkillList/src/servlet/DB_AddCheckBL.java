@@ -62,25 +62,6 @@ public class DB_AddCheckBL extends HttpServlet {
 
 
 
-		// フェーズ
-//		    List<String> test_requirementList = new ArrayList<String>() {{add("◎"); add(""); add("◎");}};
-		    // 二重構造
-//		    ArrayList<List<String>> requirement = new ArrayList<>();
-//		    ArrayList<List<String>> basic = new ArrayList<>();
-//		    ArrayList<List<String>> details = new ArrayList<>();
-//		    ArrayList<List<String>> pg = new ArrayList<>();
-//		    ArrayList<List<String>> single = new ArrayList<>();
-//		    ArrayList<List<String>> join = new ArrayList<>();
-//		    ArrayList<List<String>> customer = new ArrayList<>();
-//		    ArrayList<List<String>> environment = new ArrayList<>();
-//		 requirement.add(test_requirementList);
-//		 basic.add(test_requirementList);
-//		 details.add(test_requirementList);
-//		 pg.add(test_requirementList);
-//		 single.add(test_requirementList);
-//		 join.add(test_requirementList);
-//		 customer.add(test_requirementList);
-//		 environment.add(test_requirementList);
 		 HttpSession session = request.getSession();
 
 		try {
@@ -117,9 +98,26 @@ public class DB_AddCheckBL extends HttpServlet {
 		session.setAttribute("peopleNumber",peopleNumber);
 		session.setAttribute("development",development);
 
+
 		if (get_name != null || db_number.isEmpty()) {	// get_nameがnullでなければ社員Noが重複している
-			err_message = "すでに使われている社員Noまたは社員Noが入力されていません";
+			err_message += "すでに使われている社員Noまたは社員Noが入力されていません<br>";
+		}
+
+		if(kana.isEmpty()) {
+			err_message += "フリガナが入力されていません<br>";
+		}
+
+		if(db_name.isEmpty()) {
+			err_message += "氏名が入力されていません<br>";
+		}
+
+		if(password.isEmpty()) {
+			err_message += "パスワードが入力されていません<br>";
+		}
+
+		if (!(err_message.equals(""))) {
 			request.setAttribute("err_message",err_message);
+			request.setAttribute("return_flg","1");
 			getServletContext().getRequestDispatcher("/jsp/DB_Add.jsp").forward(request, response);
 		} else {
 			getServletContext().getRequestDispatcher("/jsp/Add.jsp").forward(request, response);

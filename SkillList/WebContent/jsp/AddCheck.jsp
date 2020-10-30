@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/SkillList/css/Add_Check.css">
 <meta charset="UTF-8">
 <title>スキルシート管理システム</title>
 </head>
@@ -88,9 +89,11 @@ environment = (ArrayList<String>) session.getAttribute("environment");
 peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
 development = (ArrayList<String>) session.getAttribute("development");
 %>
-<h1>スキルシート管理システム:スキルシート登録</h1>
+<div class="table">
+<h2>スキルシート管理システム:スキルシート登録</h2>
 <br>
-<h2>■Profile</h2>
+<h2>&#9632;Profile</h2>
+</div>
 <form action="../SkillList/AddCommit" method="post">
 <div class="table">
 <table>
@@ -135,6 +138,7 @@ development = (ArrayList<String>) session.getAttribute("development");
 <!-- フェーズここまで -->
 <input type="hidden" name="peopleNumber<%=i %>" value="<%=peopleNumber.get(i) %>">
 <input type="hidden" name="development<%=i %>" value="<%=development.get(i) %>">
+<div style="border:1px solid #000000; margin-bottom: 20px;">
 <table>
 	<tr>
 		<td>No.</td>
@@ -187,6 +191,8 @@ development = (ArrayList<String>) session.getAttribute("development");
 		<td><%=development.get(i) %></td>
 	</tr>
 </table>
+<p style="margin-bottom:1em;"></p>
+</div>
 <%} %>
 </div>
 <!-- DB登録情報 -->
@@ -209,12 +215,13 @@ development = (ArrayList<String>) session.getAttribute("development");
 <input type="hidden" name="tool" value=<%=tool%>>
 <input type="hidden" name="db" value=<%=db%>>
 <input type="hidden" name="qualification" value=<%=qualification%>>
-<button type="submit" class="btn">確認</button>
+<div class="buttonTable">
+<button type="submit" class="editButton">確認</button>
+<input type="button" value="戻る" class="editButton" onclick="history.back()" formaction="/SkillList/jsp/Add.jsp"><!-- ヒストリーバック使用 -->
+</div>
 </form>
 
-<form action="/SkillList/jsp/Add.jsp" method="post">
-<input type="button" value="戻る" onclick="history.back()"><!-- ヒストリーバック使用 -->
-</form>
+
 </body>
 
 </body>
