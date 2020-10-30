@@ -5,26 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン画面</title>
-<link rel="stylesheet" type="text/css" href="/SkillList/css/Popup.css">
+<link rel="stylesheet" type="text/css" href="/SkillList/css/Login.css">
 </head>
 <body>
 	<h1>スキルシート管理システム：ログイン</h1>
 	<form method="POST">
-		<table style="border-collapse: collapse;">
+		<input type="hidden" value="login" name="flg">
+		<table class="loginTable">
 			<tr>
 				<th class="id">ID：</th>
-				<td><input style="border =1: width:40px;" type="text" name="id"></td>
+				<td class="text_td"><input type="text" name="id" class="text"></td>
 			</tr>
 			<tr>
 				<th class="password">パスワード：</th>
-				<td><input style="border =1: width:40px;" type="password"
-					name="password"></td>
+				<td class="text_td"><input type="password" name="password"
+					class="text"></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td class="btn_td"><input type="submit" value="ログイン"
+					class="btn"></td>
 			</tr>
 		</table>
-		<div class="btn">
-			<input type="hidden" value="login" name="flg"> <input
-				type="submit" value="ログイン" class="btn">
-		</div>
 	</form>
 	<!-- エラー文受け取り -->
 	<%
@@ -33,17 +35,18 @@
 	<%
 		if (errmsg != null) {
 	%>
+	<div class="errmsg_div">
 	<p>エラーメッセージ</p>
-	<div
-		style="padding: 10px; margin-bottom: 10px; border: 5px double #333333;">
+	<div class="errmsg">
 		<%
 			{
 					out.println(errmsg);
 				}
-		%><br>
+		%>
 	</div>
 	<%
 		}
 	%>
+	</div>
 </body>
 </html>

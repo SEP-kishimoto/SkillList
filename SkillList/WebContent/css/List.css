@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+body {
+	width: 60%;
+	margin: 0 auto;
+}
+
+h1 {
+	font-size: 25px;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+	text-align: center;
+	padding: 30px;
+	width: 300px;
+	border: 5px double #333333;
+	background-color: white;
+	position: fixed;
+	top: 200px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	left: 50%;
+}
+
+.listTable {
+	margin: 50px auto;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 20px;
+	border-style: solid;
+	border-width: 2px;
+	border-collapse: collapse;
+}
+
+.column th {
+	border-style: solid;
+	border-width: 2px;
+	border-collapse: collapse;
+	height: 60px;
+	background-color: #2983CC;
+}
+
+.data td {
+	border-style: solid;
+	border-width: 1px;
+	border-collapse: collapse;
+	height: 60px;
+}
+
+.db_name {
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	background-color: #fff;
+	color: #0000ff;
+}
+
+.column_number {
+	width: 200px;
+}
+
+.column_name {
+	width: 300px;
+}
+
+.new_input {
+	background-color: #2983CC;
+	text-align: center;
+	font-weight: bold;
+	width: 120px;
+	padding: 12px 12px;
+	border: 1px solid #000000;
+	outline: none;
+}
+
+.logout_input {
+	background-color: #2983CC;
+	text-align: center;
+	font-weight: bold;
+	width: 120px;
+	padding: 12px 12px;
+	border: 1px solid #000000;
+	outline: none;
+}
+
+.head_div {
+	margin: 50px auto;
+	text-align: center;
+}
+.in_div {
+	width: 500px;
+	margin: 0px auto;
+	text-align: right;
+}
