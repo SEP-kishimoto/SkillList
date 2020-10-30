@@ -392,11 +392,7 @@ public class EditCommitBL extends HttpServlet {
 
 
 		String view = "";
-		if (master_flg.equals("1")) {
-			view = "/ListBL";
-		} else {
-			view = "/SkillBL";
-		}
+		view = "/SkillBL";
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
