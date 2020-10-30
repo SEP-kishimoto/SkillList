@@ -115,14 +115,14 @@ beginning = (ArrayList<String>) request.getAttribute("beginning");
 end = (ArrayList<String>) request.getAttribute("end");
 task = (ArrayList<String>) request.getAttribute("task");
 
-requirement = (ArrayList<List<String>>) session.getAttribute("requirement");
-basic = (ArrayList<List<String>>) session.getAttribute("basic");
-details = (ArrayList<List<String>>) session.getAttribute("details");
-pg = (ArrayList<List<String>>) session.getAttribute("pg");
-single = (ArrayList<List<String>>) session.getAttribute("single");
-join = (ArrayList<List<String>>) session.getAttribute("join");
-customer = (ArrayList<List<String>>) session.getAttribute("customer");
-environment = (ArrayList<List<String>>) session.getAttribute("environment");
+requirement = (ArrayList<List<String>>) request.getAttribute("requirement");
+basic = (ArrayList<List<String>>) request.getAttribute("basic");
+details = (ArrayList<List<String>>) request.getAttribute("details");
+pg = (ArrayList<List<String>>) request.getAttribute("pg");
+single = (ArrayList<List<String>>) request.getAttribute("single");
+join = (ArrayList<List<String>>) request.getAttribute("join");
+customer = (ArrayList<List<String>>) request.getAttribute("customer");
+environment = (ArrayList<List<String>>) request.getAttribute("environment");
 
 peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
 development = (ArrayList<String>) request.getAttribute("development");
