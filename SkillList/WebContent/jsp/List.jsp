@@ -6,18 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>技術者一覧画面</title>
-<link rel="stylesheet" type="text/css" href="/SkillList/css/Popup.css">
+<link rel="stylesheet" type="text/css" href="/SkillList/css/List.css">
 </head>
 <body>
 	<h1>スキルシート管理システム：技術者一覧</h1>
 	<!-- 新規登録 -->
 	<form>
-		<input formaction="./jsp/DB_Add.jsp"
-			type="submit" name="send" value="新規登録"
-			style="width: 100px; height: 25px">
+		<div class="head_div">
+			<div class="in_div">
+				<input class="new_input" formaction="./jsp/DB_Add.jsp" type="submit"
+					name="send" value="新規登録">
+			</div>
+		</div>
 	</form>
 	<!-- 技術者一覧 -->
-	<table border="1" style="border-collapse: collapse;">
+	<table class="listTable">
 		<tr class="column">
 			<th><div class="column_number">社員No.</div></th>
 			<th><div class="column_name">名前</div></th>
@@ -31,37 +34,43 @@
 				String filename = (String) rs.getString("filename");
 		%>
 		<form method="POST" action="/SkillList/SkillBL">
-		<tr>
+		<tr class="data">
 			<td><%=db_number%></td>
 			<td><input class="db_name" type="submit" value="<%=db_name%>">
-			<input type="hidden" name="db_number" value="<%=db_number%>">
-			<input type="hidden" name="db_name" value="<%=db_name%>">
-			<input type="hidden" name="master_flg" value="<%=master_flg%>">
-			<input type="hidden" name="filename" value="<%=filename%>"></td>
+				<input type="hidden" name="db_number" value="<%=db_number%>">
+				<input type="hidden" name="db_name" value="<%=db_name%>"> <input
+				type="hidden" name="master_flg" value="<%=master_flg%>"> <input
+				type="hidden" name="filename" value="<%=filename%>"></td>
 		</tr>
 		</form>
+
 		<%
 			}
 		%>
 	</table>
+
 	<form>
-	<input type="button" id="logoutBtn" value='ログアウト' onclick="LogoutPopUp()">
-			<div id="logoutModal" class="modal">
-				<div class="modal-content">
-					<div class="modal-body">
-						<span class="logout_span" style="text-align: center;">ログアウトします。
-							<br>よろしいですか？
-						</span>
-						<p></p>
-							<input
-							type="submit" value="OK" formaction="/SkillList/LoginBL"> <input
-							type="button" id="logoutCloseBtn" value="キャンセル">
+		<div class="head_div">
+			<div class="in_div">
+				<input class="logout_input" type="button" id="logoutBtn"
+					value='ログアウト' onclick="LogoutPopUp()">
+				<div id="logoutModal" class="modal">
+					<div class="modal-content">
+						<div class="modal-body">
+							<span class="logout_span" style="text-align: center;">ログアウトします。
+								<br>よろしいですか？
+							</span>
+							<p></p>
+							<input type="submit" value="OK" formaction="/SkillList/LoginBL">
+							<input type="button" id="logoutCloseBtn" value="キャンセル">
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</form>
 	<script type="text/javascript">
-	function LogoutPopUp() {
+		function LogoutPopUp() {
 			var btn = document.getElementById('logoutBtn');
 			var modal = document.getElementById('logoutModal');
 
