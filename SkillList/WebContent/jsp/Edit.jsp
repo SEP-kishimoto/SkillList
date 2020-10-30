@@ -239,27 +239,91 @@ if (errmsg != null) {
 <table class="phaseTable">
 	<tr>
 		<td class="tableText">要件定義</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="requirement<%=i %>" value="<%=requirement.get(i).get(0) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="requirement<%=i %>">
+			<option value="<%=requirement.get(i).get(0) %>"><%=requirement.get(i).get(0) %></option>
+			<%if (requirement.get(i).get(0) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 		<td class="tableText">基本設計</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="basic<%=i %>" value="<%=basic.get(i).get(1) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="basic<%=i %>">
+			<option value="<%=basic.get(i).get(1) %>"><%=basic.get(i).get(1) %></option>
+			<%if (basic.get(i).get(1) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 	</tr>
 	<tr>
 		<td class="tableText">詳細設計</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="details<%=i %>" value="<%=details.get(i).get(2) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="details<%=i %>">
+			<option value="<%=details.get(i).get(2) %>"><%=details.get(i).get(2) %></option>
+			<%if (details.get(i).get(2) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 		<td class="tableText">PG製造</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="pg<%=i %>" value="<%=pg.get(i).get(3) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="pg<%=i %>">
+			<option value="<%=pg.get(i).get(3) %>"><%=pg.get(i).get(3) %></option>
+			<%if (pg.get(i).get(3) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 	</tr>
 	<tr>
 		<td class="tableText">単体試験</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="single<%=i %>" value="<%=single.get(i).get(4) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="single<%=i %>">
+			<option value="<%=single.get(i).get(4) %>"><%=single.get(i).get(4) %></option>
+			<%if (single.get(i).get(4) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 		<td class="tableText">結合試験</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="join<%=i %>" value="<%=join.get(i).get(5) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="join<%=i %>">
+			<option value="<%=join.get(i).get(5) %>"><%=join.get(i).get(5) %></option>
+			<%if (join.get(i).get(5) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 	</tr>
 	<tr>
 		<td class="tableText">客先試験</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="customer<%=i %>" value="<%=customer.get(i).get(6) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="customer<%=i %>">
+			<option value="<%=customer.get(i).get(6) %>"><%=customer.get(i).get(6) %></option>
+			<%if (customer.get(i).get(6) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 		<td class="tableText">環境設定</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="environment<%=i %>" value="<%=environment.get(i).get(7) %>"></td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="environment<%=i %>">
+			<option value="<%=environment.get(i).get(7) %>"><%=environment.get(i).get(7) %></option>
+			<%if (environment.get(i).get(7) == "") {%>
+			<option value="◎">◎</option>
+			<%} else { %>
+			<option value=""></option>
+			<%} %>
+		</select></td>
 	</tr>
 </table>
 <p style="margin-bottom:1em;"></p>
