@@ -309,7 +309,7 @@ session.setAttribute("development", development);
 				<div class="modal-content">
 					<div class="modal-body">
 						<span class="delete_span" style="text-align: center;">下記の技術者の
-							<br>・ユーザーアカウント<br>・スキルシート<br>を削除します。よろしいですか？
+							<br>・ユーザーアカウント<br>・スキルシート<br>を削除します<br>削除を行った場合<br>データの復元はできません<br>本当に削除してもよろしいですか？
 						</span>
 
 						<p class="delete_p"><%=db_name %></p>
