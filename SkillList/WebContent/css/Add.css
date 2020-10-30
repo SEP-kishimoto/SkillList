@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+body {
+	width: 60%;
+	margin-right: auto;
+	margin-left : auto;
+	outline: none;
+}
+
+h1 {
+	font-size: 25px;
+}
+h2 {
+	font-size: 20px;
+}
+.profileTd {
+	width: 600px;
+}
+.inputLine {
+	width:150px;
+	height: 24px;
+	box-sizing:border-box;
+}
+.phaseTable {
+	margin-left: 20px;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.tableText {
+	font-weight: bold;
+	padding:0;
+}
+.tableWidth {
+	width: 80px;
+	padding:0;
+}
+.inputWidth {
+	width: 40px;
+	height: 24px;
+	box-sizing:border-box;
+	margin:0; padding:0;
+}
+.alignCenter {
+	height: 100%;
+	box-sizing:border-box;
+}
+textarea {
+	vertical-align:top;
+	width: 80%;
+}
+.textWidth {
+	 width: 80%;
+}
+.textRow {
+  height: calc( 1.3em * 5 );
+  line-height: 1.3;
+}
+td {
+	padding: 0;
+}
+
+.buttonTable {
+	text-align: center;
+}
+.editButton {
+	display: inline-block;
+	background-color: #2983CC;
+	text-align: center;
+	font-weight: bold;
+	width: 20%;
+	padding: 12px 12px;
+	margin: 0 10px;
+	border: 1px solid #000000;
+	outline: none;
+}
+
+
+.skillButton {
+	display: inline-block;
+	background-color: #2983CC;
+	text-align: center;
+	font-weight: bold;
+	width: 120px;
+	padding: 12px 12px;
+	margin: 0 10px;
+	border: 1px solid #000000;
+	outline: none;
+}

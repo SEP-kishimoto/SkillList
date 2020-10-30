@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+body {
+	width: 60%;
+	margin-right: auto;
+	margin-left : auto;
+	outline: none;
+}
+
+
+.buttonTable {
+	left:130px;
+}
+
+.skillButton {
+	display: inline-block;
+	background-color: #2983CC;
+	text-align: center;
+	font-weight: bold;
+	width: 120px;
+	padding: 12px 12px;
+	margin: 0 10px;
+	border: 1px solid #000000;
+	outline: none;
+}
+
+
+.inputLine {
+	width:150px;
+	height: 24px;
+	box-sizing:border-box;
+}
+
+th{
+	text-align: right;
+}
