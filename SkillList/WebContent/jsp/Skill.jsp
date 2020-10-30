@@ -347,15 +347,14 @@ session.setAttribute("development", development);
 					</div>
 				</div>
 			</div>
-			<form>
 			<%String master_flg2=(String)session.getAttribute("master_flg");
 			if(master_flg2.equals("1")){
 			%>
 			<input type="hidden" value="<%=master_flg2%>" name="master_flg2">
-<input type="submit" value="戻る" formaction="/SkillList/ListBL">
-<%}%></form>
+			<input class="skillButton" type="submit" value="戻る" formaction="/SkillList/ListBL">
+			<%}%>
 	</div>
-
+</form>
 	<script>
 		function DeletePopUp() {
 			var btn = document.getElementById('deleteBtn');
