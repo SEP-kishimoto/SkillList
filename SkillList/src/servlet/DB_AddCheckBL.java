@@ -100,19 +100,19 @@ public class DB_AddCheckBL extends HttpServlet {
 
 
 		if (get_name != null || db_number.isEmpty()) {	// get_nameがnullでなければ社員Noが重複している
-			err_message += "すでに使われている社員Noまたは社員Noが入力されていません<br>";
+			err_message += "すでに使われている社員番号または社員番号が記入されていません<br>";
 		}
 
 		if(kana.isEmpty()) {
-			err_message += "フリガナが入力されていません<br>";
+			err_message += "フリガナを記入してください<br>";
 		}
 
 		if(db_name.isEmpty()) {
-			err_message += "氏名が入力されていません<br>";
+			err_message += "氏名を記入してください<br>";
 		}
 
 		if(password.isEmpty()) {
-			err_message += "パスワードが入力されていません<br>";
+			err_message += "パスワードを記入してください<br>";
 		}
 
 		if (!(err_message.equals(""))) {
