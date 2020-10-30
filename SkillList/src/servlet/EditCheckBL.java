@@ -1,7 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -217,12 +220,29 @@ public class EditCheckBL extends HttpServlet {
 	    	}
 	    }
 
+
+	    // 年齢のチェック
+	 	SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+	 	String a = birthday.replace("/", "");
+	 	Date date;
+	 	Date now = new Date();
+
 	    /*
 	     * Profile 生年月日形式
 	     */
 	    String regex = "\\d{4}\\/\\d{2}\\/\\d{2}$";
 	    if (!(birthday.matches(regex))) {
 	    	errmsg += "生年月日は「0000/00/00」の形式で入力してください";
+	    } else {
+			try {
+				date = sdFormat.parse(a);
+				int ageValue = (Integer.parseInt(sdFormat.format(now)) - Integer.parseInt(sdFormat.format(date))) / 10000;
+				String str = Integer.toString(ageValue);
+				request.setAttribute("age", str); // 年齢を自動判定
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 	    }
 
 	    /*
