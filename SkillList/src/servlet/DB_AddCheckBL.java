@@ -100,7 +100,7 @@ public class DB_AddCheckBL extends HttpServlet {
 
 
 		if (get_name != null || db_number.isEmpty()) {	// get_nameがnullでなければ社員Noが重複している
-			err_message += "すでに使われている社員番号または社員番号が記入されていません<br>";
+			err_message += "社員番号が記入されていないか、既に使用されている社員番号です<br>";
 		}
 
 		if(kana.isEmpty()) {
