@@ -112,11 +112,9 @@
 	<h1>スキルシート管理システム:スキルシート登録</h1>
 	</div>
 	<br>
-	<%
-		if (errmsg != null) {
-			out.print(errmsg);
-		}
-	%>
+<% if (errmsg != null) {%>
+<p style="color: red"><%=errmsg %></p>
+<%} %>
 	<div class="table">
 	</div>
 	<form action="/SkillList/AddCheckBL" method="post">
@@ -140,7 +138,7 @@
 		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="address" value="<%=address%>"></td>
 	</tr>
 	<tr>
-		<td class="tableText">生年月*</td>
+		<td class="tableText">生年月日*</td>
 		<td>&nbsp;：&nbsp;<input class="inputLine"type="text" name="birthday" value="<%=birthday%>"></td>
 	</tr>
 	<tr>
@@ -312,11 +310,9 @@
 				value="1">項目追加</button><!-- AddCheckBLで項目追加の処理を行う-->
 
 
-			<button type="submit" class="editButton" name="return_flg" value="1" formaction="/SkillList/jsp/DB_Add.jsp">戻る</button>
+			<button type="submit" class="editButton" name="return_flg" value="1" formaction="/SkillList/jsp/DB_Add.jsp" >戻る</button>
 
 	</div>
 </form>
-
-
 </body>
 </html>

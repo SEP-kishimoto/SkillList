@@ -37,15 +37,15 @@ if (return_flg != null) {
 
 String err_message = (String) request.getAttribute("err_message");
 request.getSession().setAttribute("master_flg", 1);
-if (err_message != null) {
-	out.println("<h2>" + err_message + "</h2>");
-}
+if (err_message != null) {%>
+	<p style="color: red"><%=err_message %></p>
+<% }
 String master_flg = "1";
 
 %>
 
 <table>
-	<tr><th>社員No* : </th><td><input type="text" name="db_number" class="inputLine" value=<%=db_number %>></td></tr>
+	<tr><th>社員番号* : </th><td><input type="text" name="db_number" class="inputLine" value=<%=db_number %>></td></tr>
 	<tr><th>フリガナ* : </th><td><input type="text" class="inputLine" name="kana" value=<%=kana %>></td></tr>
 	<tr><th>氏名* : </th><td><input type="text" class="inputLine" name="db_name" value=<%=db_name %>></td></tr>
 	<tr><th>パスワード* : </th><td><input type="password" name="password" class="inputLine" value=<%=password %>></td></tr>
