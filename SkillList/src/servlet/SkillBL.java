@@ -138,6 +138,15 @@ public class SkillBL extends HttpServlet {
 	      value = birthStr;
 	      request.setAttribute("birthday", value);
 
+	      SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+	      String b = value.replace("/", "");
+	      Date date;
+	      Date now = new Date();
+	      date = sdFormat.parse(b);
+	      int ageValue = (Integer.parseInt(sdFormat.format(now)) - Integer.parseInt(sdFormat.format(date))) / 10000;
+	      String str = Integer.toString(ageValue);
+	      request.setAttribute("age", str);
+
 	      value = getCell(sh, 4, 8).getStringCellValue();
 	      request.setAttribute("gender", value);
 
