@@ -41,12 +41,9 @@ h1 {
 }
 
 .errmsg {
+	text-align: center;
 	padding: 10px;
-	margin-left: 20px;
+	margin: 50px auto;
 	border: 5px double #333333;
 	width: 500px;
-}
-
-.errmsg_div {
-	margin-left: 30%;
 }

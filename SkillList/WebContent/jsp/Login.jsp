@@ -35,8 +35,6 @@
 	<%
 		if (errmsg != null) {
 	%>
-	<div class="errmsg_div">
-	<p>エラーメッセージ</p>
 	<div class="errmsg">
 		<%
 			{
@@ -47,6 +45,5 @@
 	<%
 		}
 	%>
-	</div>
 </body>
 </html>
