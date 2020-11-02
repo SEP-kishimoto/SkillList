@@ -241,7 +241,7 @@ if (errmsg != null) {
 <p style="font-weight: bold">フェーズ</p>
 <table class="phaseTable">
 	<tr>
-		<td class="phaseText" style="font-weight: bold">要件定義</td>
+		<td style="width: 70px; font-weight: bold">要件定義</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="requirement<%=i %>">
 			<option value="<%=requirement.get(i).get(0) %>"><%=requirement.get(i).get(0) %></option>
@@ -251,7 +251,7 @@ if (errmsg != null) {
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="phaseText" style="font-weight: bold">基本設計</td>
+		<td style="width: 70px; font-weight: bold">基本設計</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="basic<%=i %>">
 			<option value="<%=basic.get(i).get(1) %>"><%=basic.get(i).get(1) %></option>
@@ -263,7 +263,7 @@ if (errmsg != null) {
 		</select></td>
 	</tr>
 	<tr>
-		<td class="phaseText" style="font-weight: bold">詳細設計</td>
+		<td style="width: 70px; font-weight: bold">詳細設計</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="details<%=i %>">
 			<option value="<%=details.get(i).get(2) %>"><%=details.get(i).get(2) %></option>
@@ -273,7 +273,7 @@ if (errmsg != null) {
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="phaseText" style="font-weight: bold">PG製造</td>
+		<td style="width: 70px; font-weight: bold">PG製造</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="pg<%=i %>">
 			<option value="<%=pg.get(i).get(3) %>"><%=pg.get(i).get(3) %></option>
@@ -285,7 +285,7 @@ if (errmsg != null) {
 		</select></td>
 	</tr>
 	<tr>
-		<td class="phaseText" style="font-weight: bold">単体試験</td>
+		<td style="width:70px; font-weight: bold">単体試験</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="single<%=i %>">
 			<option value="<%=single.get(i).get(4) %>"><%=single.get(i).get(4) %></option>
@@ -295,7 +295,7 @@ if (errmsg != null) {
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="phaseText" style="font-weight: bold">結合試験</td>
+		<td style="width: 70px; font-weight: bold">結合試験</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="join<%=i %>">
 			<option value="<%=join.get(i).get(5) %>"><%=join.get(i).get(5) %></option>
@@ -307,7 +307,7 @@ if (errmsg != null) {
 		</select></td>
 	</tr>
 	<tr>
-		<td class="phaseText" style="font-weight: bold">客先試験</td>
+		<td style="width: 70px; font-weight: bold">客先試験</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="customer<%=i %>">
 			<option value="<%=customer.get(i).get(6) %>"><%=customer.get(i).get(6) %></option>
@@ -317,7 +317,7 @@ if (errmsg != null) {
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="phaseText" style="font-weight: bold">環境設定</td>
+		<td style="width: 70px; font-weight: bold">環境設定</td>
 		<td class="tableWidth">&nbsp;：&nbsp;
 		<select class="inputWidth" name="environment<%=i %>">
 			<option value="<%=environment.get(i).get(7) %>"><%=environment.get(i).get(7) %></option>
