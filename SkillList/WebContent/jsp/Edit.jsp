@@ -177,19 +177,19 @@ if (errmsg != null) {
 	</tr>
 	<tr>
 		<td class="tableText">性別*</td>
-		<td>&nbsp;：&nbsp;<input class="inputLine" style="width: 40px" type="text" name="gender" value="<%=gender%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" style="width: 40px" type="text" name="gender" value="<%=gender%>">&nbsp;<label>生</label></td>
 	</tr>
 </table>
 <table class="phaseTable">
 	<tr>
 		<td class="tableText" style="min-width: 90px">最終学歴*</td>
-		<td style="width: 120px">&nbsp;：&nbsp;<input  style="width: 60%; height: 24px" type="text" name="background" placeholder="学校名" value="<%=background%>"></td>
-		<td style="width: 120px">&nbsp;：&nbsp;<input style="width: 60%; height: 24px" type="text" name="backgroundNumber" placeholder="卒業した年" value="<%=backgroundNumber%>"></td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input  style="width: 50%; height: 24px" type="text" name="background" placeholder="学校名" value="<%=background%>"></td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input style="width: 50%; height: 24px" type="text" name="backgroundNumber" placeholder="卒業した年" value="<%=backgroundNumber%>">&nbsp;<label>年</label></td>
 	</tr>
 	<tr>
 		<td class="tableText">最寄り駅*</td>
-		<td style="width: 120px">&nbsp;：&nbsp;<input style="width: 60%; height: 24px" type="text" name="nearestStation" placeholder="路線名" value="<%=nearestStation%>"></td>
-		<td style="width: 120px">&nbsp;：&nbsp;<input style="width: 60%; height: 24px" type="text" name="stationName" placeholder="駅名" value="<%=stationName%>"></td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input style="width: 50%; height: 24px" type="text" name="nearestStation" placeholder="路線名" value="<%=nearestStation%>">&nbsp;<label>線</label></td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input style="width: 50%; height: 24px" type="text" name="stationName" placeholder="駅名" value="<%=stationName%>">&nbsp;<label>駅</label></td>
 	</tr>
 </table>
 

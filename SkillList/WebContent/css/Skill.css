@@ -5,6 +5,7 @@ body {
 	min-width: 320px;
 	margin-right: auto;
 	margin-left : auto;
+	font-size: 14px;
 }
 h1 {
 	font-size: 25px;
@@ -22,7 +23,7 @@ h2 {
 .tableText {
 	font-weight: bold;
 	padding: 0;
-	width: 90px;
+	width: 80px;
 }
 .textWidth {
 	 width: 80%;
@@ -45,6 +46,9 @@ h2 {
 	outline: none;
 }
 @media screen and (min-width: 950px) {
+	body {
+		font-size: 16px;
+	}
 	.skillButton {
 		display: inline-block;
 		background-color: #2983CC;

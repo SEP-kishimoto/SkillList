@@ -133,7 +133,7 @@ development = (ArrayList<String>) request.getAttribute("development");
 <table>
 	<tr class="tableLayout">
 		<td class="tableText" style="min-width: 90px">フリガナ*</td>
-		<td style="width: auto">&nbsp;：&nbsp;<%=kana%></td>
+		<td style="width: auto; font-size: max(16px, 1vw)">&nbsp;：&nbsp;<%=kana%></td>
 	</tr>
 	<tr>
 		<td class="tableText">氏名*</td>
@@ -145,11 +145,11 @@ development = (ArrayList<String>) request.getAttribute("development");
 	</tr>
 	<tr>
 		<td class="tableText">生年月日*</td>
-		<td style="width: auto">&nbsp;：&nbsp;<%=birthday%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=birthday%>&nbsp;生</td>
 	</tr>
 	<tr>
 		<td class="tableText">年齢*</td>
-		<td style="width: auto">&nbsp;：&nbsp;<%=age%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=age%>&nbsp;歳</td>
 	</tr>
 	<tr>
 		<td class="tableText">性別*</td>
@@ -159,13 +159,13 @@ development = (ArrayList<String>) request.getAttribute("development");
 <table>
 	<tr>
 		<td class="tableText">最終学歴*</td>
-		<td>&nbsp;：&nbsp;<%=background%></td>
-		<td>&nbsp;：&nbsp;<%=backgroundNumber%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=background%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=backgroundNumber%>&nbsp;年</td>
 	</tr>
 	<tr>
 		<td class="tableText">最寄り駅*</td>
-		<td>&nbsp;：&nbsp;<%=nearestStation%></td>
-		<td>&nbsp;：&nbsp;<%=stationName%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=nearestStation%>&nbsp;線</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=stationName%>&nbsp;駅</td>
 	</tr>
 </table>
 

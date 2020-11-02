@@ -6,6 +6,7 @@ body {
 	margin-right: auto;
 	margin-left : auto;
 	-webkit-text-size-adjust: 100%;
+	font-size: 14px;
 }
 h1 {
 	font-size: 25px;
@@ -80,6 +81,9 @@ td {
 }
 
 @media screen and (min-width: 640px) {
+	body {
+		font-size: 16px;
+	}
 	.editButton {
 		display: inline-block;
 		background-color: #2983CC;

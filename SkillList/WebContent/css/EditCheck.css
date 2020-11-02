@@ -5,9 +5,10 @@ body {
 	min-width: 320px;
 	margin-right: auto;
 	margin-left : auto;
+	font-size: 14px;
 }
 h1 {
-	font-size: min(25px, 5vw);
+	font-size: 25px;
 }
 h2 {
 	font-size: 20px;
@@ -35,6 +36,9 @@ h2 {
 	outline: none;
 }
 @media screen and (min-width: 640px) {
+	body {
+		font-size: 16px;
+	}
 	.editCheckButton {
 		display: inline-block;
 		background-color: #2983CC;
