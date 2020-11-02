@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList "%>
 <%@page import="javax.servlet.http.HttpServletRequest"%>
-<%@page import="javax.servlet.http.HttpServletRequest"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,12 +26,16 @@ String kana = "";
 String db_name = "";
 String password = "";
 
-String return_flg = (String) request.getAttribute("db_number");
+String return_flg = (String) request.getSession().getAttribute("return_flg");
+
+if(return_flg != null) {
+	return_flg = request.getParameter("return_flg");
+}
 if (return_flg != null) {
-	db_number = (String) request.getAttribute("db_number");
-	kana = (String) request.getAttribute("kana");
-	db_name = (String) request.getAttribute("db_name");
-	password = (String) request.getAttribute("password");
+	db_number = request.getParameter("db_number");
+	kana = request.getParameter("kana");
+	db_name = request.getParameter("db_name");
+	password =request.getParameter("password");
 }
 
 String err_message = (String) request.getAttribute("err_message");
@@ -55,6 +58,7 @@ String master_flg = "1";
 
 </div>
 <br><br>
+
 <div class="buttonTable">
 <button type="submit" class="skillButton">確認</button>
 <button type="submit" class="skillButton" name="master_flg2" value="1" formaction="/SkillList/ListBL">戻る</button>
