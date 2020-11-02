@@ -32,6 +32,7 @@ String kana = "";
 String name = "";
 String address = "";
 String birthday = "";
+String age = "";
 String gender = "";
 String background = "";
 String backgroundNumber = "";
@@ -88,6 +89,7 @@ kana = (String) request.getAttribute("kana");
 name = (String) request.getAttribute("name");
 address = (String) request.getAttribute("address");
 birthday = (String) request.getAttribute("birthday");
+age = (String) request.getAttribute("age");
 gender = (String) request.getAttribute("gender");
 background = (String) request.getAttribute("background");
 backgroundNumber = (String) request.getAttribute("backgroundNumber");
@@ -144,6 +146,10 @@ development = (ArrayList<String>) request.getAttribute("development");
 	<tr>
 		<td class="tableText">生年月日*</td>
 		<td style="width: auto">&nbsp;：&nbsp;<%=birthday%></td>
+	</tr>
+	<tr>
+		<td class="tableText">年齢*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=age%></td>
 	</tr>
 	<tr>
 		<td class="tableText">性別*</td>
