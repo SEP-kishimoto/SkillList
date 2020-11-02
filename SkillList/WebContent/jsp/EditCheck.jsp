@@ -135,28 +135,28 @@ development = (ArrayList<String>) request.getAttribute("development");
 <form method="post" action="/SkillList/EditCommitBL">
 <table>
 	<tr>
-		<td class="tableText">フリガナ*</td>
-		<td>&nbsp;：&nbsp;<%=kana%></td>
+		<td class="tableText" style="min-width: 90px">フリガナ*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=kana%></td>
 	</tr>
 	<tr>
 		<td class="tableText">氏名*</td>
-		<td>&nbsp;：&nbsp;<%=name%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=name%></td>
 	</tr>
 	<tr>
 		<td class="tableText">現住所*</td>
-		<td>&nbsp;：&nbsp;<%=address%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=address%></td>
 	</tr>
 	<tr>
-		<td class="tableText">生年月*</td>
-		<td>&nbsp;：&nbsp;<%=birthday%></td>
+		<td class="tableText">生年月日*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=birthday%></td>
 	</tr>
 	<tr>
 		<td class="tableText">年齢*</td>
-		<td>&nbsp;：&nbsp;<%=age%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=age%></td>
 	</tr>
 	<tr>
 		<td class="tableText">性別*</td>
-		<td>&nbsp;：&nbsp;<%=gender%></td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=gender%></td>
 	</tr>
 </table>
 <table>
@@ -175,7 +175,7 @@ development = (ArrayList<String>) request.getAttribute("development");
 <h2>■Skill Info</h2>
 <table>
 	<tr>
-		<td class="tableText">OS</td>
+		<td class="tableText" style="min-width: 90px">OS</td>
 		<td>&nbsp;：&nbsp;<%=os%></td>
 	</tr>
 	<tr>
@@ -187,12 +187,12 @@ development = (ArrayList<String>) request.getAttribute("development");
 		<td>&nbsp;：&nbsp;<%=tool%></td>
 	</tr>
 	<tr>
-		<td class="tableText">データベース</td>
+		<td class="tableText" style="width: 100px; min-width: 100px">データベース</td>
 		<td>&nbsp;：&nbsp;<%=db%></td>
 	</tr>
 	<tr>
-		<td class="tableText">資格</td>
-		<td>&nbsp;：&nbsp;<%=qualification%></td>
+		<td class="tableText" style="vertical-align: top">資格</td>
+		<td style="vertical-align: top">&nbsp;：&nbsp;<%=qualification%></td>
 	</tr>
 </table>
 
@@ -213,8 +213,8 @@ development = (ArrayList<String>) request.getAttribute("development");
 		<td>&nbsp;：&nbsp;<%=end.get(i) %></td>
 	</tr>
 	<tr>
-		<td class="tableText">業務内容</td>
-		<td>&nbsp;：&nbsp;<%=task.get(i) %></td>
+		<td class="tableText" style="font-weight: bold; width: 90px; vertical-align: top">業務内容</td>
+		<td style="height: 24px; vertical-align: top">&nbsp;：&nbsp;<%=task.get(i) %></td>
 	</tr>
 </table>
 <p style="font-weight: bold">フェーズ</p>
@@ -251,8 +251,8 @@ development = (ArrayList<String>) request.getAttribute("development");
 		<td>&nbsp;：&nbsp;<%=peopleNumber.get(i) %></td>
 	</tr>
 	<tr>
-		<td class="tableText">開発環境</td>
-		<td>&nbsp;：&nbsp;<%=development.get(i) %></td>
+		<td class="tableText" style="font-weight: bold; width: 90px; vertical-align: top">開発環境</td>
+		<td style="height: 24px; vertical-align: top">&nbsp;：&nbsp;<%=development.get(i) %></td>
 	</tr>
 </table>
 <p style="margin-bottom:1em;"></p>
