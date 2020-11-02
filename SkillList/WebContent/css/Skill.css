@@ -2,6 +2,7 @@
 
 body {
 	width: 60%;
+	min-width: 320px;
 	margin-right: auto;
 	margin-left : auto;
 }
@@ -14,24 +15,49 @@ h2 {
 .phaseTable {
 	margin-left: 20px;
 }
+.tableLayout {
+	border-collapse: collapse;
+	table-layout: fixed;
+}
 .tableText {
 	font-weight: bold;
+	padding: 0;
+	width: 90px;
 }
-
+.textWidth {
+	 width: 80%;
+}
 .buttonTable {
 	text-align: center;
+	box-sizing: content-box;
 }
 .skillButton {
-	display: inline-block;
+	display: list-item;
 	background-color: #2983CC;
 	text-align: center;
 	font-weight: bold;
-	font-size: 1vw;
-	width: 9vw;
-	padding: 12px 6px;
-	margin: 0 10px;
+	font-size: 20px;
+	width: 80%;
+	max-width: 350px;
+	padding: 12px 12px;
+	margin: 10px auto;
 	border: 1px solid #000000;
 	outline: none;
+}
+@media screen and (min-width: 950px) {
+	.skillButton {
+		display: inline-block;
+		background-color: #2983CC;
+		text-align: center;
+		font-weight: bold;
+		font-size: 1vw;
+		width: 15%;
+		min-width: 30px;
+		padding: 12px 6px;
+		margin: 0 6px;
+		border: 1px solid #000000;
+		outline: none;
+	}
 }
 
 .modal {

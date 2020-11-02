@@ -2,8 +2,10 @@
 
 body {
 	width: 60%;
+	min-width: 320px;
 	margin-right: auto;
 	margin-left : auto;
+	-webkit-text-size-adjust: 100%;
 }
 h1 {
 	font-size: 25px;
@@ -11,11 +13,8 @@ h1 {
 h2 {
 	font-size: 20px;
 }
-.profileTd {
-	width: 600px;
-}
 .inputLine {
-	width:150px;
+	width: 40%;
 	height: 24px;
 	box-sizing:border-box;
 }
@@ -27,6 +26,13 @@ h2 {
 .tableText {
 	font-weight: bold;
 	padding:0;
+	width: 90px;
+}
+.phaseText {
+	font-weight: bold;
+	padding:0;
+	width: 80px;
+	min-width: 80px;
 }
 .tableWidth {
 	width: 80px;
@@ -61,13 +67,30 @@ td {
 	text-align: center;
 }
 .editButton {
-	display: inline-block;
+	display: list-item;
 	background-color: #2983CC;
 	text-align: center;
 	font-weight: bold;
-	width: 20%;
+	font-size: 20px;
+	width: 80%;
 	padding: 12px 12px;
-	margin: 0 10px;
+	margin: 10px auto;
 	border: 1px solid #000000;
 	outline: none;
+}
+
+@media screen and (min-width: 640px) {
+	.editButton {
+		display: inline-block;
+		background-color: #2983CC;
+		text-align: center;
+		font-weight: bold;
+		font-size: 100%;
+		width: 20%;
+		min-width: 30px;
+		padding: 12px 0;
+		margin: 0 6px;
+		border: 1px solid #000000;
+		outline: none;
+	}
 }
