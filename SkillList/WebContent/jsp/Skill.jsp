@@ -158,7 +158,7 @@ development = (ArrayList<String>) request.getAttribute("development");
 </table>
 <table>
 	<tr>
-		<td class="tableText">最終学歴*</td>
+		<td class="tableText" style="min-width: 90px">最終学歴*</td>
 		<td style="width: auto">&nbsp;：&nbsp;<%=background%></td>
 		<td style="width: auto">&nbsp;：&nbsp;<%=backgroundNumber%>&nbsp;年</td>
 	</tr>
@@ -213,7 +213,7 @@ development = (ArrayList<String>) request.getAttribute("development");
 </table>
 <table>
 	<tr>
-		<td style="font-weight: bold; width: 90px; vertical-align: top">業務内容</td>
+		<td class="tableText" style="min-width: 90px; vertical-align: top">業務内容</td>
 		<td style="height: 24px; vertical-align: top">&nbsp;：&nbsp;<%=task.get(i) %></td>
 	</tr>
 </table>
