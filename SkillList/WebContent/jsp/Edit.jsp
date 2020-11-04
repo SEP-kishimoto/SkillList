@@ -173,11 +173,11 @@ if (errmsg != null) {
 	</tr>
 	<tr>
 		<td class="tableText">生年月日*</td>
-		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="birthday" value="<%=birthday%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="birthday" value="<%=birthday%>">&nbsp;<label>生</label></td>
 	</tr>
 	<tr>
 		<td class="tableText">性別*</td>
-		<td>&nbsp;：&nbsp;<input class="inputLine" style="width: 40px" type="text" name="gender" value="<%=gender%>">&nbsp;<label>生</label></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" style="width: 40px" type="text" name="gender" value="<%=gender%>"></td>
 	</tr>
 </table>
 <table class="phaseTable">

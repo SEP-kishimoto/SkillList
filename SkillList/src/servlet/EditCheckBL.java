@@ -372,7 +372,7 @@ public class EditCheckBL extends HttpServlet {
 		    n = 0;
 		    String[] developmentList = development.get(s).replaceAll("、", ",").replaceAll(" ", "").replaceAll("　", "").split(",", -1);
 		    for (int i = 0; i < developmentList.length;i++) {
-		    	if (developmentList[n].length() > 14) {
+		    	if (developmentList[n].length() > 13) {
 		    		development_over = 1;
 		    		break;
 		    	}
@@ -385,18 +385,17 @@ public class EditCheckBL extends HttpServlet {
 
 		    if (taskList.length - 1 > 10) {
 				errmsg += "業務内容は10項目以内で入力してください" + "(No." + (s + 1) + ")<br>";
-				break;
 			}
 		    if (task_over == 1) {
 				errmsg += "業務内容は一つの項目に対して24文字以内で入力してください" + "(No." + (s + 1) + ")<br>";
-				break;
+				task_over = 0;
 			}
 			if (developmentList.length - 1 > 10) {
 				errmsg += "開発環境は10項目以内で入力してください" + "(No." + (s + 1) + ")<br>";
-				break;
 			}
 			if (development_over == 1) {
 				errmsg += "開発環境は一つの項目に対して13文字以内で入力してください" + "(No." + (s + 1) + ")<br>";
+				development_over = 0;
 			}
 	    }
 
