@@ -51,14 +51,14 @@ List<String> task = new ArrayList<String>();
 
 <!-- Background Note変数 フェーズ表示、List二重構造 -->
 <%
-List<String> requirement = new ArrayList<>();
-List<String>basic = new ArrayList<>();
-List<String> details = new ArrayList<>();
-List<String> pg = new ArrayList<>();
-List<String> single = new ArrayList<>();
-List<String> join = new ArrayList<>();
-List<String> customer = new ArrayList<>();
-List<String> environment = new ArrayList<>();
+ArrayList<List<String>> requirement = new ArrayList<>();
+ArrayList<List<String>>basic = new ArrayList<>();
+ArrayList<List<String>> details = new ArrayList<>();
+ArrayList<List<String>> pg = new ArrayList<>();
+ArrayList<List<String>> single = new ArrayList<>();
+ArrayList<List<String>> join = new ArrayList<>();
+ArrayList<List<String>> customer = new ArrayList<>();
+ArrayList<List<String>> environment = new ArrayList<>();
 %>
 
 <!-- Background Note変数 リスト構造 -->
@@ -72,22 +72,22 @@ List<String> development = new ArrayList<String>();
 %>
 <!-- Background Noteの設定 リスト構造 本来は二重構造 -->
 <%
-noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
-beginning = (ArrayList<String>) session.getAttribute("beginning");
-end = (ArrayList<String>) session.getAttribute("end");
-task = (ArrayList<String>) session.getAttribute("task");
+noteNumber = (ArrayList<String>) request.getAttribute("noteNumber");
+beginning = (ArrayList<String>) request.getAttribute("beginning");
+end = (ArrayList<String>) request.getAttribute("end");
+task = (ArrayList<String>) request.getAttribute("task");
 
-requirement = (ArrayList<String>) session.getAttribute("requirement");
-basic = (ArrayList<String>) session.getAttribute("basic");
-details = (ArrayList<String>) session.getAttribute("details");
-pg = (ArrayList<String>) session.getAttribute("pg");
-single = (ArrayList<String>) session.getAttribute("single");
-join = (ArrayList<String>) session.getAttribute("join");
-customer = (ArrayList<String>) session.getAttribute("customer");
-environment = (ArrayList<String>) session.getAttribute("environment");
+requirement = (ArrayList<List<String>>) request.getAttribute("requirement");
+basic = (ArrayList<List<String>>)request.getAttribute("basic");
+details = (ArrayList<List<String>>) request.getAttribute("details");
+pg = (ArrayList<List<String>>) request.getAttribute("pg");
+single = (ArrayList<List<String>>) request.getAttribute("single");
+join = (ArrayList<List<String>>) request.getAttribute("join");
+customer =(ArrayList<List<String>>) request.getAttribute("customer");
+environment = (ArrayList<List<String>>) request.getAttribute("environment");
 
-peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
-development = (ArrayList<String>) session.getAttribute("development");
+peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
+development = (ArrayList<String>) request.getAttribute("development");
 %>
 <div class="table">
 <h2>スキルシート管理システム:スキルシート登録</h2>
@@ -183,27 +183,27 @@ development = (ArrayList<String>) session.getAttribute("development");
 <table>
 	<tr>
 		<td class="tableText">要件定義</td>
-		<td>&nbsp;：&nbsp;<%=requirement.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=requirement.get(i).get(0) %></td>
 		<td class="tableText">基本設計</td>
-		<td>&nbsp;：&nbsp;<%=basic.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=basic.get(i).get(1) %></td>
 	</tr>
 	<tr>
 		<td class="tableText">詳細設計</td>
-		<td>&nbsp;：&nbsp;<%=details.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=details.get(i).get(2) %></td>
 		<td class="tableText">PG製造</td>
-		<td>&nbsp;：&nbsp;<%=pg.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=pg.get(i).get(3) %></td>
 	</tr>
 	<tr>
 		<td class="tableText">単体試験</td>
-		<td>&nbsp;：&nbsp;<%=single.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=single.get(i).get(4) %></td>
 		<td class="tableText">結合試験</td>
-		<td>&nbsp;：&nbsp;<%=join.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=join.get(i).get(5) %></td>
 	</tr>
 	<tr>
 		<td class="tableText">客先試験</td>
-		<td>&nbsp;：&nbsp;<%=customer.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=customer.get(i).get(6) %></td>
 		<td class="tableText">環境設定</td>
-		<td>&nbsp;：&nbsp;<%=environment.get(i) %></td>
+		<td>&nbsp;：&nbsp;<%=environment.get(i).get(7) %></td>
 	</tr>
 </table>
 <p style="margin-bottom:1em;"></p>
