@@ -51,14 +51,14 @@ List<String> task = new ArrayList<String>();
 
 <!-- Background Note変数 フェーズ表示、List二重構造 -->
 <%
-List<String> requirement = new ArrayList<>();
-List<String>basic = new ArrayList<>();
-List<String> details = new ArrayList<>();
-List<String> pg = new ArrayList<>();
-List<String> single = new ArrayList<>();
-List<String> join = new ArrayList<>();
-List<String> customer = new ArrayList<>();
-List<String> environment = new ArrayList<>();
+ArrayList<List<String>> requirement = new ArrayList<>();
+ArrayList<List<String>>basic = new ArrayList<>();
+ArrayList<List<String>> details = new ArrayList<>();
+ArrayList<List<String>> pg = new ArrayList<>();
+ArrayList<List<String>> single = new ArrayList<>();
+ArrayList<List<String>> join = new ArrayList<>();
+ArrayList<List<String>> customer = new ArrayList<>();
+ArrayList<List<String>> environment = new ArrayList<>();
 %>
 
 <!-- Background Note変数 リスト構造 -->
@@ -72,22 +72,22 @@ List<String> development = new ArrayList<String>();
 %>
 <!-- Background Noteの設定 リスト構造 本来は二重構造 -->
 <%
-noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
-beginning = (ArrayList<String>) session.getAttribute("beginning");
-end = (ArrayList<String>) session.getAttribute("end");
-task = (ArrayList<String>) session.getAttribute("task");
+noteNumber = (ArrayList<String>) request.getAttribute("noteNumber");
+beginning = (ArrayList<String>) request.getAttribute("beginning");
+end = (ArrayList<String>) request.getAttribute("end");
+task = (ArrayList<String>) request.getAttribute("task");
 
-requirement = (ArrayList<String>) session.getAttribute("requirement");
-basic = (ArrayList<String>) session.getAttribute("basic");
-details = (ArrayList<String>) session.getAttribute("details");
-pg = (ArrayList<String>) session.getAttribute("pg");
-single = (ArrayList<String>) session.getAttribute("single");
-join = (ArrayList<String>) session.getAttribute("join");
-customer = (ArrayList<String>) session.getAttribute("customer");
-environment = (ArrayList<String>) session.getAttribute("environment");
+requirement = (ArrayList<List<String>>) request.getAttribute("requirement");
+basic = (ArrayList<List<String>>)request.getAttribute("basic");
+details = (ArrayList<List<String>>) request.getAttribute("details");
+pg = (ArrayList<List<String>>) request.getAttribute("pg");
+single = (ArrayList<List<String>>) request.getAttribute("single");
+join = (ArrayList<List<String>>) request.getAttribute("join");
+customer =(ArrayList<List<String>>) request.getAttribute("customer");
+environment = (ArrayList<List<String>>) request.getAttribute("environment");
 
-peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
-development = (ArrayList<String>) session.getAttribute("development");
+peopleNumber = (ArrayList<String>) request.getAttribute("peopleNumber");
+development = (ArrayList<String>) request.getAttribute("development");
 %>
 <div class="table">
 <h2>スキルシート管理システム:スキルシート登録</h2>
@@ -95,106 +95,131 @@ development = (ArrayList<String>) session.getAttribute("development");
 <h2>&#9632;Profile</h2>
 </div>
 <form action="../SkillList/AddCommit" method="post">
-<div class="table">
 <table>
-	<tr><th>フリガナ* : </th><td><%=kana%></td></tr>
-	<tr><th>氏名* : </th><td><%=db_name%></td></tr>
-	<tr><th>現住所* : </th><td><%=address%></td></tr>
-	<tr><th>生年月日* : </th><td><%=birthday%></td></tr>
-	<tr><th>年齢 : </th><td><%=age%></td></tr>	<!-- javascriptを使って自動表示 -->
-	<tr><th>性別* : </th><td><%=gender%></td></tr>
-	<tr><th>最終学歴* : </th><td><%=background%></td><td><%=backgroundNumber%>年</td></tr>
-	<tr><th>最寄り駅* : </th><td><%=nearestStation%></td><td><%=stationName%></td></tr>
-
-
+	<tr>
+		<td class="tableText" style="min-width: 90px">フリガナ*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=kana%></td>
+	</tr>
+	<tr>
+		<td class="tableText">氏名*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=db_name%></td>
+	</tr>
+	<tr>
+		<td class="tableText">現住所*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=address%></td>
+	</tr>
+	<tr>
+		<td class="tableText">生年月日*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=birthday%>&nbsp;生</td>
+	</tr>
+	<tr>
+		<td class="tableText">年齢*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=age%>&nbsp;歳</td>
+	</tr>
+	<tr>
+		<td class="tableText">性別*</td>
+		<td style="width: auto">&nbsp;：&nbsp;<%=gender%></td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<td class="tableText">最終学歴*</td>
+		<td>&nbsp;：&nbsp;<%=background%></td>
+		<td>&nbsp;：&nbsp;<%=backgroundNumber%>&nbsp;年</td>
+	</tr>
+	<tr>
+		<td class="tableText">最寄り駅*</td>
+		<td>&nbsp;：&nbsp;<%=nearestStation%>&nbsp;線</td>
+		<td>&nbsp;：&nbsp;<%=stationName%>&nbsp;駅</td>
+	</tr>
 </table>
 
-<br><br>
 <h2>■Skill Info</h2>
 <table>
-	<tr><th>OS : </th><td><%=os%></td></tr>
-	<tr><th>スキル : </th><td><%=skill%></td></tr>
-	<tr><th>ツール : </th><td><%=tool%></td></tr>
-	<tr><th>データベース : </th><td><%=db%></td></tr>
-	<tr><th>資格 : </th><td><%=qualification%></td></tr>
-
+	<tr>
+		<td class="tableText" style="min-width: 90px">OS</td>
+		<td>&nbsp;：&nbsp;<%=os%></td>
+	</tr>
+	<tr>
+		<td class="tableText">スキル</td>
+		<td>&nbsp;：&nbsp;<%=skill%></td>
+	</tr>
+	<tr>
+		<td class="tableText">ツール</td>
+		<td>&nbsp;：&nbsp;<%=tool%></td>
+	</tr>
+	<tr>
+		<td class="tableText" style="width: 100px; min-width: 100px">データベース</td>
+		<td>&nbsp;：&nbsp;<%=db%></td>
+	</tr>
+	<tr>
+		<td class="tableText" style="vertical-align: top">資格</td>
+		<td style="vertical-align: top">&nbsp;：&nbsp;<%=qualification%></td>
+	</tr>
 </table>
 
-<br><br>
-<h2>■BackGround Note</h2>
+<h2>■Background Note</h2>
 <%for (int i = 0; i < noteNumber.size(); i++) { %>
-<input type="hidden" name="beginning<%=i %>" value="<%=beginning.get(i) %>">
-<input type="hidden" name="end<%=i %>" value="<%=end.get(i) %>">
-<input type="hidden" name="task<%=i %>" value="<%=task.get(i) %>">
-<!-- フェーズ -->
-<input type="hidden" name="requirement<%=i %>" value="<%=requirement.get(i)%>">
-<input type="hidden" name="basic<%=i %>" value="<%=basic.get(i) %>">
-<input type="hidden" name="details<%=i %>" value="<%=details.get(i) %>">
-<input type="hidden" name="pg<%=i %>" value="<%=pg.get(i) %>">
-<input type="hidden" name="single<%=i %>" value="<%=single.get(i) %>">
-<input type="hidden" name="join<%=i %>" value="<%=join.get(i) %>">
-<input type="hidden" name="customer<%=i %>" value="<%=customer.get(i) %>">
-<input type="hidden" name="environment<%=i %>" value="<%=environment.get(i) %>">
-<!-- フェーズここまで -->
-<input type="hidden" name="peopleNumber<%=i %>" value="<%=peopleNumber.get(i) %>">
-<input type="hidden" name="development<%=i %>" value="<%=development.get(i) %>">
 <div style="border:1px solid #000000; margin-bottom: 20px;">
 <table>
 	<tr>
-		<td>No.</td>
-		<td><%=noteNumber.get(i) %></td>
+		<td class="tableText">No.</td>
+		<td>&nbsp;：&nbsp;<%=noteNumber.get(i) %></td>
 	</tr>
 	<tr>
-		<td>開始</td>
-		<td><%=beginning.get(i) %></td>
+		<td class="tableText">開始</td>
+		<td>&nbsp;：&nbsp;<%=beginning.get(i) %></td>
 	</tr>
 	<tr>
-		<td>終了</td>
-		<td><%=end.get(i) %></td>
+		<td class="tableText">終了</td>
+		<td>&nbsp;：&nbsp;<%=end.get(i) %></td>
 	</tr>
 	<tr>
-		<td>業務内容</td>
-		<td><%=task.get(i) %></td>
+		<td class="tableText" style="font-weight: bold; width: 90px; vertical-align: top">業務内容</td>
+		<td style="height: 24px; vertical-align: top">&nbsp;：&nbsp;<%=task.get(i) %></td>
 	</tr>
-	<!-- 本来二重構造 -->
+</table>
+<p style="font-weight: bold">フェーズ</p>
+<table>
 	<tr>
-		<td>要件定義</td>
-		<td><%=requirement.get(i)%></td>
-		<td>基本設計</td>
-		<td><%=basic.get(i) %></td>
-	</tr>
-	<tr>
-		<td>詳細設計</td>
-		<td><%=details.get(i) %></td>
-		<td>PG製造</td>
-		<td><%=pg.get(i) %></td>
+		<td class="tableText">要件定義</td>
+		<td>&nbsp;：&nbsp;<%=requirement.get(i).get(0) %></td>
+		<td class="tableText">基本設計</td>
+		<td>&nbsp;：&nbsp;<%=basic.get(i).get(1) %></td>
 	</tr>
 	<tr>
-		<td>単体試験</td>
-		<td><%=single.get(i) %></td>
-		<td>結合試験</td>
-		<td><%=join.get(i) %></td>
+		<td class="tableText">詳細設計</td>
+		<td>&nbsp;：&nbsp;<%=details.get(i).get(2) %></td>
+		<td class="tableText">PG製造</td>
+		<td>&nbsp;：&nbsp;<%=pg.get(i).get(3) %></td>
 	</tr>
 	<tr>
-		<td>客先試験</td>
-		<td><%=customer.get(i) %></td>
-		<td>環境設定</td>
-		<td><%=environment.get(i) %></td>
-	</tr>
-	<!-- ここまで本来二重構造 -->
-	<tr>
-		<td>人数</td>
-		<td><%=peopleNumber.get(i) %></td>
+		<td class="tableText">単体試験</td>
+		<td>&nbsp;：&nbsp;<%=single.get(i).get(4) %></td>
+		<td class="tableText">結合試験</td>
+		<td>&nbsp;：&nbsp;<%=join.get(i).get(5) %></td>
 	</tr>
 	<tr>
-		<td>開発環境</td>
-		<td><%=development.get(i) %></td>
+		<td class="tableText">客先試験</td>
+		<td>&nbsp;：&nbsp;<%=customer.get(i).get(6) %></td>
+		<td class="tableText">環境設定</td>
+		<td>&nbsp;：&nbsp;<%=environment.get(i).get(7) %></td>
+	</tr>
+</table>
+<p style="margin-bottom:1em;"></p>
+<table>
+	<tr>
+		<td class="tableText">人数</td>
+		<td>&nbsp;：&nbsp;<%=peopleNumber.get(i) %></td>
+	</tr>
+	<tr>
+		<td class="tableText" style="font-weight: bold; width: 90px; vertical-align: top">開発環境</td>
+		<td style="height: 24px; vertical-align: top">&nbsp;：&nbsp;<%=development.get(i) %></td>
 	</tr>
 </table>
 <p style="margin-bottom:1em;"></p>
 </div>
 <%} %>
-</div>
 <!-- DB登録情報 -->
 <input type="hidden" name="db_number" value=<%=db_number%>>
 <input type="hidden" name="db_name" value=<%=db_name%>><!-- Profileの氏名も同じものを使用 -->
@@ -216,8 +241,8 @@ development = (ArrayList<String>) session.getAttribute("development");
 <input type="hidden" name="db" value=<%=db%>>
 <input type="hidden" name="qualification" value=<%=qualification%>>
 <div class="buttonTable">
-<button type="submit" class="editButton">確認</button>
-<input type="button" value="戻る" class="editButton" onclick="history.back()" formaction="/SkillList/jsp/Add.jsp"><!-- ヒストリーバック使用 -->
+<button type="submit" class="addCheckButton">登録</button>
+<input type="button" value="戻る" class="addCheckButton" onclick="history.back()" formaction="/SkillList/jsp/Add.jsp"><!-- ヒストリーバック使用 -->
 </div>
 </form>
 

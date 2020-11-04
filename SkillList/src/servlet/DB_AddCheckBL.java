@@ -104,15 +104,15 @@ public class DB_AddCheckBL extends HttpServlet {
 		}
 
 		if(kana.isEmpty()) {
-			err_message += "フリガナを記入してください<br>";
+			err_message += "フリガナを入力してください<br>";
 		}
 
 		if(db_name.isEmpty()) {
-			err_message += "氏名を記入してください<br>";
+			err_message += "氏名を入力してください<br>";
 		}
 
 		if(password.isEmpty()) {
-			err_message += "パスワードを記入してください<br>";
+			err_message += "パスワードを入力してください<br>";
 		}
 
 		if (!(err_message.equals(""))) {

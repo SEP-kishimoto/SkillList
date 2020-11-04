@@ -24,6 +24,11 @@
 		String kana = (String) request.getAttribute("kana");
 		String errmsg = (String) request.getAttribute("errmsg");
 
+		System.out.println(db_number);
+		System.out.println(db_name);
+		System.out.println(password);
+		System.out.println(kana);
+
 		//Profile
 		String address = "";
 		String birthday = "";
@@ -123,11 +128,11 @@
 			type="hidden" name="db_name" value=<%=db_name%>> <input
 			type="hidden" name="kana" value=<%=kana%>> <input
 			type="hidden" name="noteNumber" value=<%=noteNumber%>>
-			<h2>&#9632;Profile</h2>
+<h2>&#9632;Profile</h2>
 <table class="phaseTable">
 	<tr>
-		<td class="tableText">フリガナ*</td>
-		<td class="profileTd">&nbsp;：&nbsp;<%=kana%></td>
+		<td class="tableText" style="min-width: 90px">フリガナ*</td>
+		<td style="width: 600px">&nbsp;：&nbsp;<%=kana%></td>
 	</tr>
 	<tr>
 		<td class="tableText">氏名*</td>
@@ -135,48 +140,51 @@
 	</tr>
 	<tr>
 		<td class="tableText">現住所*</td>
-		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="address" value="<%=address%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" style="width: 80%" type="text" name="address" value="<%=address%>"></td>
 	</tr>
 	<tr>
 		<td class="tableText">生年月日*</td>
-		<td>&nbsp;：&nbsp;<input class="inputLine"type="text" name="birthday" value="<%=birthday%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="birthday" value="<%=birthday%>">&nbsp;<label>生</label></td>
 	</tr>
 	<tr>
 		<td class="tableText">性別*</td>
-		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="gender" value="<%=gender%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" style="width: 40px" type="text" name="gender" value="<%=gender%>"></td>
 	</tr>
-
+</table>
+<table class="phaseTable">
 	<tr>
-		<td class="tableText">最終学歴*</td>
-		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="background" placeholder="学校名" value="<%=background%>">&nbsp;：&nbsp;<input class="inputLine" type="text" name="backgroundNumber" placeholder="卒業した年" value="<%=backgroundNumber%>"></td>
+		<td class="tableText" style="min-width: 90px">最終学歴*</td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input  style="width: 50%; height: 24px" type="text" name="background" placeholder="学校名" value="<%=background%>"></td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input style="width: 50%; height: 24px" type="text" name="backgroundNumber" placeholder="卒業した年" value="<%=backgroundNumber%>">&nbsp;<label>年</label></td>
 	</tr>
 	<tr>
 		<td class="tableText">最寄り駅*</td>
-		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="nearestStation" placeholder="路線名" value="<%=nearestStation%>">&nbsp;：&nbsp;<input class="inputLine" type="text" name="stationName" placeholder="駅名" value="<%=stationName%>"></td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input style="width: 50%; height: 24px" type="text" name="nearestStation" placeholder="路線名" value="<%=nearestStation%>">&nbsp;<label>線</label></td>
+		<td style="width: 150px">&nbsp;：&nbsp;<input style="width: 50%; height: 24px" type="text" name="stationName" placeholder="駅名" value="<%=stationName%>">&nbsp;<label>駅</label></td>
 	</tr>
 </table>
 
 <h2>&#9632;Skill Info</h2>
 <table class="phaseTable">
 	<tr>
-		<td class="tableText">OS</td>
-		<td class="profileTd">&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="os" value="<%=os%>"></td>
+		<td class="tableText" style="width: 100px; min-width: 100px; height: 24px">OS</td>
+		<td style="width: 600px">&nbsp;：&nbsp;<input class="inputLine" type="text" name="os" value="<%=os%>"></td>
 	</tr>
 	<tr>
 		<td class="tableText">スキル</td>
-		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="skill" value="<%=skill%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="skill" value="<%=skill%>"></td>
 	</tr>
 	<tr>
 		<td class="tableText">ツール</td>
-		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="tool" value="<%=tool%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="tool" value="<%=tool%>"></td>
 	</tr>
 	<tr>
 		<td class="tableText">データベース</td>
-		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="db" value="<%=db%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="db" value="<%=db%>"></td>
 	</tr>
 	<tr>
 		<td class="tableText">資格</td>
-		<td>&nbsp;：&nbsp;<input style="width: 330px; height: 24px" type="text" name="qualification" value="<%=qualification%>"></td>
+		<td>&nbsp;：&nbsp;<input class="inputLine" type="text" name="qualification" value="<%=qualification%>"></td>
 	</tr>
 
 </table>
@@ -186,7 +194,7 @@
 <table class="phaseTable">
 	<tr>
 		<td class="tableText">No.</td>
-		<td>&nbsp;：&nbsp;<%=noteNumber.get(i) %></td>
+		<td style="width: 600px">&nbsp;：&nbsp;<%=noteNumber.get(i) %></td>
 	</tr>
 	<tr>
 		<td class="tableText">開始</td>
@@ -197,15 +205,16 @@
 		<td>&nbsp;：&nbsp;<input style="height: 24px" type="text" name="end<%=i %>" value="<%=end.get(i) %>"></td>
 	</tr>
 	<tr>
-		<td class="tableText" style="vertical-align: top">業務内容</td>
-		<td class="textWidth" style="width: 600px; height: 24px">&nbsp;：&nbsp;<textarea class="textRow" name="task<%=i %>"><%=task.get(i) %></textarea></td>
+		<td class="tableText" style="min-width: 90px; vertical-align: top">業務内容</td>
+		<td>&nbsp;：&nbsp;<textarea class="textRow" name="task<%=i %>"><%=task.get(i) %></textarea></td>
 	</tr>
 </table>
 <p style="font-weight: bold">フェーズ</p>
 <table class="phaseTable">
 	<tr>
-		<td class="tableText">要件定義</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="requirement<%=i %>">
+		<td style="width: 70px; font-weight: bold">要件定義</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="requirement<%=i %>">
 			<option value="<%=requirement.get(i) %>"><%=requirement.get(i) %></option>
 			<%if (requirement.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -213,8 +222,9 @@
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="tableText">基本設計</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="basic<%=i %>">
+		<td style="width: 70px; font-weight: bold">基本設計</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="basic<%=i %>">
 			<option value="<%=basic.get(i) %>"><%=basic.get(i) %></option>
 			<%if (basic.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -224,8 +234,9 @@
 		</select></td>
 	</tr>
 	<tr>
-		<td class="tableText">詳細設計</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="details<%=i %>">
+		<td style="width: 70px; font-weight: bold">詳細設計</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="details<%=i %>">
 			<option value="<%=details.get(i) %>"><%=details.get(i) %></option>
 			<%if (details.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -233,8 +244,9 @@
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="tableText">PG製造</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="pg<%=i %>">
+		<td style="width: 70px; font-weight: bold">PG製造</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="pg<%=i %>">
 			<option value="<%=pg.get(i) %>"><%=pg.get(i) %></option>
 			<%if (pg.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -244,8 +256,9 @@
 		</select></td>
 	</tr>
 	<tr>
-		<td class="tableText">単体試験</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="single<%=i %>">
+		<td style="width:70px; font-weight: bold">単体試験</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="single<%=i %>">
 			<option value="<%=single.get(i) %>"><%=single.get(i) %></option>
 			<%if (single.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -253,8 +266,9 @@
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="tableText">結合試験</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="join<%=i %>">
+		<td style="width: 70px; font-weight: bold">結合試験</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="join<%=i %>">
 			<option value="<%=join.get(i) %>"><%=join.get(i) %></option>
 			<%if (join.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -264,8 +278,9 @@
 		</select></td>
 	</tr>
 	<tr>
-		<td class="tableText">客先試験</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="customer<%=i %>">
+		<td style="width: 70px; font-weight: bold">客先試験</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="customer<%=i %>">
 			<option value="<%=customer.get(i) %>"><%=customer.get(i) %></option>
 			<%if (customer.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -273,8 +288,9 @@
 			<option value=""></option>
 			<%} %>
 		</select></td>
-		<td class="tableText">環境設定</td>
-		<td class="tableWidth">&nbsp;：&nbsp;<select class="inputWidth" name="environment<%=i %>">
+		<td style="width: 70px; font-weight: bold">環境設定</td>
+		<td class="tableWidth">&nbsp;：&nbsp;
+		<select class="inputWidth" name="environment<%=i %>">
 			<option value="<%=environment.get(i) %>"><%=environment.get(i) %></option>
 			<%if (environment.get(i) == "") {%>
 			<option value="◎">◎</option>
@@ -291,13 +307,15 @@
 		<td style="width: 600px">&nbsp;：&nbsp;<input class="inputWidth" type="text" name="peopleNumber<%=i %>" value="<%=peopleNumber.get(i) %>"></td>
 	</tr>
 	<tr>
-		<td class="tableText" style="vertical-align: top">開発環境</td>
+		<td class="tableText" style="min-width: 90px; vertical-align: top">開発環境</td>
 		<td>&nbsp;：&nbsp;<textarea class="textRow" name="development<%=i %>"><%=development.get(i) %></textarea></td>
 	</tr>
 </table>
 <p style="margin-bottom:1em;"></p>
 </div>
 <%} %>
+
+
 			<br>
 			<br>
 			<br>
@@ -309,10 +327,11 @@
 				<button type="submit" class="editButton" name="addition_flg"
 				value="1">項目追加</button><!-- AddCheckBLで項目追加の処理を行う-->
 
+	<button type="submit" class="editButton" name="return_flg" value="1" formaction="/SkillList/jsp/DB_Add.jsp" >戻る</button>
 
-			<button type="submit" class="editButton" name="return_flg" value="1" formaction="/SkillList/jsp/DB_Add.jsp" >戻る</button>
 
 	</div>
 </form>
+
 </body>
 </html>
