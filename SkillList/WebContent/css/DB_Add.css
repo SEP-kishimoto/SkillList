@@ -3,6 +3,7 @@
 
 body {
 	width: 60%;
+	min-width: 320px;
 	margin-right: auto;
 	margin-left : auto;
 	outline: none;
