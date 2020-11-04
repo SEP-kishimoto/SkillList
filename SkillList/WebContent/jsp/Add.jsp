@@ -328,6 +328,7 @@
 				value="1">項目追加</button><!-- AddCheckBLで項目追加の処理を行う-->
 
 	<button type="submit" class="editButton" name="return_flg" value="1" formaction="/SkillList/jsp/DB_Add.jsp" >戻る</button>
+	
 
 
 	</div>
