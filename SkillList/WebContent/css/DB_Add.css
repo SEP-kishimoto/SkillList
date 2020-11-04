@@ -11,7 +11,8 @@ body {
 
 
 .buttonTable {
-text-align: center;
+	text-align: center;
+	box-sizing: content-box;
 }
 
 .skillButton {

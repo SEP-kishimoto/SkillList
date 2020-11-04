@@ -31,7 +31,6 @@ String return_flg = (String) request.getSession().getAttribute("return_flg");
 if(return_flg == null) {
 	return_flg = request.getParameter("return_flg");
 }
-System.out.println("リターン" + return_flg);
 if (return_flg != null) {
 	db_number = (String) request.getParameter("db_number");
 	kana = request.getParameter("kana");
