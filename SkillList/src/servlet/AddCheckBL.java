@@ -262,6 +262,12 @@ public class AddCheckBL extends HttpServlet {
 				if (skillList[n].equals("")) {
 					break;
 				}
+
+				if (skillList[n].length() > 33) {
+		    		skill_over = 1;
+		    		skill_charcount = skillList[n].length() - 33;
+		    		break;
+		    	}
 				System.out.println("ループ回数" + i + " 文字数" + skill_charcount);
 				if (moji.length() + skillList[n].length() + 1 > 33 && lastrow_flg == 0) { // 行に設定する文字数 + これから設定しようとしている文字数 + カンマ分 > 行に入る文字数(全角)
 					skill_charcount = 0;
