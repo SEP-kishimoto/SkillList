@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>スキルシート管理システム：詳細</title>
+<title>スキルシート詳細画面</title>
 <link rel="stylesheet" type="text/css" href="/SkillList/css/Skill.css">
 </head>
 <body>
