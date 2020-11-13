@@ -14,6 +14,8 @@
 	<form>
 		<div class="head_div">
 			<div class="in_div">
+				<!-- テスト用のリンク先を指定して遷移を確認する -->
+				<!-- ./test/LinkCheck.jsp ./jsp/DB_Add.jsp-->
 				<input class="new_input" formaction="./jsp/DB_Add.jsp" type="submit"
 					name="send" value="新規登録">
 			</div>
@@ -33,6 +35,8 @@
 				String master_flg = (String) rs.getString("master_flg");
 				String filename = (String) rs.getString("filename");
 		%>
+		<!-- テスト用のリンク先を指定してログアウト等を確認する -->
+		<!-- ./test/ListTestOutput.jsp /SkillList/SkillBL-->
 		<form method="POST" action="/SkillList/SkillBL">
 		<tr class="data">
 			<td><%=db_number%></td>
@@ -61,6 +65,8 @@
 								<br>よろしいですか？
 							</span>
 							<p></p>
+							<!-- テスト用のリンク先を指定して遷移を確認する -->
+							<!-- ./test/LinkCheck.jsp -->
 							<input type="submit" value="OK" formaction="/SkillList/LoginBL">
 							<input type="button" id="logoutCloseBtn" value="キャンセル">
 						</div>

@@ -9,6 +9,8 @@
 </head>
 <body>
 	<h1>スキルシート管理システム：ログイン</h1>
+	<!-- テスト用の入力データ送信先 -->
+	<!-- action="./test/LoginTestOutput.jsp" -->
 	<form method="POST">
 		<input type="hidden" value="login" name="flg">
 		<table class="loginTable">

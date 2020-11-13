@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>スキルシート管理システム：詳細</title>
 <link rel="stylesheet" type="text/css" href="/SkillList/css/Skill.css">
 </head>
 <body>
@@ -129,7 +129,7 @@ development = (ArrayList<String>) request.getAttribute("development");
 <h1>スキルシート管理システム：詳細</h1>
 
 <h2>&#9632;Profile</h2>
-<form method="post" action="/SkillList/EditBL">
+<form method="post">
 <table>
 	<tr class="tableLayout">
 		<td class="tableText" style="min-width: 90px">フリガナ*</td>
@@ -305,6 +305,8 @@ session.setAttribute("development", development);
 %>
 
 	<div class="buttonTable">
+			<!-- テスト用のリンク先 -->
+			<!-- ./test/SkillTestOutput.jsp ./jsp/Edit.jsp-->
 			<!-- 編集ボタン -->
 			<input class="skillButton" type="submit" value="編集" formaction="./jsp/Edit.jsp">
 			<!-- 削除ボタン -->
@@ -322,6 +324,8 @@ session.setAttribute("development", development);
 
 						<p class="delete_p"><%=db_name %></p>
 
+						<!-- テスト用のリンク先 -->
+						<!-- ./test/LinkCheck.jsp /SkillList/DeleteBL-->
 						<input
 							type="submit" value="OK" formaction="/SkillList/DeleteBL"> <input
 							type="button" id="deleteCloseBtn" value="キャンセル">
@@ -339,6 +343,8 @@ session.setAttribute("development", development);
 						</span>
 
 						<p class="download_p"><%=db_name %></p>
+						<!-- テスト用のリンク先 -->
+						<!-- ./test/LinkCheck.jsp /SkillList/DownloadBL-->
 							<input
 							type="submit" value="OK" formaction="/SkillList/DownloadBL"> <input
 							type="button" id="DownloadCloseBtn" value="キャンセル">
@@ -354,6 +360,8 @@ session.setAttribute("development", development);
 							<br>よろしいですか？
 						</span>
 						<p></p>
+						<!-- テスト用のリンク先 -->
+						<!-- ./test/LinkCheck.jsp /SkillList/ListBL /SkillList/LoginBL-->
 							<input
 							type="submit" value="OK" formaction="/SkillList/LoginBL"> <input
 							type="button" id="logoutCloseBtn" value="キャンセル">
@@ -363,6 +371,8 @@ session.setAttribute("development", development);
 			<%
 			if(master_flg2.equals("1")){
 			%>
+			<!-- テスト用のリンク先 -->
+			<!-- ./test/LinkCheck.jsp /SkillList/ListBL-->
 			<input type="hidden" value="<%=master_flg2%>" name="master_flg2">
 			<input class="skillButton" type="submit" value="戻る" formaction="/SkillList/ListBL">
 			<%}%>

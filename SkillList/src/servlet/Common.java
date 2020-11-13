@@ -20,6 +20,10 @@ public class Common {
 		String url = "jdbc:mysql://localhost:3306/SkillSheetDB?characterEncoding=UTF-8&serverTimezone=JST";
 		Class.forName("com.mysql.cj.jdbc.Driver");//ドライバのロード
 		Connection con = DriverManager.getConnection(url, user, password);
+
+		/*
+		 * DriverManagerがnullではないことを確認する
+		 */
 		return con;
 
 	}

@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+/*
+全体のCSS
+*/
 body {
 	width: 60%;
 	min-width: 320px;
@@ -28,12 +30,6 @@ h2 {
 	font-weight: bold;
 	padding:0;
 	width: 90px;
-}
-.phaseText {
-	font-weight: bold;
-	padding:0;
-	width: 80px;
-	min-width: 80px;
 }
 .tableWidth {
 	width: 80px;
@@ -64,6 +60,9 @@ td {
 	padding: 0;
 }
 
+/*
+確認、項目追加、戻るボタンのCSS
+*/
 .buttonTable {
 	text-align: center;
 }

@@ -39,14 +39,41 @@ public class LoginBL extends HttpServlet {
 		String pass = request.getParameter("password");//ログインパスワード
 		String flg = request.getParameter("flg");//初回起動フラグ
 		System.out.println("値受け取り");
+
+		// debug用の処理------------------------------
+		if (id == "") {
+			id = null;
+		}
+		if(pass == "") {
+			pass = null;
+		}
+		if (flg == "") {
+			flg = null;
+		}
+		/* debug用の処理------------------------------ */
+
+		/*
+		 * ブレークポイント1
+		 * 変数 id, pass, flg
+		 * flgで分岐する
+		 */
 		if (flg == null) {//ログインページ閲覧初回
 			id = "";
 			pass = "";
 			request.setAttribute("id", id);
 			request.setAttribute("password", pass);
 			System.out.println("初回");
+
+
+			//test/LoginBLTestOutput.jsp 元のデータ /jsp/Login.jsp
+
 			getServletContext().getRequestDispatcher("/jsp/Login.jsp").forward(request, response);
 		} else {//ログインボタン押下
+
+			/*
+			 * ブレークポイント2
+			 * id, passで分岐する
+			 */
 			if (id != null && pass != null) {//ID・Passがどちらも入っている
 				try {
 					Connection con = Common.getConnection();
@@ -58,12 +85,23 @@ public class LoginBL extends HttpServlet {
 					rs.last();//SQL結果の最後の行へ
 					int number_of_row = rs.getRow();//SQL結果の行数を取得
 					rs.beforeFirst(); //最初に戻る
+
 					if (number_of_row != 1) {//ID・Passが一致しない場合かID・Passが複数ある場合
 						String errmsg = "IDもしくはパスワードが間違っているか入力されていません。";
 						request.setAttribute("errmsg", errmsg);
 						request.setAttribute("id", id);
 						request.setAttribute("password", pass);
 						System.out.println("ID・PASS該当なし、または複数該当");
+
+
+						//test/LoginBLTestOutput.jsp 元のデータ /jsp/Login.jsp
+
+
+						/*
+						 * ブレークポイント3
+						 * ID・Passが一致しない場合かID・Passが複数ある場合
+						 * errmsgが発生しているか確認する
+						 */
 						getServletContext().getRequestDispatcher("/jsp/Login.jsp").forward(request, response);
 					} else {//ID・Passの該当が一件の場合
 						rs.next();
@@ -77,6 +115,16 @@ public class LoginBL extends HttpServlet {
 						request.setAttribute("filename", filename);
 						System.out.println("ID・パス該当あり");
 						ServletContext sc = getServletContext();
+
+
+						//test/LoginBLTestOutput.jsp 元のデータ /ListBL
+
+
+						/*
+						 * ブレークポイント4
+						 * ID・Passの該当が一件の場合
+						 * 変数 db_number, db_name, master_flg, filename
+						 */
 						RequestDispatcher dispatcher = sc.getRequestDispatcher("/ListBL");
 						dispatcher.forward(request, response);
 						}
@@ -88,6 +136,7 @@ public class LoginBL extends HttpServlet {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
+
 			} else {//ID・Passが入っていない
 
 				String errmsg = "IDもしくはパスワードが間違っているか入力されていません。";
@@ -95,6 +144,16 @@ public class LoginBL extends HttpServlet {
 				request.setAttribute("id", id);
 				request.setAttribute("password", pass);
 				System.out.println("ID・Pass不足");
+
+
+				//test/LoginBLTestOutput.jsp 元のデータ /jsp/Login.jsp
+
+
+				/*
+				 * ブレークポイント5
+				 * ID・Passが入っていない
+				 * errmsgが発生しているか確認する
+				 */
 				getServletContext().getRequestDispatcher("/jsp/Login.jsp").forward(request, response);
 			}
 		}

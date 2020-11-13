@@ -63,14 +63,14 @@ public class EditCheckBL extends HttpServlet {
 	    String nearestStation = "";
 	    String stationName = "";
 
-	    // スキル変数
+	    // Skill Info変数
 	    String os = "";
 	    String skill = "";
 	    String tool = "";
 	    String db = "";
 	    String qualification = "";
 
-	    // 履歴変数
+	    // Background Note変数
 	    List<String> noteNumber = new ArrayList<String>();
 	    List<String> beginning = new ArrayList<String>();
 	    List<String> end = new ArrayList<String>();
@@ -83,11 +83,13 @@ public class EditCheckBL extends HttpServlet {
 	    List<String> development = new ArrayList<String>();
 
 	    // 変数に設定
+	    // DB
 	    db_number = request.getParameter("db_number");
 	    db_name = request.getParameter("db_name");
 	    master_flg = request.getParameter("master_flg");
 	    filename = request.getParameter("filename");
 
+	    // Profileに設定
 	    kana = request.getParameter("kana");
 	    name = request.getParameter("name");
 	    address = request.getParameter("address");
@@ -98,6 +100,7 @@ public class EditCheckBL extends HttpServlet {
 	    nearestStation = request.getParameter("nearestStation");
 	    stationName = request.getParameter("stationName");
 
+	    // Skill Infoに設定
 	    os = request.getParameter("os");
 	    skill = request.getParameter("skill");
 	    tool = request.getParameter("tool");
@@ -118,22 +121,11 @@ public class EditCheckBL extends HttpServlet {
 	    	}
 	    }
 
+
+	    // Background Noteに設定
+
 	    HttpSession session = request.getSession();
 	    noteNumber = (ArrayList<String>) session.getAttribute("noteNumber");
-
-	    String errmsg = "";
-
-	    // ','で改行
-	    int n = 0;
-	    int skill_charcount = 0;	// スキル文字数カウント
-	    int tool_charcount = 0;		// ツール文字数カウント
-	    String moji ="";
-	    int skill_over = 0;	// スキル文字数オーバーフラグ
-	    int tool_over = 0;	// ツール文字数オーバーフラグ
-	    int count = 0;
-	    int lastrow_flg = 0;	// 最終行フラグ
-	    int task_over = 0;	// 業務内容オーバーフラグ
-	    int development_over = 0;	// 開発環境オーバーフラグ
 
 	    for (int i = 0; i < noteNumber.size(); i++) {
 	    	String backgroundValue = "beginning" + Integer.toString(i);
@@ -208,7 +200,24 @@ public class EditCheckBL extends HttpServlet {
 
 
 	    /*
-	     * Profileチェック
+	     * エラーメッセージ
+	     * errmsg
+	     */
+	    String errmsg = "";
+
+	    int n = 0;
+	    int skill_charcount = 0;	// スキル文字数カウント
+	    int tool_charcount = 0;		// ツール文字数カウント
+	    String moji ="";
+	    int skill_over = 0;	// スキル文字数オーバーフラグ
+	    int tool_over = 0;	// ツール文字数オーバーフラグ
+	    int count = 0;
+	    int lastrow_flg = 0;	// 最終行フラグ
+	    int task_over = 0;	// 業務内容オーバーフラグ
+	    int development_over = 0;	// 開発環境オーバーフラグ
+
+	    /*
+	     * Profile項目のエラーチェック
 	     * kana, name, address, birthday, age, gender,
 	     * background, backgroundNumber, nearestStation, stationName
 	     */
@@ -254,6 +263,11 @@ public class EditCheckBL extends HttpServlet {
 	     */
 	    String[] skillList = skill.split(",", -1);
 	    for (int i = 0; i < skillList.length;i++) {
+	    	if (skillList[n].length() > 33) {
+	    		skill_over = 1;
+	    		skill_charcount = skillList[n].length() - 33;
+	    		break;
+	    	}
 	    	if (skillList[n].equals("")) {
 	    		  break;
 	    	}
@@ -279,7 +293,7 @@ public class EditCheckBL extends HttpServlet {
 	    		n++;
 	    	} else {
 	    		lastrow_flg = 1;	// 最終行フラグ
-	    		 n++;
+	    		n++;
 	    	}
 
 	    	if (i == skillList.length - 1) {
@@ -290,11 +304,17 @@ public class EditCheckBL extends HttpServlet {
 	    	}
 	    }
 
-
-
+	    /*
+	     * tool項目の文字数チェック
+	     */
 	    n = 0;
 	    String[] toolList = tool.split(",", -1);
 	    for (int i = 0; i < toolList.length; i++) {
+	    	if (toolList[n].length() > 20) {
+	    		tool_over = 1;
+	    		tool_charcount = toolList[n].length() - 20;
+	    		break;
+	    	}
 	    	if (toolList[n].equals("")) {
 	    		break;
 	    	}
@@ -330,7 +350,6 @@ public class EditCheckBL extends HttpServlet {
 
 	    /*
 	     * エラーメッセージの追加
-	     * 変数名 errmsg
 	     */
 
 	    if (os.length() > 60) {
@@ -341,7 +360,7 @@ public class EditCheckBL extends HttpServlet {
 			errmsg += "スキルの文字数が" + skill_charcount + "文字超えています<br>";
 		}
 //
-		if (tool.length() > 60) {
+		if (tool_over == 1) {
 			errmsg += "ツールの文字数が" + tool_charcount + "文字超えています<br>";
 		}
 
@@ -353,9 +372,11 @@ public class EditCheckBL extends HttpServlet {
 			errmsg += "資格を60文字以内で入力してください<br>";
 		}
 
-	    // 業務内容文字数チェック
+
 	    n = 0;
 	    for (int s = 0; s < noteNumber.size(); s++) {
+
+	    	// 業務内容文字数チェック
 	    	n = 0;
 	    	String[] taskList = task.get(s).split(",", -1);
 		    for (int i = 0; i < taskList.length;i++) {
@@ -384,14 +405,20 @@ public class EditCheckBL extends HttpServlet {
 		    }
 
 		    if (taskList.length - 1 > 10) {
-				errmsg += "業務内容は10項目以内で入力してください" + "(No." + (s + 1) + ")<br>";
+				errmsg += "業務内容は10行以内で入力してください" + "(No." + (s + 1) + ")<br>";
 			}
 		    if (task_over == 1) {
 				errmsg += "業務内容は一つの項目に対して24文字以内で入力してください" + "(No." + (s + 1) + ")<br>";
 				task_over = 0;
 			}
+
+
+			if (peopleNumber.get(s).length() >= 5) {
+				errmsg += "人数を4文字以内で入力してください" + "(No." + (s + 1) + ")<br>";
+			}
+
 			if (developmentList.length - 1 > 10) {
-				errmsg += "開発環境は10項目以内で入力してください" + "(No." + (s + 1) + ")<br>";
+				errmsg += "開発環境は10行以内で入力してください" + "(No." + (s + 1) + ")<br>";
 			}
 			if (development_over == 1) {
 				errmsg += "開発環境は一つの項目に対して13文字以内で入力してください" + "(No." + (s + 1) + ")<br>";
@@ -399,14 +426,14 @@ public class EditCheckBL extends HttpServlet {
 			}
 	    }
 
-		for (int i = 0; i < noteNumber.size(); i++) {
-			if (peopleNumber.get(i).length() >= 5) {
-				errmsg += "人数を4文字以内で入力してください<br>" + "(No." + (i + 1) + ")<br>";
-				break;
-			}
-		}
 
-	    // db
+
+
+		/*
+		 * 情報を設定
+		 */
+
+	    // DB
 	    request.setAttribute("db_number", db_number);
 	    request.setAttribute("db_name", db_name);
 	    request.setAttribute("master_flg", master_flg);
@@ -448,6 +475,10 @@ public class EditCheckBL extends HttpServlet {
 	    request.setAttribute("peopleNumber", peopleNumber);
 	    request.setAttribute("development", development);
 
+	    /*
+	     * テスト用リンク先
+	     * /test/EditCheckBLTestOutput.jsp  → 元々のデータ  /jsp/EditCheck.jsp /jsp/Edit.jsp
+	     */
 	    if(errmsg == "") {
 			getServletContext().getRequestDispatcher("/jsp/EditCheck.jsp").forward(request, response);
 		} else {

@@ -36,6 +36,9 @@ public class ListBL extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		request.setCharacterEncoding("UTF-8");
+
 		String db_number = (String) request.getAttribute("db_number");
 		String db_name = (String) request.getAttribute("db_name");
 		String master_flg = (String) request.getAttribute("master_flg");
@@ -47,6 +50,13 @@ public class ListBL extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("master_flg",master_flg);
+
+		/*
+		 * ブレークポイント1
+		 * 変数 db_number, db_name, master_flg, filename
+		 * 変数を確認する
+		 * master_flgで分岐
+		 */
 		if (master_flg.equals("1")) {//管理者ログインの場合
 			try {
 				Connection commst = Common.getConnection();
@@ -55,6 +65,20 @@ public class ListBL extends HttpServlet {
 				ResultSet rs = stmt.executeQuery(sqlmst);
 				request.setAttribute("ResultSet", rs);
 				System.out.println("管理者です");
+
+				// debug用の処理------------------------------
+				/*String debugmsg = "管理者じゃけぇ";
+				request.setAttribute("debugmsg", debugmsg);
+				getServletContext().getRequestDispatcher("/test/ListBLTestOutput.jsp").forward(request, response);
+				/* debug用の処理------------------------------ */
+
+				/*
+				 * ブレークポイント2
+				 * 管理者ログインの場合
+				 * DBの変数rsが入っているかチェックする
+				 * テスト用の分岐先で、管理者と表示されている*/
+
+
 				getServletContext().getRequestDispatcher("/jsp/List.jsp").forward(request, response);
 			} catch (SQLException e) {
 				System.out.println("SQLException" + e);
@@ -71,6 +95,19 @@ public class ListBL extends HttpServlet {
 			request.setAttribute("filename", filename);
 			System.out.println("一般です");
 			ServletContext sc = getServletContext();
+
+			// debug用の処理------------------------------
+			/*String debugmsg = "一般人じゃけぇ";
+			request.setAttribute("debugmsg", debugmsg);
+			RequestDispatcher dispatcher = sc.getRequestDispatcher("/test/ListBLTestOutput.jsp");
+			/* debug用の処理------------------------------ */
+
+			/*
+			 * ブレークポイント3
+			 * 一般ログインの場合
+			 * テスト用の分岐先で一般と表示されている
+			 **/
+
 			RequestDispatcher dispatcher = sc.getRequestDispatcher("/SkillBL");
 			dispatcher.forward(request, response);
 		}
