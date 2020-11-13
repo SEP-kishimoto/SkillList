@@ -10,7 +10,7 @@ import="servlet.EditBL"
 <html>
 <head>
 <meta charset="UTF-8">
-<title>スキルシート編集確認</title>
+<title>スキルシート編集確認画面</title>
 <link rel="stylesheet" type="text/css" href="/SkillList/css/EditCheck.css">
 </head>
 <body>
