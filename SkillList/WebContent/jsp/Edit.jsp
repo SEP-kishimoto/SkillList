@@ -10,7 +10,7 @@ import="servlet.EditBL"
 <html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>スキルシート編集</title>
+<title>スキルシート編集画面</title>
 <link rel="stylesheet" type="text/css" href="/SkillList/css/Edit.css">
 </head>
 <body>
