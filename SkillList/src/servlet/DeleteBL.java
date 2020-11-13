@@ -70,6 +70,10 @@ public class DeleteBL extends HttpServlet {
 	        File delete_file = new File("C:\\temp\\" + filename);
 	        delete_file.delete();//deleteメソッドを使用してファイルを削除する
 
+	        /*
+	         * 遷移先をテスト共通のリンク先に指定する。
+	         * /test/LinkCheck.jsp 元のデータ /ListBL /LoginBL
+	         */
 	        //画面遷移先
 	        if(master_flg.equals("1")) {
 	        	request.setAttribute("master_flg", master_flg);

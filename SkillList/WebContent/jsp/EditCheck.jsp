@@ -132,6 +132,8 @@ development = (ArrayList<String>) request.getAttribute("development");
 
 <h1>スキルシート管理システム：編集確認</h1>
 <h2>■Profile</h2>
+<!-- テスト用のリンク先 -->
+<!-- /SkillList/EditCheckTestOutput /SkillList/EditCommitBL-->
 <form method="post" action="/SkillList/EditCommitBL">
 <table>
 	<tr>

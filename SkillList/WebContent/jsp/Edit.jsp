@@ -157,6 +157,8 @@ if (errmsg != null) {
 <p style="color: red"><%=errmsg %></p>
 <%} %>
 <h2>&#9632;Profile</h2>
+<!-- 入力した値を取るテストのリンク先 -->
+<!-- /SkillList/EditTestOutput /SkillList/EditCheckBL-->
 <form method="post" action="/SkillList/EditCheckBL">
 <table class="phaseTable">
 	<tr>
@@ -355,7 +357,9 @@ session.setAttribute("noteNumber", noteNumber);
 <input type="hidden" name="filename" value="<%=filename %>">
 <div class="buttonTable">
 <input class="editButton" type="submit" value="確認">
+<!-- /SkillList/ItemAddBL ./test/LinkCheck.jsp -->
 <input class="editButton" type="submit" value="項目追加" formaction="/SkillList/ItemAddBL">
+<!-- /SkillList/SkillBL ./test/LinkCheck.jsp -->
 <input class="editButton" type="submit" value="戻る" formaction="/SkillList/SkillBL">
 </div>
 </form>

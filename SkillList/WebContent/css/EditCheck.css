@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+/*
+全体のCSS
+*/
 body {
 	width: 60%;
 	min-width: 320px;
@@ -19,6 +21,9 @@ h2 {
 	width: 90px;
 }
 
+/*
+確認、項目追加、戻るボタンのCSS
+*/
 .buttonTable {
 	text-align: center;
 }

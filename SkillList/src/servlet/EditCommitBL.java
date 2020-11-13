@@ -204,6 +204,10 @@ public class EditCommitBL extends HttpServlet {
 	    peopleNumber = (ArrayList<String>) session.getAttribute("peopleNumber");
 	    development = (ArrayList<String>) session.getAttribute("development");
 
+	    /*
+	     * ブレークポイント1
+	     * 変数にテスト用の値が受け取ってこれているか確認する
+	     */
 	    FileOutputStream out = null;
 
 		try {
@@ -238,6 +242,9 @@ public class EditCommitBL extends HttpServlet {
 		      int charcount = 0;	// 文字数カウントs
 		      String moji ="";
 		      int p = 9;
+		      if (!(skill.endsWith(","))) {
+		    	  skill += ",";
+		      }
 		      String[] skillList = skill.split(",", -1);
 		      for (int i = 0; i < skillList.length; i++) {
 		    	  if (i == skillList.length - 1) {
@@ -270,6 +277,9 @@ public class EditCommitBL extends HttpServlet {
 		      }
 
 		      n = 0;
+		      if (!(tool.endsWith(","))) {
+		    	  tool += ",";
+		      }
 		      String[] toolList = tool.split(",", -1);
 		      for (int i = 9; i <= 12; i++) {
 		    	  getCell(sh, i, 9).setCellValue(toolList[n]);
@@ -327,7 +337,11 @@ public class EditCommitBL extends HttpServlet {
 		    	  }
 		    	  getCell(sh, 27 + n, 2).setCellValue(date);
 
-		    	  String[] taskList = task.get(i).split(",", -1);
+		    	  String taskEnd = task.get(i);
+		    	  if (!(taskEnd.endsWith(","))) {
+			    	  taskEnd += ",";
+			      }
+		    	  String[] taskList = taskEnd.split(",", -1);
 		    	  for (int s = 0; s < 10; s++) {
 		    		  if (taskList[s].equals("")) {
 		    			  for (int brank = 0; brank < 10 - s; brank++) {
@@ -351,7 +365,11 @@ public class EditCommitBL extends HttpServlet {
 
 		    	  getCell(sh, 18 + n, 10).setCellValue(peopleNumber.get(i));
 
-		    	  String[] developmentList = development.get(i).split(",", -1);
+		    	  String developmentEnd = development.get(i);
+		    	  if (!(developmentEnd.endsWith(","))) {
+		    		  developmentEnd += ",";
+			      }
+		    	  String[] developmentList = developmentEnd.split(",", -1);
 		    	  for (int s = 0; s < 10; s++) {
 		    		  if (developmentList[s].equals("")) {
 		    			  for (int brank = 0; brank < 10 - s; brank++) {
@@ -390,6 +408,12 @@ public class EditCommitBL extends HttpServlet {
 		request.setAttribute("master_flg", master_flg);
 		request.setAttribute("filename", filename);
 
+		/*
+		 * 更新後SkillBLに与えられる情報
+		 * db?_number, db_name, master_flg, filename
+		 * 元の場所 /SkillBL
+		 * 受け取るOutput名、/test/EditCommitTestOutput.jsp
+		 */
 
 		String view = "";
 		view = "/SkillBL";

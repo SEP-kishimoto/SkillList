@@ -2,7 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -154,14 +154,29 @@ public class ItemAddBL extends HttpServlet {
 	    	development.add(i, a);
 	    }
 
+
+	    /*
+	     * ブレークポイント
+	     * 変数に値が入っているかチェックする
+	     */
+
 	    // 空白を追加
 	    beginning.add(beginning.size() - 1, "");
+	    beginning.removeAll(Collections.singleton(null));
 	    end.add(end.size() - 1, "");
+	    end.removeAll(Collections.singleton(null));
 	    task.add(task.size() - 1, "");
-	    List<String> ListAdd = Arrays.asList("", "", "", "", "", "", "", "");
-	    checkList.add(checkList.size() - 1, ListAdd);
+	    task.removeAll(Collections.singleton(null));
+	    valueList = new ArrayList<>();
+	    for (int i = 0; i < 8; i++) {
+	    	valueList.add(i, "");
+	    }
+	    checkList.add(checkList.size() - 1, valueList);
 	    peopleNumber.add(peopleNumber.size() - 1, "");
+	    peopleNumber.removeAll(Collections.singleton(null));
 	    development.add(development.size() - 1, "");
+	    development.removeAll(Collections.singleton(null));
+
 
 	    // db
 	    request.setAttribute("db_number", db_number);
@@ -205,6 +220,11 @@ public class ItemAddBL extends HttpServlet {
 
 	    session.setAttribute("peopleNumber", peopleNumber);
 	    session.setAttribute("development", development);
+
+	    /*
+	     *元のデータ /jsp/Edit.jsp
+	     *テストする際のリンク先 /test/ItemAddBLTestOutput.jsp
+	     */
 
 	    // 追加処理
 	    String view = "/jsp/Edit.jsp";

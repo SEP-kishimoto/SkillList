@@ -106,6 +106,13 @@ public class SkillBL extends HttpServlet {
 		    filename = request.getParameter("filename");
 	    }
 
+
+	    /*
+	     * ブレークポイント1
+	     * 変数 db_number, db_name, master_flg, filename
+	     * 変数に渡された値が入っているかチェックする
+	     *
+	     */
 	    request.setAttribute("db_number", db_number);
 	    request.setAttribute("db_name", db_name);
 	    request.setAttribute("master_flg", master_flg);
@@ -120,6 +127,11 @@ public class SkillBL extends HttpServlet {
 	      Sheet sh = wb.getSheetAt(0); //シート番号で読み込みたい場合はこちら
 
 	      int wonderland = sh.getLastRowNum() - 17;
+
+	      /*
+	       * ブレークポイント2
+	       * Profile関係の値がvalueに渡されているかをチェックしていく
+	       */
 
 	      // Profile読み込み
 	      String value = getCell(sh, 3, 2).getStringCellValue();
@@ -162,6 +174,10 @@ public class SkillBL extends HttpServlet {
 	      value = getCell(sh, 5, 10).getStringCellValue();
 	      request.setAttribute("stationName", value);
 
+	      /*
+	       * ブレークポイント3
+	       * Skill Info関係の値がvalueに渡されているかチェックしていく
+	       */
 
 	      // Skill Info読み込み
 	      value = getCell(sh, 8, 2).getStringCellValue();
@@ -185,12 +201,18 @@ public class SkillBL extends HttpServlet {
 	      }
 	      request.setAttribute("tool", value);
 
-	      value = getCell(sh, 12, 2).getStringCellValue();
+	      value = getCell(sh, 13, 2).getStringCellValue();
 	      request.setAttribute("db", value);
 
 	      value = getCell(sh, 14, 2).getStringCellValue();
 	      request.setAttribute("qualification", value);
 
+
+	      /*
+	       * ブレークポイント4
+	       * Background Noteの値がvalueに渡されているかをチェックしていく
+	       *
+	       */
 
 	      // Background Note読み込み表示
 
@@ -360,6 +382,11 @@ public class SkillBL extends HttpServlet {
 	      }
 	    }
 
+	    /*
+		 * ブレークポイント5
+		 * requestされた値のテスト用のリンク先
+		 */
+	    //String view = "/test/SkillBLTestOutput.jsp";
 	    String view = "/jsp/Skill.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
