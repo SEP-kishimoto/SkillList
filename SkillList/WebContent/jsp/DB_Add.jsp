@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="/SkillList/css/DB_Add.css">
 <meta charset="UTF-8">
-<title>スキルシート管理システム</title>
+<title>DB登録画面</title>
 <script type="text/javascript">
 
 

@@ -9,7 +9,7 @@
 <head>
 <link rel="stylesheet" href="/SkillList/css/Add_Check.css">
 <meta charset="UTF-8">
-<title>スキルシート管理システム</title>
+<title>登録確認画面</title>
 </head>
 <body>
 <%
